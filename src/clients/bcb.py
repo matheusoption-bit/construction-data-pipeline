@@ -1,0 +1,350 @@
+"""
+Cliente para API do Banco Central do Brasil (BCB).
+
+Este módulo fornece uma interface para buscar séries temporais da API de dados
+abertos do Banco Central do Brasil.
+
+Exemplo de uso:
+    >>> from src.clients.bcb import BCBClient
+    >>> 
+    >>> client = BCBClient()
+    >>> 
+    >>> # Buscar uma série (IPCA - código 433)
+    >>> ipca_data = client.fetch_series(433, start_date="01/01/2023", end_date="31/12/2023")
+    >>> 
+    >>> # Buscar múltiplas séries
+    >>> series_map = {
+    ...     "ipca": 433,
+    ...     "selic": 432,
+    ...     "igpm": 189
+    ... }
+    >>> data = client.fetch_multiple_series(series_map)
+"""
+
+import time
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+import requests
+import structlog
+
+logger = structlog.get_logger(__name__)
+
+
+class BCBClient:
+    """
+    Cliente para interagir com a API do Banco Central do Brasil.
+    
+    A API fornece acesso a séries temporais econômicas e financeiras.
+    Documentação: https://dadosabertos.bcb.gov.br/
+    
+    Attributes:
+        base_url: URL base da API do BCB
+        timeout: Timeout em segundos para requisições HTTP
+        max_retries: Número máximo de tentativas em caso de falha
+        retry_delay: Delay inicial em segundos para retry (com backoff exponencial)
+    """
+    
+    def __init__(
+        self,
+        base_url: str = "https://api.bcb.gov.br/dados/serie/bcdata.sgs",
+        timeout: int = 60,
+        max_retries: int = 3,
+        retry_delay: int = 1
+    ):
+        """
+        Inicializa o cliente BCB.
+        
+        Args:
+            base_url: URL base da API do BCB
+            timeout: Timeout em segundos para requisições
+            max_retries: Número máximo de tentativas em caso de falha
+            retry_delay: Delay inicial para retry em segundos
+        """
+        self.base_url = base_url
+        self.timeout = timeout
+        self.max_retries = max_retries
+        self.retry_delay = retry_delay
+        
+        logger.info(
+            "bcb_client_initialized",
+            base_url=base_url,
+            timeout=timeout,
+            max_retries=max_retries
+        )
+    
+    def fetch_series(
+        self,
+        series_id: int,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Busca uma série temporal da API do BCB.
+        
+        Args:
+            series_id: Código da série no SGS (Sistema Gerenciador de Séries Temporais)
+            start_date: Data inicial no formato DD/MM/YYYY (opcional)
+            end_date: Data final no formato DD/MM/YYYY (opcional)
+        
+        Returns:
+            Lista de dicionários com 'date' (YYYY-MM-DD) e 'value' (float)
+        
+        Raises:
+            requests.exceptions.HTTPError: Erro HTTP (4xx, 5xx)
+            requests.exceptions.Timeout: Timeout na requisição
+            requests.exceptions.RequestException: Erro genérico de requisição
+            ValueError: Erro ao processar dados da resposta
+        
+        Example:
+            >>> client = BCBClient()
+            >>> data = client.fetch_series(433, "01/01/2023", "31/12/2023")
+            >>> print(data[0])
+            {'date': '2023-01-01', 'value': 5.79}
+        """
+        url = f"{self.base_url}.{series_id}/dados"
+        params = {}
+        
+        if start_date:
+            params["dataInicial"] = start_date
+        if end_date:
+            params["dataFinal"] = end_date
+        
+        logger.info(
+            "fetching_bcb_series",
+            series_id=series_id,
+            start_date=start_date,
+            end_date=end_date,
+            url=url
+        )
+        
+        # Retry com backoff exponencial
+        last_exception = None
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                response = requests.get(
+                    url,
+                    params=params,
+                    timeout=self.timeout,
+                    headers={"Accept": "application/json"}
+                )
+                
+                # Verificar status HTTP
+                if response.status_code >= 400:
+                    logger.warning(
+                        "bcb_api_error",
+                        series_id=series_id,
+                        status_code=response.status_code,
+                        response_text=response.text[:500],
+                        attempt=attempt
+                    )
+                    response.raise_for_status()
+                
+                raw_data = response.json()
+                
+                # Processar e transformar dados
+                processed_data = self._process_series_data(raw_data)
+                
+                logger.info(
+                    "bcb_series_fetched",
+                    series_id=series_id,
+                    records_count=len(processed_data),
+                    attempt=attempt
+                )
+                
+                return processed_data
+            
+            except requests.exceptions.HTTPError as e:
+                last_exception = e
+                # Não fazer retry para erros 4xx (client errors)
+                if 400 <= e.response.status_code < 500:
+                    logger.error(
+                        "bcb_client_error",
+                        series_id=series_id,
+                        status_code=e.response.status_code,
+                        error=str(e)
+                    )
+                    raise
+                
+                # Retry para erros 5xx (server errors)
+                if attempt < self.max_retries:
+                    delay = self.retry_delay * (2 ** (attempt - 1))
+                    logger.warning(
+                        "bcb_server_error_retrying",
+                        series_id=series_id,
+                        attempt=attempt,
+                        max_retries=self.max_retries,
+                        retry_delay=delay,
+                        error=str(e)
+                    )
+                    time.sleep(delay)
+                else:
+                    logger.error(
+                        "bcb_max_retries_exceeded",
+                        series_id=series_id,
+                        attempts=attempt,
+                        error=str(e)
+                    )
+                    raise
+            
+            except (requests.exceptions.Timeout, requests.exceptions.RequestException) as e:
+                last_exception = e
+                if attempt < self.max_retries:
+                    delay = self.retry_delay * (2 ** (attempt - 1))
+                    logger.warning(
+                        "bcb_request_error_retrying",
+                        series_id=series_id,
+                        attempt=attempt,
+                        max_retries=self.max_retries,
+                        retry_delay=delay,
+                        error=str(e),
+                        error_type=type(e).__name__
+                    )
+                    time.sleep(delay)
+                else:
+                    logger.error(
+                        "bcb_max_retries_exceeded",
+                        series_id=series_id,
+                        attempts=attempt,
+                        error=str(e),
+                        error_type=type(e).__name__
+                    )
+                    raise
+        
+        # Se chegou aqui, todas as tentativas falharam
+        if last_exception:
+            raise last_exception
+        
+        return []
+    
+    def fetch_multiple_series(
+        self,
+        series_map: Dict[str, int],
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None
+    ) -> Dict[str, List[Dict[str, Any]]]:
+        """
+        Busca múltiplas séries temporais da API do BCB.
+        
+        Adiciona pausa de 1 segundo entre requisições para evitar sobrecarga da API.
+        
+        Args:
+            series_map: Dicionário mapeando identificadores para códigos SGS
+                       Exemplo: {"ipca": 433, "selic": 432}
+            start_date: Data inicial no formato DD/MM/YYYY (opcional)
+            end_date: Data final no formato DD/MM/YYYY (opcional)
+        
+        Returns:
+            Dicionário com os identificadores mapeados para os dados das séries
+        
+        Raises:
+            requests.exceptions.HTTPError: Erro HTTP em alguma das requisições
+            requests.exceptions.Timeout: Timeout em alguma das requisições
+            requests.exceptions.RequestException: Erro genérico em alguma requisição
+        
+        Example:
+            >>> client = BCBClient()
+            >>> series_map = {"ipca": 433, "selic": 432}
+            >>> data = client.fetch_multiple_series(series_map, "01/01/2023")
+            >>> print(list(data.keys()))
+            ['ipca', 'selic']
+        """
+        logger.info(
+            "fetching_multiple_bcb_series",
+            series_count=len(series_map),
+            series_ids=list(series_map.keys()),
+            start_date=start_date,
+            end_date=end_date
+        )
+        
+        results = {}
+        errors = {}
+        
+        for idx, (series_name, series_id) in enumerate(series_map.items(), 1):
+            try:
+                logger.debug(
+                    "fetching_series",
+                    series_name=series_name,
+                    series_id=series_id,
+                    progress=f"{idx}/{len(series_map)}"
+                )
+                
+                data = self.fetch_series(series_id, start_date, end_date)
+                results[series_name] = data
+                
+                # Pausa entre requisições (exceto na última)
+                if idx < len(series_map):
+                    time.sleep(1)
+            
+            except Exception as e:
+                logger.error(
+                    "error_fetching_series",
+                    series_name=series_name,
+                    series_id=series_id,
+                    error=str(e),
+                    error_type=type(e).__name__
+                )
+                errors[series_name] = str(e)
+        
+        if errors:
+            logger.warning(
+                "some_series_failed",
+                successful_count=len(results),
+                failed_count=len(errors),
+                failed_series=list(errors.keys())
+            )
+        
+        logger.info(
+            "multiple_series_fetch_completed",
+            successful_count=len(results),
+            failed_count=len(errors),
+            total_count=len(series_map)
+        )
+        
+        return results
+    
+    def _process_series_data(self, raw_data: List[Dict[str, str]]) -> List[Dict[str, Any]]:
+        """
+        Processa dados brutos da API BCB.
+        
+        Converte formato de data DD/MM/YYYY para YYYY-MM-DD e valores com vírgula
+        decimal para float.
+        
+        Args:
+            raw_data: Lista de dicionários com 'data' e 'valor' da API
+        
+        Returns:
+            Lista processada com 'date' e 'value'
+        
+        Raises:
+            ValueError: Erro ao processar data ou valor
+        """
+        processed = []
+        
+        for item in raw_data:
+            try:
+                # Converter data de DD/MM/YYYY para YYYY-MM-DD
+                date_str = item.get("data", "")
+                date_obj = datetime.strptime(date_str, "%d/%m/%Y")
+                formatted_date = date_obj.strftime("%Y-%m-%d")
+                
+                # Converter valor: substituir vírgula por ponto e converter para float
+                value_str = item.get("valor", "0")
+                value = float(value_str.replace(",", "."))
+                
+                processed.append({
+                    "date": formatted_date,
+                    "value": value
+                })
+            
+            except (ValueError, KeyError) as e:
+                logger.warning(
+                    "error_processing_data_point",
+                    item=item,
+                    error=str(e),
+                    error_type=type(e).__name__
+                )
+                # Continuar processando outros pontos
+                continue
+        
+        return processed
