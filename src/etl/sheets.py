@@ -359,21 +359,21 @@ class SheetsLoader:
     @rate_limit_api_call(calls_per_minute=20)
     def append_to_sheet(self, sheet_name: str, rows: List[List[Any]]) -> None:
         """
-        Adiciona linhas ao final da aba.
+        Adiciona múltiplas linhas ao final de uma aba (otimizado para batch).
         
         Args:
             sheet_name: Nome da aba
-            rows: Lista de listas com linhas a adicionar
+            rows: Lista de linhas para adicionar
         
         Raises:
             gspread.exceptions.APIError: Erro ao adicionar dados
         """
         if not rows:
-            logger.warning("empty_rows_provided", sheet_name=sheet_name)
+            logger.warning("no_rows_to_append", sheet_name=sheet_name)
             return
         
         logger.info(
-            "appending_to_sheet",
+            "appending_batch_to_sheet",
             sheet_name=sheet_name,
             rows_count=len(rows)
         )
@@ -381,14 +381,18 @@ class SheetsLoader:
         try:
             worksheet = self.create_sheet_if_not_exists(sheet_name)
             
-            # Adicionar linhas
-            for row in rows:
-                worksheet.append_row(row)
+            # ✅ BATCH INSERT (1 request para todas as linhas)
+            worksheet.append_rows(
+                rows,
+                value_input_option='USER_ENTERED',
+                insert_data_option='INSERT_ROWS',
+                table_range=None
+            )
             
             logger.info(
-                "rows_appended_successfully",
+                "rows_appended_batch",
                 sheet_name=sheet_name,
-                rows_appended=len(rows)
+                rows_count=len(rows)
             )
         
         except gspread.exceptions.APIError as e:
