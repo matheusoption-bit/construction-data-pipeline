@@ -29,8 +29,10 @@ Exemplo de uso:
 """
 
 import os
+import time
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from functools import wraps
 
 import gspread
 import pandas as pd
@@ -38,6 +40,30 @@ import structlog
 from oauth2client.service_account import ServiceAccountCredentials
 
 logger = structlog.get_logger(__name__)
+
+
+def rate_limit_api_call(calls_per_minute=30):
+    """
+    Decorator para rate limiting de chamadas à API do Google Sheets.
+    
+    Args:
+        calls_per_minute: Número máximo de chamadas por minuto
+    """
+    min_interval = 60.0 / calls_per_minute
+    last_called = [0.0]
+    
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            elapsed = time.time() - last_called[0]
+            left_to_wait = min_interval - elapsed
+            if left_to_wait > 0:
+                time.sleep(left_to_wait)
+            result = func(*args, **kwargs)
+            last_called[0] = time.time()
+            return result
+        return wrapper
+    return decorator
 
 
 class SheetsLoader:
@@ -330,6 +356,7 @@ class SheetsLoader:
             )
             raise
     
+    @rate_limit_api_call(calls_per_minute=20)
     def append_to_sheet(self, sheet_name: str, rows: List[List[Any]]) -> None:
         """
         Adiciona linhas ao final da aba.
