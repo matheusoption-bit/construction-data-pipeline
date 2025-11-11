@@ -22,7 +22,7 @@ Exemplo de uso:
 """
 
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
 import requests
@@ -44,6 +44,27 @@ class BCBClient:
         max_retries: Número máximo de tentativas em caso de falha
         retry_delay: Delay inicial em segundos para retry (com backoff exponencial)
     """
+    
+    # Séries diárias (dados disponíveis D+1)
+    DAILY_SERIES = {
+        1,      # USD/BRL (Câmbio)
+        11,     # USD/BRL (Ptax venda)
+        10813,  # EUR/BRL
+        10814,  # GBP/BRL
+    }
+    
+    # Séries mensais (dados disponíveis após fim do mês)
+    MONTHLY_SERIES = {
+        432,    # Selic
+        226,    # TR
+        433,    # IPCA
+        189,    # IGP-M
+        7478,   # Poupança
+        4189,   # INPC
+        4390,   # Crédito PF
+        1207,   # Produção Construção Civil
+        24364,  # Estoque Crédito Habitacional
+    }
     
     def __init__(
         self,
@@ -73,6 +94,83 @@ class BCBClient:
             max_retries=max_retries
         )
     
+    def _is_daily_series(self, series_id: int) -> bool:
+        """
+        Verifica se série é diária.
+        
+        Args:
+            series_id: Código da série
+        
+        Returns:
+            True se série é diária, False se mensal
+        """
+        return series_id in self.DAILY_SERIES
+    
+    def _validate_and_adjust_dates(
+        self,
+        series_id: int,
+        start_date: Optional[str],
+        end_date: Optional[str]
+    ) -> tuple[str, str]:
+        """
+        Valida e ajusta datas para evitar buscar dados futuros/não disponíveis.
+        
+        Args:
+            series_id: Código da série
+            start_date: Data inicial (DD/MM/YYYY) ou None
+            end_date: Data final (DD/MM/YYYY) ou None
+        
+        Returns:
+            Tupla (start_date_adjusted, end_date_adjusted)
+        """
+        hoje = datetime.now()
+        
+        # Determinar data final máxima segura
+        if self._is_daily_series(series_id):
+            # Séries diárias: até ontem (dados vêm D+1)
+            max_safe_date = hoje - timedelta(days=1)
+        else:
+            # Séries mensais: até último dia do mês anterior
+            primeiro_dia_mes_atual = hoje.replace(day=1)
+            max_safe_date = primeiro_dia_mes_atual - timedelta(days=1)
+        
+        # Ajustar end_date se não fornecido ou se futuro
+        if end_date:
+            try:
+                end_dt = datetime.strptime(end_date, "%d/%m/%Y")
+                if end_dt > max_safe_date:
+                    logger.warning(
+                        "future_date_adjusted",
+                        series_id=series_id,
+                        requested_date=end_date,
+                        adjusted_to=max_safe_date.strftime("%d/%m/%Y"),
+                        reason="Requested date is in the future or data not yet available"
+                    )
+                    end_date = max_safe_date.strftime("%d/%m/%Y")
+            except ValueError:
+                logger.warning(
+                    "invalid_date_format",
+                    series_id=series_id,
+                    end_date=end_date
+                )
+                end_date = max_safe_date.strftime("%d/%m/%Y")
+        else:
+            end_date = max_safe_date.strftime("%d/%m/%Y")
+            logger.info(
+                "end_date_auto_set",
+                series_id=series_id,
+                end_date=end_date,
+                series_type="daily" if self._is_daily_series(series_id) else "monthly"
+            )
+        
+        # Garantir start_date
+        if not start_date:
+            # Padrão: últimos 12 meses
+            start_dt = max_safe_date - timedelta(days=365)
+            start_date = start_dt.strftime("%d/%m/%Y")
+        
+        return start_date, end_date
+    
     def fetch_series(
         self,
         series_id: int,
@@ -81,6 +179,9 @@ class BCBClient:
     ) -> List[Dict[str, Any]]:
         """
         Busca uma série temporal da API do BCB.
+        
+        IMPORTANTE: Valida e ajusta datas automaticamente para evitar
+        buscar dados futuros ou não disponíveis.
         
         Args:
             series_id: Código da série no SGS (Sistema Gerenciador de Séries Temporais)
@@ -102,6 +203,11 @@ class BCBClient:
             >>> print(data[0])
             {'date': '2023-01-01', 'value': 5.79}
         """
+        # VALIDAÇÃO: Ajustar datas para evitar dados futuros/não disponíveis
+        start_date, end_date = self._validate_and_adjust_dates(
+            series_id, start_date, end_date
+        )
+        
         url = f"{self.base_url}.{series_id}/dados"
         params = {}
         
@@ -142,13 +248,37 @@ class BCBClient:
                 
                 raw_data = response.json()
                 
+                # VALIDAÇÃO: Resposta vazia da API
+                if not raw_data:
+                    logger.warning(
+                        "api_returned_empty",
+                        series_id=series_id,
+                        start_date=start_date,
+                        end_date=end_date,
+                        message="API retornou lista vazia - série pode não ter dados no período"
+                    )
+                    return []
+                
                 # Processar e transformar dados
                 processed_data = self._process_series_data(raw_data)
+                
+                # VALIDAÇÃO: Detectar valores constantes suspeitos
+                if processed_data and len(processed_data) > 10:
+                    unique_values = set(item['value'] for item in processed_data)
+                    if len(unique_values) == 1:
+                        logger.warning(
+                            "suspicious_constant_value",
+                            series_id=series_id,
+                            constant_value=processed_data[0]['value'],
+                            records_count=len(processed_data),
+                            message="Todos os registros têm o mesmo valor - pode indicar dados default/placeholder"
+                        )
                 
                 logger.info(
                     "bcb_series_fetched",
                     series_id=series_id,
                     records_count=len(processed_data),
+                    unique_values_count=len(set(item['value'] for item in processed_data)) if processed_data else 0,
                     attempt=attempt
                 )
                 
@@ -320,6 +450,7 @@ class BCBClient:
             ValueError: Erro ao processar data ou valor
         """
         processed = []
+        hoje = datetime.now().date()
         
         for item in raw_data:
             try:
@@ -328,9 +459,28 @@ class BCBClient:
                 date_obj = datetime.strptime(date_str, "%d/%m/%Y")
                 formatted_date = date_obj.strftime("%Y-%m-%d")
                 
+                # VALIDAÇÃO: Ignorar datas futuras (dados não confiáveis)
+                if date_obj.date() > hoje:
+                    logger.warning(
+                        "future_date_ignored",
+                        date=formatted_date,
+                        today=str(hoje)
+                    )
+                    continue
+                
                 # Converter valor: substituir vírgula por ponto e converter para float
                 value_str = item.get("valor", "0")
                 value = float(value_str.replace(",", "."))
+                
+                # VALIDAÇÃO: Ignorar valores inválidos
+                if value == 0 or abs(value) > 1_000_000:
+                    logger.warning(
+                        "invalid_value_ignored",
+                        date=formatted_date,
+                        value=value,
+                        reason="zero or extreme outlier"
+                    )
+                    continue
                 
                 processed.append({
                     "date": formatted_date,

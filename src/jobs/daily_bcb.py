@@ -86,7 +86,15 @@ def process_series(
     
     try:
         # Calcular datas (últimos N meses)
-        end_date = datetime.now()
+        # CORREÇÃO: Para séries mensais, usar último dia do mês ANTERIOR
+        # para evitar buscar dados não divulgados ainda
+        hoje = datetime.now()
+        
+        # Usar último dia do mês anterior como data final
+        # (dados mensais são divulgados após o fim do mês)
+        primeiro_dia_mes_atual = hoje.replace(day=1)
+        end_date = primeiro_dia_mes_atual - timedelta(days=1)
+        
         start_date = end_date - timedelta(days=months_back * 30)
         
         start_date_str = start_date.strftime("%d/%m/%Y")
@@ -96,7 +104,8 @@ def process_series(
             "fetching_series_data",
             series_id=series_id,
             start_date=start_date_str,
-            end_date=end_date_str
+            end_date=end_date_str,
+            note="Using last day of previous month to avoid unreleased data"
         )
         
         # Buscar dados do BCB
