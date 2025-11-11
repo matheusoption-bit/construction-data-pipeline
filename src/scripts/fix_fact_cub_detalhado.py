@@ -175,18 +175,39 @@ def fix_fact_cub_detalhado(input_file: str = "docs/fact_cub_detalhado.md"):
     print("📅 Corrigindo data_referencia...")
     
     if 'data_referencia' in df.columns:
-        # Detectar se é serial (numérico) ou já está corrigido (string)
-        sample_value = df['data_referencia'].iloc[0] if len(df) > 0 else None
+        # Mostrar amostra ANTES
+        sample_before = df['data_referencia'].head(5).tolist()
+        print(f"  Amostra ANTES: {sample_before[:3]}")
         
-        if sample_value and isinstance(sample_value, (int, float)):
-            # Aplicar conversão
-            df['data_referencia'] = df['data_referencia'].apply(
-                lambda x: excel_serial_to_date(x) if pd.notna(x) else None
+        # Tentar converter para numérico (se falhar, mantém como string)
+        df_numeric = pd.to_numeric(df['data_referencia'], errors='coerce')
+        
+        # Verificar se há valores numéricos (seriais) - valores > 1000 indicam seriais
+        has_serials = (df_numeric > 1000).sum() > 0
+        
+        if has_serials:
+            # Contar quantos são seriais
+            serial_count = (df_numeric > 1000).sum()
+            
+            # Aplicar conversão apenas nos valores numéricos
+            df['data_referencia'] = df.apply(
+                lambda row: (
+                    excel_serial_to_date(df_numeric.loc[row.name])
+                    if pd.notna(df_numeric.loc[row.name]) and df_numeric.loc[row.name] > 1000
+                    else row['data_referencia']
+                ),
+                axis=1
             )
-            print(f"  ✓ {len(df)} datas convertidas\n")
-            logger.info("dates_converted", rows=len(df))
+            
+            # Mostrar amostra DEPOIS
+            sample_after = df['data_referencia'].head(5).tolist()
+            
+            print(f"  ✓ {serial_count:,} datas convertidas de serial para ISO")
+            print(f"  Amostra DEPOIS: {sample_after[:3]}\n")
+            
+            logger.info("dates_converted", rows=int(serial_count))
         else:
-            print("  ℹ️  Datas já estão no formato correto\n")
+            print(f"  ℹ️  Datas já estão no formato correto (não são seriais)\n")
     else:
         print("  ⚠️  Coluna 'data_referencia' não encontrada\n")
     
@@ -212,14 +233,32 @@ def fix_fact_cub_detalhado(input_file: str = "docs/fact_cub_detalhado.md"):
     print("🔢 Corrigindo valores -100...")
     
     if 'valor' in df.columns:
+        # Converter vírgula para ponto (formato brasileiro → internacional)
+        if df['valor'].dtype == 'object':
+            df['valor'] = df['valor'].astype(str).str.replace(',', '.')
+        
+        # FORÇAR conversão para numérico
+        df['valor'] = pd.to_numeric(df['valor'], errors='coerce')
+        
+        # Mostrar amostra ANTES (valores -100)
+        valores_invalidos = df[df['valor'] == -100]['valor'].head(5).tolist()
+        if valores_invalidos:
+            print(f"  Amostra ANTES: {valores_invalidos[:3]}")
+        
         # Contar valores -100
         count_invalid = (df['valor'] == -100).sum()
         
         # Substituir por None
         df.loc[df['valor'] == -100, 'valor'] = None
         
-        print(f"  ✓ {count_invalid:,} valores -100 substituídos por NULL\n")
-        logger.info("invalid_values_fixed", count=count_invalid)
+        # Mostrar amostra DEPOIS
+        if count_invalid > 0:
+            print(f"  ✓ {count_invalid:,} valores -100 substituídos por NULL")
+            print(f"  Amostra DEPOIS: [None, None, None]\n")
+        else:
+            print(f"  ✓ Valores convertidos para numérico ({count_invalid} valores -100 encontrados)\n")
+        
+        logger.info("invalid_values_fixed", count=int(count_invalid))
     else:
         print("  ⚠️  Coluna 'valor' não encontrada\n")
     
@@ -227,18 +266,39 @@ def fix_fact_cub_detalhado(input_file: str = "docs/fact_cub_detalhado.md"):
     print("🕐 Corrigindo created_at...")
     
     if 'created_at' in df.columns:
-        # Detectar se é serial ou já está corrigido
-        sample_value = df['created_at'].iloc[0] if len(df) > 0 else None
+        # Mostrar amostra ANTES
+        sample_before = df['created_at'].head(5).tolist()
+        print(f"  Amostra ANTES: {sample_before[:3]}")
         
-        if sample_value and isinstance(sample_value, (int, float)):
-            # Aplicar conversão
-            df['created_at'] = df['created_at'].apply(
-                lambda x: excel_serial_to_datetime(x) if pd.notna(x) else None
+        # Tentar converter para numérico (se falhar, mantém como string)
+        df_numeric = pd.to_numeric(df['created_at'], errors='coerce')
+        
+        # Verificar se há valores numéricos (seriais) - valores > 1000 indicam seriais
+        has_serials = (df_numeric > 1000).sum() > 0
+        
+        if has_serials:
+            # Contar quantos são seriais
+            serial_count = (df_numeric > 1000).sum()
+            
+            # Aplicar conversão apenas nos valores numéricos
+            df['created_at'] = df.apply(
+                lambda row: (
+                    excel_serial_to_datetime(df_numeric.loc[row.name])
+                    if pd.notna(df_numeric.loc[row.name]) and df_numeric.loc[row.name] > 1000
+                    else row['created_at']
+                ),
+                axis=1
             )
-            print(f"  ✓ {len(df)} timestamps convertidos\n")
-            logger.info("timestamps_converted", rows=len(df))
+            
+            # Mostrar amostra DEPOIS
+            sample_after = df['created_at'].head(5).tolist()
+            
+            print(f"  ✓ {serial_count:,} timestamps convertidos de serial para ISO")
+            print(f"  Amostra DEPOIS: {sample_after[:3]}\n")
+            
+            logger.info("timestamps_converted", rows=int(serial_count))
         else:
-            print("  ℹ️  Timestamps já estão no formato correto\n")
+            print(f"  ℹ️  Timestamps já estão no formato correto (não são seriais)\n")
     else:
         print("  ⚠️  Coluna 'created_at' não encontrada\n")
     
