@@ -12,8 +12,15 @@ ENV/
 
 # Environment variables
 .env
+.env.local
+.env.*.local
 
-# Google credentials
+# Google Sheets credentials
+config/google_credentials.json
+config/*.json
+!config/.gitkeep
+
+# Google credentials (legacy)
 credentials.json
 *_key.json
 
@@ -43,8 +50,3 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-
-# Credentials
-credentials.json
-*_key.json
-*.json
