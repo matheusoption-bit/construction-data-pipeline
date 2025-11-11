@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-11-11",
+    "owner": "matheusoption-bit",
+    "description": "Configuração completa de fontes CBIC para BI Construção Civil",
+    "total_sources": 113
+  },
+  "cub_oneroso": {
+    "global": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.01_BI_54.xlsx",
+      "descricao": "CUB Global Brasil - Série Histórica Oneroso",
+      "frequencia": "mensal",
+      "tipos_inclusos": [
+        "R1-N",
+        "R8-N",
+        "R16-N",
+        "PP4-N",
+        "PIS",
+        "RP1Q",
+        "CSL8-N",
+        "CSL16-N",
+        "CAL8-N",
+        "GI"
+      ],
+      "granularidade": "brasil",
+      "horario_coleta": "09:00",
+      "dia_coleta": "5",
+      "sheet_name": "fact_cub_global",
+      "colunas_dimensoes": [
+        "data_referencia",
+        "tipo_cub"
+      ],
+      "colunas_metricas": [
+        "valor_m2",
+        "variacao_mensal",
+        "variacao_anual"
+      ]
+    },
+    "por_uf": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.06_BI_53.xlsx",
+      "descricao": "CUB por UF - Global Oneroso",
+      "frequencia": "mensal",
+      "granularidade": "uf",
+      "horario_coleta": "09:00",
+      "dia_coleta": "5",
+      "sheet_name": "fact_cub_detalhado",
+      "colunas_dimensoes": [
+        "data_referencia",
+        "tipo_cub",
+        "uf"
+      ],
+      "colunas_metricas": [
+        "valor_m2",
+        "variacao_mensal",
+        "variacao_anual"
+      ]
+    },
+    "componentes": {
+      "materiais": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.02_BI_52.xlsx",
+        "descricao": "CUB Componente Materiais",
+        "frequencia": "mensal",
+        "sheet_name": "fact_cub_componentes",
+        "componente": "materiais",
+        "participacao_media": 0.50
+      },
+      "mao_obra": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.03_BI_52.xlsx",
+        "descricao": "CUB Componente Mão de Obra",
+        "frequencia": "mensal",
+        "sheet_name": "fact_cub_componentes",
+        "componente": "mao_obra",
+        "participacao_media": 0.35
+      },
+      "despesa_adm": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.04_BI_52.xlsx",
+        "descricao": "CUB Componente Despesa Administrativa",
+        "frequencia": "mensal",
+        "sheet_name": "fact_cub_componentes",
+        "componente": "despesa_adm",
+        "participacao_media": 0.10
+      },
+      "equipamento": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.05_BI_52.xlsx",
+        "descricao": "CUB Componente Equipamento",
+        "frequencia": "mensal",
+        "sheet_name": "fact_cub_componentes",
+        "componente": "equipamento",
+        "participacao_media": 0.05
+      }
+    }
+  },
+  "cub_desonerado": {
+    "global": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.B.01_BI_53.xlsx",
+      "descricao": "CUB Global Brasil - Desonerado",
+      "frequencia": "mensal",
+      "tipos_inclusos": [
+        "R1-N",
+        "R8-N",
+        "R16-N",
+        "PP4-N",
+        "PIS",
+        "RP1Q",
+        "CSL8-N",
+        "CSL16-N",
+        "CAL8-N",
+        "GI"
+      ],
+      "sheet_name": "fact_cub_desonerado"
+    },
+    "por_uf": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.B.06_BI_52.xlsx",
+      "descricao": "CUB por UF - Desonerado",
+      "frequencia": "mensal",
+      "sheet_name": "fact_cub_desonerado_uf"
+    },
+    "componentes": {
+      "materiais": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.B.02_BI_52.xlsx",
+        "descricao": "CUB Desonerado Componente Materiais",
+        "sheet_name": "fact_cub_componentes"
+      },
+      "mao_obra": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.B.03_BI_52.xlsx",
+        "descricao": "CUB Desonerado Componente Mão de Obra",
+        "sheet_name": "fact_cub_componentes"
+      },
+      "despesa_adm": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.B.04_BI_52.xlsx",
+        "descricao": "CUB Desonerado Componente Despesa Administrativa",
+        "sheet_name": "fact_cub_componentes"
+      },
+      "equipamento": {
+        "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.B.05_BI_52.xlsx",
+        "descricao": "CUB Desonerado Componente Equipamento",
+        "sheet_name": "fact_cub_componentes"
+      }
+    }
+  },
+  "cub_medio": {
+    "residencial": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.C.01_Global_Brasil_Serie_Historica_BI_52.xlsx",
+      "descricao": "CUB Médio Residencial",
+      "frequencia": "mensal",
+      "tipos_componentes": [
+        "R1-N",
+        "R8-N",
+        "R16-N"
+      ],
+      "sheet_name": "fact_cub_medio"
+    },
+    "multifamiliar": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.C.02_Global_Brasil_Serie_Historica_BI_52.xlsx",
+      "descricao": "CUB Médio Multifamiliar",
+      "frequencia": "mensal",
+      "sheet_name": "fact_cub_medio"
+    },
+    "comercial": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.C.03_Global_Brasil_Serie_Historica_BI_52.xlsx",
+      "descricao": "CUB Médio Comercial",
+      "frequencia": "mensal",
+      "tipos_componentes": [
+        "CSL8-N",
+        "CSL16-N",
+        "CAL8-N"
+      ],
+      "sheet_name": "fact_cub_medio"
+    },
+    "industrial": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.C.04_Global_Brasil_Serie_Historica_BI_52.xlsx",
+      "descricao": "CUB Médio Industrial",
+      "frequencia": "mensal",
+      "tipos_componentes": [
+        "GI"
+      ],
+      "sheet_name": "fact_cub_medio"
+    }
+  },
+  "sinapi": {
+    "nova_ponderacao_brasil": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.E.02_139.xlsx",
+      "descricao": "SINAPI - Nova Ponderação Brasil e Regiões",
+      "frequencia": "mensal",
+      "granularidade": "brasil_regioes",
+      "sheet_name": "fact_sinapi"
+    },
+    "nova_ponderacao_estados": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.E.03_138.xlsx",
+      "descricao": "SINAPI - Nova Ponderação Estados",
+      "frequencia": "mensal",
+      "granularidade": "estados",
+      "sheet_name": "fact_sinapi"
+    },
+    "antigas_ponderacoes_brasil": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.E.04_139.xlsx",
+      "descricao": "SINAPI - Antigas Ponderações Brasil",
+      "frequencia": "mensal",
+      "sheet_name": "fact_sinapi_historico"
+    }
+  },
+  "cimento": {
+    "preco_medio": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_07.A.01_5.xlsx",
+      "descricao": "Preço Médio Cimento",
+      "frequencia": "mensal",
+      "sheet_name": "fact_cimento"
+    },
+    "consumo_aparente": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_07.A.03_Consumo_cimento_54.xlsx",
+      "descricao": "Consumo Aparente de Cimento",
+      "frequencia": "mensal",
+      "sheet_name": "fact_cimento"
+    },
+    "vendas_internas": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_07.A.02_Vendas_Cimento_55.xlsx",
+      "descricao": "Vendas Internas de Cimento",
+      "frequencia": "mensal",
+      "sheet_name": "fact_cimento"
+    }
+  },
+  "mercado_imobiliario": {
+    "lancamentos": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_02.A.01_BI_54.xlsx",
+      "descricao": "Lançamentos Imobiliários",
+      "frequencia": "mensal",
+      "sheet_name": "fact_mercado_imobiliario"
+    },
+    "vendas": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_02.A.02_BI_54.xlsx",
+      "descricao": "Vendas Imobiliárias",
+      "frequencia": "mensal",
+      "sheet_name": "fact_mercado_imobiliario"
+    },
+    "estoque": {
+      "url": "http://www.cbicdados.com.br/media/anexos/tabela_02.A.03_BI_54.xlsx",
+      "descricao": "Estoque de Imóveis",
+      "frequencia": "mensal",
+      "sheet_name": "fact_mercado_imobiliario"
+    }
+  },
+  "dimensoes": {
+    "dim_tipo_cub": {
+      "tipos": [
+        {
+          "codigo": "R1-N",
+          "nome": "Residencial Unifamiliar - Padrão Normal",
+          "categoria": "residencial",
+          "area_privativa": "130 m²",
+          "num_pavimentos": 1,
+          "descricao": "Casa popular, térreo, padrão normal"
+        },
+        {
+          "codigo": "R8-N",
+          "nome": "Residencial Multifamiliar 8 pavimentos - Padrão Normal",
+          "categoria": "residencial",
+          "num_pavimentos": 8,
+          "descricao": "Edifício residencial, 8 pavimentos, padrão normal"
+        },
+        {
+          "codigo": "R16-N",
+          "nome": "Residencial Multifamiliar 16 pavimentos - Padrão Normal",
+          "categoria": "residencial",
+          "num_pavimentos": 16,
+          "descricao": "Edifício residencial, 16 pavimentos, padrão normal"
+        },
+        {
+          "codigo": "PP4-N",
+          "nome": "Popular 4 pavimentos - Padrão Normal",
+          "categoria": "popular",
+          "num_pavimentos": 4,
+          "descricao": "Prédio popular, 4 pavimentos"
+        },
+        {
+          "codigo": "PIS",
+          "nome": "Projeto de Interesse Social",
+          "categoria": "social",
+          "descricao": "Habitação de interesse social"
+        },
+        {
+          "codigo": "RP1Q",
+          "nome": "Residencial Popular 1 quarto",
+          "categoria": "popular",
+          "descricao": "Residencial popular, 1 quarto"
+        },
+        {
+          "codigo": "CSL8-N",
+          "nome": "Comercial Salas e Lojas 8 pavimentos - Padrão Normal",
+          "categoria": "comercial",
+          "num_pavimentos": 8,
+          "descricao": "Edifício comercial, 8 pavimentos"
+        },
+        {
+          "codigo": "CSL16-N",
+          "nome": "Comercial Salas e Lojas 16 pavimentos - Padrão Normal",
+          "categoria": "comercial",
+          "num_pavimentos": 16,
+          "descricao": "Edifício comercial, 16 pavimentos"
+        },
+        {
+          "codigo": "CAL8-N",
+          "nome": "Comercial Andares Livres 8 pavimentos - Padrão Normal",
+          "categoria": "comercial",
+          "num_pavimentos": 8,
+          "descricao": "Edifício comercial andares livres, 8 pavimentos"
+        },
+        {
+          "codigo": "GI",
+          "nome": "Galpão Industrial",
+          "categoria": "industrial",
+          "descricao": "Galpão industrial padrão"
+        }
+      ]
+    },
+    "dim_localidade": {
+      "ufs": [
+        {"sigla": "AC", "nome": "Acre", "regiao": "Norte", "sinduscon": "SINDUSCON-AC"},
+        {"sigla": "AL", "nome": "Alagoas", "regiao": "Nordeste", "sinduscon": "SINDUSCON-AL"},
+        {"sigla": "AP", "nome": "Amapá", "regiao": "Norte", "sinduscon": "SINDUSCON-AP"},
+        {"sigla": "AM", "nome": "Amazonas", "regiao": "Norte", "sinduscon": "SINDUSCON-AM"},
+        {"sigla": "BA", "nome": "Bahia", "regiao": "Nordeste", "sinduscon": "SINDUSCON-BA"},
+        {"sigla": "CE", "nome": "Ceará", "regiao": "Nordeste", "sinduscon": "SINDUSCON-CE"},
+        {"sigla": "DF", "nome": "Distrito Federal", "regiao": "Centro-Oeste", "sinduscon": "SINDUSCON-DF"},
+        {"sigla": "ES", "nome": "Espírito Santo", "regiao": "Sudeste", "sinduscon": "SINDUSCON-ES"},
+        {"sigla": "GO", "nome": "Goiás", "regiao": "Centro-Oeste", "sinduscon": "SINDUSCON-GO"},
+        {"sigla": "MA", "nome": "Maranhão", "regiao": "Nordeste", "sinduscon": "SINDUSCON-MA"},
+        {"sigla": "MT", "nome": "Mato Grosso", "regiao": "Centro-Oeste", "sinduscon": "SINDUSCON-MT"},
+        {"sigla": "MS", "nome": "Mato Grosso do Sul", "regiao": "Centro-Oeste", "sinduscon": "SINDUSCON-MS"},
+        {"sigla": "MG", "nome": "Minas Gerais", "regiao": "Sudeste", "sinduscon": "SINDUSCON-MG"},
+        {"sigla": "PA", "nome": "Pará", "regiao": "Norte", "sinduscon": "SINDUSCON-PA"},
+        {"sigla": "PB", "nome": "Paraíba", "regiao": "Nordeste", "sinduscon": "SINDUSCON-PB"},
+        {"sigla": "PR", "nome": "Paraná", "regiao": "Sul", "sinduscon": "SINDUSCON-PR"},
+        {"sigla": "PE", "nome": "Pernambuco", "regiao": "Nordeste", "sinduscon": "SINDUSCON-PE"},
+        {"sigla": "PI", "nome": "Piauí", "regiao": "Nordeste", "sinduscon": "SINDUSCON-PI"},
+        {"sigla": "RJ", "nome": "Rio de Janeiro", "regiao": "Sudeste", "sinduscon": "SINDUSCON-RJ"},
+        {"sigla": "RN", "nome": "Rio Grande do Norte", "regiao": "Nordeste", "sinduscon": "SINDUSCON-RN"},
+        {"sigla": "RS", "nome": "Rio Grande do Sul", "regiao": "Sul", "sinduscon": "SINDUSCON-RS"},
+        {"sigla": "RO", "nome": "Rondônia", "regiao": "Norte", "sinduscon": "SINDUSCON-RO"},
+        {"sigla": "RR", "nome": "Roraima", "regiao": "Norte", "sinduscon": "SINDUSCON-RR"},
+        {"sigla": "SC", "nome": "Santa Catarina", "regiao": "Sul", "sinduscon": "SINDUSCON-SC"},
+        {"sigla": "SP", "nome": "São Paulo", "regiao": "Sudeste", "sinduscon": "SINDUSCON-SP"},
+        {"sigla": "SE", "nome": "Sergipe", "regiao": "Nordeste", "sinduscon": "SINDUSCON-SE"},
+        {"sigla": "TO", "nome": "Tocantins", "regiao": "Norte", "sinduscon": "SINDUSCON-TO"}
+      ],
+      "regioes": [
+        {"nome": "Norte", "ufs": ["AC", "AP", "AM", "PA", "RO", "RR", "TO"]},
+        {"nome": "Nordeste", "ufs": ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"]},
+        {"nome": "Centro-Oeste", "ufs": ["DF", "GO", "MT", "MS"]},
+        {"nome": "Sudeste", "ufs": ["ES", "MG", "RJ", "SP"]},
+        {"nome": "Sul", "ufs": ["PR", "RS", "SC"]}
+      ]
+    },
+    "dim_tempo": {
+      "periodo": "2015-01 até 2025-11",
+      "granularidades": ["ano", "trimestre", "mes", "semana"],
+      "hierarquia": "ano > trimestre > mes"
+    }
+  }
+}

@@ -655,3 +655,345 @@ class CBICClient:
         df = self.parse_cub_by_state(filepath, uf=uf, tipo_cub=tipo_cub)
         
         return df
+    
+    # =========================================================================
+    # MÉTODOS DO SISTEMA CUB COMPLETO - BI Construção Civil Master
+    # =========================================================================
+    
+    def get_cub_global_oneroso_complete(self, force_download: bool = False) -> pd.DataFrame:
+        """
+        Busca CUB Global Brasil Oneroso (TODOS os tipos).
+        
+        Retorna série histórica completa com:
+        - 10 tipos de CUB (R1-N, R8-N, R16-N, PP4-N, PIS, RP1Q, CSL8-N, CSL16-N, CAL8-N, GI)
+        - Dados desde 2015 até presente
+        - Variações MoM e YoY calculadas
+        
+        Returns:
+            DataFrame com colunas:
+            - data_referencia: datetime
+            - tipo_cub: str
+            - valor_m2: float
+            - variacao_mensal: float
+            - variacao_anual: float
+            - regime: str ('oneroso')
+        """
+        logger.info("fetching_cub_global_oneroso_complete")
+        
+        # Download
+        filepath = self.download_table(
+            table_id="06.A.01",
+            table_type="BI",
+            number=54,
+            force_download=force_download
+        )
+        
+        # Parse Excel
+        df = pd.read_excel(filepath, sheet_name=0)
+        
+        # Estrutura: primeira coluna é data, demais são tipos de CUB
+        date_col = df.columns[0]
+        
+        # Melt (unpivot)
+        df_long = df.melt(
+            id_vars=[date_col],
+            var_name='tipo_cub',
+            value_name='valor_m2'
+        )
+        
+        df_long = df_long.rename(columns={date_col: 'data_referencia'})
+        
+        # Converter data (formato pode ser 'jan/2015', 'Jan-15', etc)
+        df_long['data_referencia'] = pd.to_datetime(
+            df_long['data_referencia'],
+            format='%b/%Y',
+            errors='coerce'
+        )
+        
+        # Se falhou, tentar outro formato
+        if df_long['data_referencia'].isna().all():
+            df_long['data_referencia'] = pd.to_datetime(
+                df_long['data_referencia'],
+                format='%b-%y',
+                errors='coerce'
+            )
+        
+        # Limpar valores
+        df_long['valor_m2'] = pd.to_numeric(df_long['valor_m2'], errors='coerce')
+        df_long['regime'] = 'oneroso'
+        
+        # Remover NaN
+        df_long = df_long.dropna(subset=['data_referencia', 'valor_m2'])
+        
+        # Ordenar
+        df_long = df_long.sort_values(['tipo_cub', 'data_referencia'])
+        
+        # Calcular variações
+        df_long['variacao_mensal'] = df_long.groupby('tipo_cub')['valor_m2'].pct_change() * 100
+        df_long['variacao_anual'] = df_long.groupby('tipo_cub')['valor_m2'].pct_change(periods=12) * 100
+        
+        # Tratar inf
+        df_long['variacao_mensal'] = df_long['variacao_mensal'].replace([float('inf'), float('-inf')], None)
+        df_long['variacao_anual'] = df_long['variacao_anual'].replace([float('inf'), float('-inf')], None)
+        
+        logger.info(
+            "cub_global_oneroso_fetched",
+            rows=len(df_long),
+            tipos=df_long['tipo_cub'].nunique(),
+            periodo=f"{df_long['data_referencia'].min().date()} até {df_long['data_referencia'].max().date()}"
+        )
+        
+        return df_long
+    
+    def get_cub_por_uf_complete(self, force_download: bool = False) -> pd.DataFrame:
+        """
+        Busca CUB por UF (TODAS as UFs, TODOS os tipos).
+        
+        Estrutura dimensional completa:
+        - 27 UFs
+        - 10 tipos de CUB
+        - Série histórica 2015-2025
+        
+        Returns:
+            DataFrame com colunas:
+            - data_referencia: datetime
+            - uf: str
+            - tipo_cub: str
+            - valor_m2: float
+            - variacao_mensal: float
+            - variacao_anual: float
+            - regime: str
+        """
+        logger.info("fetching_cub_por_uf_complete")
+        
+        # Download
+        filepath = self.download_table(
+            table_id="06.A.06",
+            table_type="BI",
+            number=53,
+            force_download=force_download
+        )
+        
+        # Parse Excel
+        df = pd.read_excel(filepath, sheet_name=0)
+        
+        # Estrutura típica:
+        # - Coluna 0: UF
+        # - Coluna 1: Tipo CUB
+        # - Demais colunas: Meses
+        
+        uf_col = df.columns[0]
+        tipo_col = df.columns[1]
+        date_cols = df.columns[2:]
+        
+        # Melt
+        df_long = df.melt(
+            id_vars=[uf_col, tipo_col],
+            value_vars=date_cols,
+            var_name='data_referencia',
+            value_name='valor_m2'
+        )
+        
+        df_long = df_long.rename(columns={
+            uf_col: 'uf',
+            tipo_col: 'tipo_cub'
+        })
+        
+        # Converter data
+        df_long['data_referencia'] = pd.to_datetime(
+            df_long['data_referencia'],
+            format='%b/%Y',
+            errors='coerce'
+        )
+        
+        # Limpar
+        df_long['valor_m2'] = pd.to_numeric(df_long['valor_m2'], errors='coerce')
+        df_long['regime'] = 'oneroso'
+        
+        df_long = df_long.dropna(subset=['data_referencia', 'valor_m2'])
+        
+        # Ordenar
+        df_long = df_long.sort_values(['uf', 'tipo_cub', 'data_referencia'])
+        
+        # Calcular variações por UF + tipo
+        df_long['variacao_mensal'] = df_long.groupby(['uf', 'tipo_cub'])['valor_m2'].pct_change() * 100
+        df_long['variacao_anual'] = df_long.groupby(['uf', 'tipo_cub'])['valor_m2'].pct_change(periods=12) * 100
+        
+        # Tratar inf
+        df_long['variacao_mensal'] = df_long['variacao_mensal'].replace([float('inf'), float('-inf')], None)
+        df_long['variacao_anual'] = df_long['variacao_anual'].replace([float('inf'), float('-inf')], None)
+        
+        logger.info(
+            "cub_por_uf_fetched",
+            rows=len(df_long),
+            ufs=df_long['uf'].nunique(),
+            tipos=df_long['tipo_cub'].nunique(),
+            periodo=f"{df_long['data_referencia'].min().date()} até {df_long['data_referencia'].max().date()}"
+        )
+        
+        return df_long
+    
+    def get_cub_componentes_complete(self, force_download: bool = False) -> pd.DataFrame:
+        """
+        Busca TODOS os componentes de CUB (materiais, mão de obra, despesas, equipamentos).
+        
+        Returns:
+            DataFrame consolidado com colunas:
+            - data_referencia: datetime
+            - tipo_cub: str
+            - componente: str ('materiais', 'mao_obra', 'despesa_adm', 'equipamento')
+            - valor_m2: float
+            - participacao_percentual: float
+        """
+        logger.info("fetching_cub_componentes_complete")
+        
+        componentes_map = {
+            'materiais': ('06.A.02', 'BI', 52),
+            'mao_obra': ('06.A.03', 'BI', 52),
+            'despesa_adm': ('06.A.04', 'BI', 52),
+            'equipamento': ('06.A.05', 'BI', 52)
+        }
+        
+        all_dfs = []
+        
+        for comp_name, (table_id, table_type, number) in componentes_map.items():
+            logger.info("fetching_componente", componente=comp_name)
+            
+            # Download
+            filepath = self.download_table(
+                table_id=table_id,
+                table_type=table_type,
+                number=number,
+                force_download=force_download
+            )
+            
+            # Parse
+            df = pd.read_excel(filepath, sheet_name=0)
+            
+            date_col = df.columns[0]
+            
+            df_long = df.melt(
+                id_vars=[date_col],
+                var_name='tipo_cub',
+                value_name='valor_m2'
+            )
+            
+            df_long = df_long.rename(columns={date_col: 'data_referencia'})
+            
+            df_long['data_referencia'] = pd.to_datetime(
+                df_long['data_referencia'],
+                format='%b/%Y',
+                errors='coerce'
+            )
+            
+            df_long['componente'] = comp_name
+            df_long['valor_m2'] = pd.to_numeric(df_long['valor_m2'], errors='coerce')
+            
+            df_long = df_long.dropna(subset=['data_referencia', 'valor_m2'])
+            
+            all_dfs.append(df_long)
+        
+        # Consolidar
+        result = pd.concat(all_dfs, ignore_index=True)
+        
+        # Calcular participação percentual
+        # Para cada tipo_cub + data, somar total e calcular %
+        result['total_cub'] = result.groupby(['tipo_cub', 'data_referencia'])['valor_m2'].transform('sum')
+        result['participacao_percentual'] = (result['valor_m2'] / result['total_cub']) * 100
+        
+        result = result.drop('total_cub', axis=1)
+        
+        logger.info(
+            "cub_componentes_fetched",
+            rows=len(result),
+            componentes=result['componente'].nunique(),
+            tipos=result['tipo_cub'].nunique()
+        )
+        
+        return result
+    
+    def get_cub_medio_complete(self, force_download: bool = False) -> pd.DataFrame:
+        """
+        Busca CUB Médio (residencial, multifamiliar, comercial, industrial).
+        
+        Returns:
+            DataFrame com colunas:
+            - data_referencia: datetime
+            - categoria: str ('residencial', 'multifamiliar', 'comercial', 'industrial')
+            - valor_m2: float
+            - variacao_mensal: float
+            - variacao_anual: float
+        """
+        logger.info("fetching_cub_medio_complete")
+        
+        categorias_map = {
+            'residencial': ('06.C.01', 'Global_Brasil_Serie_Historica_BI', 52),
+            'multifamiliar': ('06.C.02', 'Global_Brasil_Serie_Historica_BI', 52),
+            'comercial': ('06.C.03', 'Global_Brasil_Serie_Historica_BI', 52),
+            'industrial': ('06.C.04', 'Global_Brasil_Serie_Historica_BI', 52)
+        }
+        
+        all_dfs = []
+        
+        for categoria, (table_id, table_type, number) in categorias_map.items():
+            logger.info("fetching_cub_medio_categoria", categoria=categoria)
+            
+            # URL customizada (formato diferente)
+            url = f"http://www.cbicdados.com.br/media/anexos/tabela_{table_id}_{table_type}_{number}.xlsx"
+            
+            # Construir filename para cache
+            filename = url.split('/')[-1]
+            cache_filepath = self.cache_dir / filename
+            
+            # Download
+            if not cache_filepath.exists() or force_download:
+                response = requests.get(url, timeout=self.timeout)
+                response.raise_for_status()
+                
+                with open(cache_filepath, 'wb') as f:
+                    f.write(response.content)
+            
+            # Parse
+            df = pd.read_excel(cache_filepath, sheet_name=0)
+            
+            # Assumindo primeira coluna é data, segunda é valor
+            date_col = df.columns[0]
+            value_col = df.columns[1] if len(df.columns) > 1 else df.columns[0]
+            
+            df_clean = df[[date_col, value_col]].copy()
+            df_clean.columns = ['data_referencia', 'valor_m2']
+            
+            df_clean['data_referencia'] = pd.to_datetime(
+                df_clean['data_referencia'],
+                format='%b/%Y',
+                errors='coerce'
+            )
+            
+            df_clean['categoria'] = categoria
+            df_clean['valor_m2'] = pd.to_numeric(df_clean['valor_m2'], errors='coerce')
+            
+            df_clean = df_clean.dropna(subset=['data_referencia', 'valor_m2'])
+            
+            all_dfs.append(df_clean)
+        
+        # Consolidar
+        result = pd.concat(all_dfs, ignore_index=True)
+        
+        # Ordenar
+        result = result.sort_values(['categoria', 'data_referencia'])
+        
+        # Calcular variações
+        result['variacao_mensal'] = result.groupby('categoria')['valor_m2'].pct_change() * 100
+        result['variacao_anual'] = result.groupby('categoria')['valor_m2'].pct_change(periods=12) * 100
+        
+        # Tratar inf
+        result['variacao_mensal'] = result['variacao_mensal'].replace([float('inf'), float('-inf')], None)
+        result['variacao_anual'] = result['variacao_anual'].replace([float('inf'), float('-inf')], None)
+        
+        logger.info(
+            "cub_medio_fetched",
+            rows=len(result),
+            categorias=result['categoria'].nunique()
+        )
+        
+        return result
