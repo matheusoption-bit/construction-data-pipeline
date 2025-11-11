@@ -557,7 +557,7 @@ class SpreadsheetSetup:
         
         # 1. Preencher dim_geo (5 municípios SC)
         try:
-            print(f"  [1/4] dim_geo...", end=" ", flush=True)
+            print(f"  [1/8] dim_geo...", end=" ", flush=True)
             dim_geo = spreadsheet.worksheet("dim_geo")
             geo_data = [
                 ['4205407', 'Florianópolis', 'SC', '42', 'SUL', 516524, 675.409, 'TRUE', '2024-11-07'],
@@ -569,20 +569,23 @@ class SpreadsheetSetup:
             
             for row in geo_data:
                 dim_geo.append_row(row)
-                time.sleep(0.5)  # Pausa entre linhas
+                time.sleep(0.5)
             
             total_rows += len(geo_data)
             logger.info("dim_geo_populated", rows=len(geo_data))
-            print(f"✓ {len(geo_data)} linhas")
+            print(f"✓ {len(geo_data)} municípios")
         
         except Exception as e:
             logger.error("failed_to_populate_dim_geo", error=str(e))
             print(f"❌ Erro")
         
-        time.sleep(1)  # Pausa entre tabelas
+        time.sleep(1)
+        
+        time.sleep(1)
         
         # 2. Preencher city_params (5 municípios)
         try:
+            print(f"  [7/8] city_params...", end=" ", flush=True)
             city_params = spreadsheet.worksheet("city_params")
             params_data = [
                 ['4205407', 'Florianópolis', 'SC', 1.180, 3.00, 1800.00, 4.20, 3200.00, 2.50, '2024-01-01', 'https://leismunicipais.com.br/codigo-tributario-florianopolis-sc', 'Capital'],
@@ -594,16 +597,21 @@ class SpreadsheetSetup:
             
             for row in params_data:
                 city_params.append_row(row)
+                time.sleep(0.5)
             
             total_rows += len(params_data)
             logger.info("city_params_populated", rows=len(params_data))
-            print(f"  ✓ city_params: {len(params_data)} municípios")
+            print(f"✓ {len(params_data)} municípios")
         
         except Exception as e:
             logger.error("failed_to_populate_city_params", error=str(e))
+            print(f"❌ Erro")
+        
+        time.sleep(1)
         
         # 3. Preencher dim_cub (5 tipos)
         try:
+            print(f"  [8/8] dim_cub...", end=" ", flush=True)
             dim_cub = spreadsheet.worksheet("dim_cub")
             cub_data = [
                 ['CUB_SC_R1N', 'SC', 'Residencial', 'R1-N', 'Normal', 2150.32, '2024-10-01', 'https://cbic.org.br'],
@@ -615,39 +623,147 @@ class SpreadsheetSetup:
             
             for row in cub_data:
                 dim_cub.append_row(row)
+                time.sleep(0.5)
             
             total_rows += len(cub_data)
             logger.info("dim_cub_populated", rows=len(cub_data))
-            print(f"  ✓ dim_cub: {len(cub_data)} tipos")
+            print(f"✓ {len(cub_data)} tipos")
         
         except Exception as e:
             logger.error("failed_to_populate_dim_cub", error=str(e))
         
-        # 4. Preencher _map_sgs (se arquivo existir)
+        # 4. Preencher dim_series (metadados séries BCB)
         try:
+            print(f"  [2/8] dim_series...", end=" ", flush=True)
+            dim_series_path = "configs/dim_series_initial.csv"
+            
+            if os.path.exists(dim_series_path):
+                df = pd.read_csv(dim_series_path)
+                dim_series = spreadsheet.worksheet("dim_series")
+                
+                for _, row in df.iterrows():
+                    dim_series.append_row(row.tolist())
+                    time.sleep(0.5)
+                
+                total_rows += len(df)
+                logger.info("dim_series_populated", rows=len(df))
+                print(f"✓ {len(df)} séries")
+            else:
+                logger.warning("dim_series_file_not_found", path=dim_series_path)
+                print(f"⚠ arquivo não encontrado")
+        
+        except Exception as e:
+            logger.error("failed_to_populate_dim_series", error=str(e))
+            print(f"❌ Erro")
+        
+        time.sleep(1)
+        
+        # 5. Preencher dim_topografia (tipos de terreno)
+        try:
+            print(f"  [3/8] dim_topografia...", end=" ", flush=True)
+            dim_topografia_path = "configs/dim_topografia_initial.csv"
+            
+            if os.path.exists(dim_topografia_path):
+                df = pd.read_csv(dim_topografia_path)
+                dim_topografia = spreadsheet.worksheet("dim_topografia")
+                
+                for _, row in df.iterrows():
+                    dim_topografia.append_row(row.tolist())
+                    time.sleep(0.5)
+                
+                total_rows += len(df)
+                logger.info("dim_topografia_populated", rows=len(df))
+                print(f"✓ {len(df)} tipos")
+            else:
+                logger.warning("dim_topografia_file_not_found", path=dim_topografia_path)
+                print(f"⚠ arquivo não encontrado")
+        
+        except Exception as e:
+            logger.error("failed_to_populate_dim_topografia", error=str(e))
+            print(f"❌ Erro")
+        
+        time.sleep(1)
+        
+        # 6. Preencher dim_metodo (métodos construtivos)
+        try:
+            print(f"  [4/8] dim_metodo...", end=" ", flush=True)
+            dim_metodo_path = "configs/dim_metodo_initial.csv"
+            
+            if os.path.exists(dim_metodo_path):
+                df = pd.read_csv(dim_metodo_path)
+                dim_metodo = spreadsheet.worksheet("dim_metodo")
+                
+                for _, row in df.iterrows():
+                    dim_metodo.append_row(row.tolist())
+                    time.sleep(0.5)
+                
+                total_rows += len(df)
+                logger.info("dim_metodo_populated", rows=len(df))
+                print(f"✓ {len(df)} métodos")
+            else:
+                logger.warning("dim_metodo_file_not_found", path=dim_metodo_path)
+                print(f"⚠ arquivo não encontrado")
+        
+        except Exception as e:
+            logger.error("failed_to_populate_dim_metodo", error=str(e))
+            print(f"❌ Erro")
+        
+        time.sleep(1)
+        
+        # 7. Preencher dim_projetos (projetos complementares)
+        try:
+            print(f"  [5/8] dim_projetos...", end=" ", flush=True)
+            dim_projetos_path = "configs/dim_projetos_initial.csv"
+            
+            if os.path.exists(dim_projetos_path):
+                df = pd.read_csv(dim_projetos_path)
+                dim_projetos = spreadsheet.worksheet("dim_projetos")
+                
+                for _, row in df.iterrows():
+                    dim_projetos.append_row(row.tolist())
+                    time.sleep(0.5)
+                
+                total_rows += len(df)
+                logger.info("dim_projetos_populated", rows=len(df))
+                print(f"✓ {len(df)} projetos")
+            else:
+                logger.warning("dim_projetos_file_not_found", path=dim_projetos_path)
+                print(f"⚠ arquivo não encontrado")
+        
+        except Exception as e:
+            logger.error("failed_to_populate_dim_projetos", error=str(e))
+            print(f"❌ Erro")
+        
+        time.sleep(1)
+        
+        # 8. Preencher _map_sgs (se arquivo existir)
+        try:
+            print(f"  [6/8] _map_sgs...", end=" ", flush=True)
             maps_sgs_path = "configs/maps_sgs.csv"
             
             if os.path.exists(maps_sgs_path):
                 df = pd.read_csv(maps_sgs_path)
-                
                 map_sgs = spreadsheet.worksheet("_map_sgs")
                 
-                # Converter DataFrame para lista de listas
                 for _, row in df.iterrows():
                     map_sgs.append_row(row.tolist())
+                    time.sleep(0.5)
                 
                 total_rows += len(df)
                 logger.info("map_sgs_populated", rows=len(df))
-                print(f"  ✓ _map_sgs: {len(df)} séries")
+                print(f"✓ {len(df)} séries")
             else:
                 logger.warning("maps_sgs_file_not_found", path=maps_sgs_path)
-                print(f"  ⚠ _map_sgs: arquivo não encontrado ({maps_sgs_path})")
+                print(f"⚠ arquivo não encontrado")
         
         except Exception as e:
             logger.error("failed_to_populate_map_sgs", error=str(e))
+            print(f"❌ Erro")
         
         logger.info("initial_data_populated", total_rows=total_rows)
-        print(f"\n✓ Total de linhas inseridas: {total_rows}")
+        print(f"\n{'='*70}")
+        print(f"  ✓ Total de linhas inseridas: {total_rows}")
+        print(f"{'='*70}\n")
         
         return total_rows
     

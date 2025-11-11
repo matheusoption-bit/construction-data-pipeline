@@ -475,6 +475,125 @@ class SheetsLoader:
             )
             raise
     
+    def read_fact_series(self) -> pd.DataFrame:
+        """
+        Lê todos os dados existentes da aba fact_series.
+        
+        Retorna dados como DataFrame pandas com todas as colunas.
+        Se a aba não existir ou estiver vazia, retorna DataFrame vazio.
+        
+        Returns:
+            DataFrame com dados existentes ou DataFrame vazio
+        
+        Example:
+            >>> loader = SheetsLoader()
+            >>> df = loader.read_fact_series()
+            >>> print(f"Registros existentes: {len(df)}")
+        """
+        logger.info("reading_fact_series")
+        
+        try:
+            data = self.read_sheet("fact_series")
+            
+            if not data or len(data) <= 1:  # Apenas header ou vazio
+                logger.info("fact_series_empty")
+                return pd.DataFrame()
+            
+            # Primeira linha é header
+            headers = data[0]
+            rows = data[1:]
+            
+            # Criar DataFrame
+            df = pd.DataFrame(rows, columns=headers)
+            
+            # Converter strings vazias para NaN
+            df = df.replace('', pd.NA)
+            
+            # Converter tipos de dados
+            if 'valor' in df.columns:
+                df['valor'] = pd.to_numeric(df['valor'], errors='coerce')
+            if 'variacao_mom' in df.columns:
+                df['variacao_mom'] = pd.to_numeric(df['variacao_mom'], errors='coerce')
+            if 'variacao_yoy' in df.columns:
+                df['variacao_yoy'] = pd.to_numeric(df['variacao_yoy'], errors='coerce')
+            
+            logger.info(
+                "fact_series_read",
+                rows_read=len(df),
+                columns=list(df.columns)
+            )
+            
+            return df
+        
+        except gspread.exceptions.WorksheetNotFound:
+            logger.info("fact_series_not_found_returning_empty")
+            return pd.DataFrame()
+        
+        except Exception as e:
+            logger.error(
+                "read_fact_series_failed",
+                error=str(e),
+                error_type=type(e).__name__
+            )
+            # Retornar DataFrame vazio em caso de erro para não quebrar pipeline
+            return pd.DataFrame()
+    
+    def deduplicate_fact_series(
+        self,
+        df: pd.DataFrame,
+        keep: str = 'last'
+    ) -> tuple[pd.DataFrame, int]:
+        """
+        Remove duplicatas do DataFrame por id_fato.
+        
+        Quando há duplicatas, mantém o registro mais recente baseado em created_at.
+        Útil para limpar dados antes de inserir no Google Sheets.
+        
+        Args:
+            df: DataFrame com dados de fact_series
+            keep: 'last' mantém o mais recente, 'first' mantém o mais antigo
+        
+        Returns:
+            Tupla (DataFrame dedupicado, número de duplicatas removidas)
+        
+        Example:
+            >>> df = pd.DataFrame({
+            ...     'id_fato': ['ipca_2023-01-01', 'ipca_2023-01-01', 'selic_2023-01-01'],
+            ...     'valor': [100, 101, 13.75],
+            ...     'created_at': ['2023-01-01 10:00:00', '2023-01-01 11:00:00', '2023-01-01 10:00:00']
+            ... })
+            >>> loader = SheetsLoader()
+            >>> df_clean, removed = loader.deduplicate_fact_series(df)
+            >>> print(f"Removidas {removed} duplicatas")
+            Removidas 1 duplicatas
+        """
+        if df.empty or 'id_fato' not in df.columns:
+            logger.info("deduplicate_skipped_empty_or_no_id")
+            return df, 0
+        
+        initial_count = len(df)
+        
+        # Ordenar por created_at para garantir ordem correta
+        if 'created_at' in df.columns:
+            df = df.sort_values('created_at')
+        
+        # Remover duplicatas mantendo o mais recente
+        df_clean = df.drop_duplicates(subset=['id_fato'], keep=keep)
+        
+        duplicates_removed = initial_count - len(df_clean)
+        
+        if duplicates_removed > 0:
+            logger.info(
+                "duplicates_removed",
+                initial_count=initial_count,
+                final_count=len(df_clean),
+                duplicates_removed=duplicates_removed
+            )
+        else:
+            logger.debug("no_duplicates_found", count=initial_count)
+        
+        return df_clean, duplicates_removed
+    
     def write_fact_series(
         self,
         series_id: str,
@@ -482,7 +601,14 @@ class SheetsLoader:
         exec_id: str
     ) -> None:
         """
-        Escreve dados de séries temporais na aba fact_series.
+        Escreve dados de séries temporais na aba fact_series com lógica UPSERT.
+        
+        Implementa UPSERT (Update or Insert):
+        1. Lê dados existentes da aba fact_series
+        2. Identifica registros novos vs. duplicados por id_fato
+        3. Remove duplicatas dos dados existentes (mantém mais recente)
+        4. Combina dados existentes limpos + novos dados
+        5. Sobrescreve aba completamente com dados dedupicados
         
         Args:
             series_id: Identificador da série (ex: "ipca", "selic")
@@ -492,6 +618,14 @@ class SheetsLoader:
         Raises:
             ValueError: Se DataFrame não tiver colunas necessárias
             gspread.exceptions.APIError: Erro ao escrever dados
+        
+        Example:
+            >>> loader = SheetsLoader()
+            >>> df = pd.DataFrame({
+            ...     'data_referencia': ['2023-01-01', '2023-02-01'],
+            ...     'valor': [100.5, 102.3]
+            ... })
+            >>> loader.write_fact_series('ipca', df, 'exec_20230101')
         """
         required_cols = {"data_referencia", "valor"}
         if not required_cols.issubset(data.columns):
@@ -501,27 +635,81 @@ class SheetsLoader:
             )
         
         logger.info(
-            "writing_fact_series",
+            "writing_fact_series_upsert",
             series_id=series_id,
             exec_id=exec_id,
-            rows=len(data)
+            new_rows=len(data)
         )
         
-        # Criar cópia para não modificar original
-        df = data.copy()
+        # ============================================
+        # PASSO 1: Preparar novos dados
+        # ============================================
+        df_new = data.copy()
         
         # Adicionar colunas de metadados
-        df["id_fato"] = [f"{series_id}_{row['data_referencia']}" for _, row in df.iterrows()]
-        df["series_id"] = series_id
-        df["fonte_original"] = "bcb_sgs"
-        df["created_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        df_new["id_fato"] = [f"{series_id}_{row['data_referencia']}" for _, row in df_new.iterrows()]
+        df_new["series_id"] = series_id
+        df_new["fonte_original"] = "bcb_sgs"
+        df_new["created_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         # Calcular variações se houver dados suficientes
-        df = df.sort_values("data_referencia")
-        df["variacao_mom"] = df["valor"].pct_change() * 100  # Month-over-month %
-        df["variacao_yoy"] = df["valor"].pct_change(periods=12) * 100  # Year-over-year %
+        df_new = df_new.sort_values("data_referencia")
+        df_new["variacao_mom"] = df_new["valor"].pct_change() * 100  # Month-over-month %
+        df_new["variacao_yoy"] = df_new["valor"].pct_change(periods=12) * 100  # Year-over-year %
         
-        # Reordenar colunas
+        # ============================================
+        # PASSO 2: Ler dados existentes
+        # ============================================
+        df_existing = self.read_fact_series()
+        
+        existing_count = len(df_existing)
+        logger.info("existing_data_read", existing_count=existing_count)
+        
+        # ============================================
+        # PASSO 3: Identificar novos vs. atualizações
+        # ============================================
+        if df_existing.empty:
+            # Não há dados existentes, todos são novos
+            df_final = df_new
+            new_count = len(df_new)
+            updated_count = 0
+            logger.info("no_existing_data_all_new", new_count=new_count)
+        else:
+            # Identificar IDs novos
+            existing_ids = set(df_existing['id_fato'].values)
+            new_ids = set(df_new['id_fato'].values)
+            
+            truly_new_ids = new_ids - existing_ids
+            update_ids = new_ids & existing_ids
+            
+            new_count = len(truly_new_ids)
+            updated_count = len(update_ids)
+            
+            logger.info(
+                "upsert_analysis",
+                existing_ids=len(existing_ids),
+                new_ids=new_count,
+                update_ids=updated_count
+            )
+            
+            # Remover registros que serão atualizados dos dados existentes
+            df_existing_filtered = df_existing[~df_existing['id_fato'].isin(update_ids)]
+            
+            # Combinar dados existentes (sem os que serão atualizados) + novos dados
+            df_combined = pd.concat([df_existing_filtered, df_new], ignore_index=True)
+            
+            # Remover duplicatas (caso haja) mantendo mais recente
+            df_final, duplicates_removed = self.deduplicate_fact_series(df_combined)
+            
+            if duplicates_removed > 0:
+                logger.warning(
+                    "duplicates_found_and_removed",
+                    duplicates_removed=duplicates_removed
+                )
+        
+        # ============================================
+        # PASSO 4: Reordenar colunas e preparar para escrita
+        # ============================================
         columns_order = [
             "id_fato",
             "series_id",
@@ -532,11 +720,14 @@ class SheetsLoader:
             "fonte_original",
             "created_at"
         ]
-        df = df[columns_order]
+        df_final = df_final[columns_order]
+        
+        # Ordenar por series_id e data_referencia para organização
+        df_final = df_final.sort_values(["series_id", "data_referencia"])
         
         # Converter para lista de listas
         headers = [columns_order]
-        rows = df.values.tolist()
+        rows = df_final.values.tolist()
         
         # Converter NaN para string vazia
         rows = [
@@ -544,20 +735,30 @@ class SheetsLoader:
             for row in rows
         ]
         
-        data_to_write = headers + rows
-        
+        # ============================================
+        # PASSO 5: Sobrescrever aba completamente
+        # ============================================
         try:
             # Criar aba se não existir
             self.create_sheet_if_not_exists("fact_series", headers=columns_order)
             
-            # Adicionar dados
-            self.append_to_sheet("fact_series", rows)
+            # Limpar aba completamente e escrever dados dedupicados
+            worksheet = self._get_spreadsheet().worksheet("fact_series")
+            worksheet.clear()
+            
+            # Escrever header + dados
+            all_data = headers + rows
+            worksheet.update('A1', all_data)
             
             logger.info(
-                "fact_series_written",
+                "fact_series_upsert_complete",
                 series_id=series_id,
                 exec_id=exec_id,
-                rows_written=len(rows)
+                existing_rows=existing_count,
+                new_rows=new_count,
+                updated_rows=updated_count,
+                final_total=len(df_final),
+                operation="upsert"
             )
         
         except Exception as e:

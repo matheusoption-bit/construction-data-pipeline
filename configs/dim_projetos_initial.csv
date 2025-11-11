@@ -1,0 +1,13 @@
+id_projeto,nome_projeto,custo_base_m2,is_obrigatorio
+PROJ_01,Arquitetônico,25.00,TRUE
+PROJ_02,Estrutural,18.00,TRUE
+PROJ_03,Hidrossanitário,12.00,TRUE
+PROJ_04,Elétrico,15.00,TRUE
+PROJ_05,Prevenção e Combate a Incêndio,10.00,TRUE
+PROJ_06,SPDA (Para-raios),8.00,TRUE
+PROJ_07,Fundações,20.00,TRUE
+PROJ_08,Ar Condicionado e Ventilação,14.00,FALSE
+PROJ_09,Paisagismo,12.00,FALSE
+PROJ_10,Acústica,15.00,FALSE
+PROJ_11,Automação Predial,18.00,FALSE
+PROJ_12,Eficiência Energética,16.00,FALSE

@@ -1,0 +1,657 @@
+"""
+Cliente para API/dados do CBICdados (Câmara Brasileira da Indústria da Construção).
+
+Este módulo fornece acesso aos dados estatísticos publicados pela CBIC,
+incluindo CUB (Custo Unitário Básico), indicadores econômicos e séries históricas.
+
+Características:
+- Cache local de arquivos Excel
+- Metadata tracking (checksums, datas)
+- Retry automático com backoff exponencial
+- Parsing robusto de múltiplos formatos de Excel
+
+Exemplo de uso:
+    >>> from src.clients.cbic import CBICClient
+    >>> 
+    >>> client = CBICClient()
+    >>> 
+    >>> # Baixar e parsear CUB por estado
+    >>> df = client.fetch_cub_historical(uf="SC")
+    >>> print(df.head())
+    >>> 
+    >>> # Download direto de tabela
+    >>> filepath = client.download_table("06.A.06", "BI", 53)
+    >>> print(f"Arquivo salvo em: {filepath}")
+"""
+
+import hashlib
+import json
+import time
+from datetime import datetime
+from pathlib import Path
+from typing import Optional, Dict, Any, Tuple
+import re
+
+import pandas as pd
+import requests
+import structlog
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_exponential,
+    retry_if_exception_type
+)
+
+logger = structlog.get_logger(__name__)
+
+
+class CBICClient:
+    """
+    Cliente para acessar dados do CBICdados.
+    
+    Gerencia downloads, cache e parsing de arquivos Excel da CBIC.
+    
+    Attributes:
+        base_url: URL base da CBIC para anexos
+        cache_dir: Diretório local para cache de arquivos
+        timeout: Timeout em segundos para requests HTTP
+    
+    Example:
+        >>> client = CBICClient()
+        >>> df_cub = client.fetch_cub_historical("SC")
+        >>> print(f"CUB SC histórico: {len(df_cub)} meses")
+    """
+    
+    # URLs conhecidas de tabelas importantes
+    KNOWN_TABLES = {
+        "cub_global": {
+            "table_id": "06.A.06",
+            "table_type": "BI",
+            "number": 53,
+            "description": "CUB/m² por UF - Global",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.06_BI_53.xlsx"
+        },
+        "cub_materiais": {
+            "table_id": "06.A.07",
+            "table_type": "BI",
+            "number": 53,
+            "description": "CUB/m² por UF - Materiais",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.07_BI_53.xlsx"
+        },
+        "cub_mao_obra": {
+            "table_id": "06.A.08",
+            "table_type": "BI",
+            "number": 53,
+            "description": "CUB/m² por UF - Mão de obra",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.08_BI_53.xlsx"
+        },
+        "cub_medio_brasil": {
+            "table_id": "06.A.01",
+            "table_type": "BI",
+            "number": 54,
+            "description": "CUB Médio Brasil",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_06.A.01_BI_54.xlsx"
+        },
+        "ipca_inpc": {
+            "table_id": "09.B.14",
+            "table_type": "n",
+            "number": 70,
+            "description": "IPCA/INPC",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_09.B.14_n_70.xlsx"
+        },
+        "selic_cdi": {
+            "table_id": "09.B.10",
+            "table_type": "n",
+            "number": 20,
+            "description": "Selic/CDI",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_09.B.10_n_20.xlsx"
+        },
+        "cambio": {
+            "table_id": "09.B.08",
+            "table_type": "n",
+            "number": 60,
+            "description": "Taxa de Câmbio",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_09.B.08_n_60.xlsx"
+        },
+        "salario_minimo": {
+            "table_id": "09.B.13",
+            "table_type": "n",
+            "number": 6,
+            "description": "Salário Mínimo",
+            "url": "http://www.cbicdados.com.br/media/anexos/tabela_09.B.13_n_6.xlsx"
+        }
+    }
+    
+    def __init__(
+        self,
+        base_url: str = "http://www.cbicdados.com.br/media/anexos/",
+        cache_dir: Optional[Path] = None,
+        timeout: int = 60
+    ):
+        """
+        Inicializa cliente CBIC.
+        
+        Args:
+            base_url: URL base para downloads
+            cache_dir: Diretório de cache (padrão: data/cache/cbic/)
+            timeout: Timeout em segundos para requests
+        """
+        self.base_url = base_url
+        self.timeout = timeout
+        
+        # Configurar diretório de cache
+        if cache_dir is None:
+            self.cache_dir = Path("data/cache/cbic")
+        else:
+            self.cache_dir = Path(cache_dir)
+        
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        
+        logger.info(
+            "cbic_client_initialized",
+            cache_dir=str(self.cache_dir),
+            base_url=self.base_url
+        )
+    
+    def _build_url(self, table_id: str, table_type: str, number: int) -> str:
+        """
+        Constrói URL para tabela específica.
+        
+        Args:
+            table_id: ID da tabela (ex: "06.A.06")
+            table_type: Tipo da tabela (ex: "BI", "n")
+            number: Número da tabela (ex: 53)
+        
+        Returns:
+            URL completa para download
+        
+        Example:
+            >>> client._build_url("06.A.06", "BI", 53)
+            'http://www.cbicdados.com.br/media/anexos/tabela_06.A.06_BI_53.xlsx'
+        """
+        filename = f"tabela_{table_id}_{table_type}_{number}.xlsx"
+        return self.base_url + filename
+    
+    def _calculate_checksum(self, filepath: Path) -> str:
+        """
+        Calcula SHA256 do arquivo.
+        
+        Args:
+            filepath: Caminho do arquivo
+        
+        Returns:
+            Hash SHA256 em hexadecimal
+        """
+        sha256_hash = hashlib.sha256()
+        
+        with open(filepath, "rb") as f:
+            for byte_block in iter(lambda: f.read(4096), b""):
+                sha256_hash.update(byte_block)
+        
+        return sha256_hash.hexdigest()
+    
+    def _save_metadata(
+        self,
+        filepath: Path,
+        url: str,
+        table_id: str,
+        description: str
+    ) -> None:
+        """
+        Salva metadata do arquivo baixado.
+        
+        Args:
+            filepath: Caminho do arquivo Excel
+            url: URL de origem
+            table_id: ID da tabela
+            description: Descrição da tabela
+        """
+        metadata = {
+            "url": url,
+            "download_date": datetime.utcnow().isoformat() + "Z",
+            "checksum_sha256": self._calculate_checksum(filepath),
+            "size_bytes": filepath.stat().st_size,
+            "table_id": table_id,
+            "description": description
+        }
+        
+        meta_path = filepath.with_suffix(filepath.suffix + ".meta.json")
+        
+        with open(meta_path, "w", encoding="utf-8") as f:
+            json.dump(metadata, f, indent=2, ensure_ascii=False)
+        
+        logger.info(
+            "metadata_saved",
+            meta_path=str(meta_path),
+            checksum=metadata["checksum_sha256"][:16]
+        )
+    
+    def _load_metadata(self, filepath: Path) -> Optional[Dict[str, Any]]:
+        """
+        Carrega metadata de arquivo.
+        
+        Args:
+            filepath: Caminho do arquivo Excel
+        
+        Returns:
+            Dicionário com metadata ou None se não existir
+        """
+        meta_path = filepath.with_suffix(filepath.suffix + ".meta.json")
+        
+        if not meta_path.exists():
+            return None
+        
+        try:
+            with open(meta_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.warning("failed_to_load_metadata", error=str(e))
+            return None
+    
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception_type((requests.RequestException, requests.Timeout))
+    )
+    def download_table(
+        self,
+        table_id: str,
+        table_type: str,
+        number: int,
+        force_download: bool = False
+    ) -> Path:
+        """
+        Baixa tabela da CBIC com retry automático.
+        
+        Faz cache local do arquivo Excel. Se já existe no cache e não está
+        corrompido, retorna o caminho sem fazer download novamente.
+        
+        Args:
+            table_id: ID da tabela (ex: "06.A.06")
+            table_type: Tipo da tabela (ex: "BI", "n")
+            number: Número da tabela (ex: 53)
+            force_download: Força redownload mesmo se existe no cache
+        
+        Returns:
+            Path para arquivo Excel baixado
+        
+        Raises:
+            requests.RequestException: Erro ao baixar arquivo
+            IOError: Erro ao salvar arquivo
+        
+        Example:
+            >>> client = CBICClient()
+            >>> filepath = client.download_table("06.A.06", "BI", 53)
+            >>> print(f"Arquivo: {filepath}")
+        """
+        url = self._build_url(table_id, table_type, number)
+        filename = f"tabela_{table_id}_{table_type}_{number}.xlsx"
+        filepath = self.cache_dir / filename
+        
+        # Verificar se já existe no cache
+        if filepath.exists() and not force_download:
+            logger.info("using_cached_file", filepath=str(filepath))
+            return filepath
+        
+        logger.info("downloading_table", url=url, table_id=table_id)
+        
+        try:
+            response = requests.get(url, timeout=self.timeout, stream=True)
+            response.raise_for_status()
+            
+            # Salvar arquivo
+            with open(filepath, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            
+            # Verificar integridade básica
+            if filepath.stat().st_size == 0:
+                raise IOError(f"Arquivo baixado está vazio: {filepath}")
+            
+            # Salvar metadata
+            description = self._get_table_description(table_id, table_type, number)
+            self._save_metadata(filepath, url, table_id, description)
+            
+            logger.info(
+                "table_downloaded",
+                filepath=str(filepath),
+                size_bytes=filepath.stat().st_size
+            )
+            
+            return filepath
+        
+        except requests.RequestException as e:
+            logger.error(
+                "download_failed",
+                url=url,
+                error=str(e),
+                error_type=type(e).__name__
+            )
+            raise
+    
+    def _get_table_description(
+        self,
+        table_id: str,
+        table_type: str,
+        number: int
+    ) -> str:
+        """
+        Obtém descrição da tabela a partir de tabelas conhecidas.
+        
+        Args:
+            table_id: ID da tabela
+            table_type: Tipo da tabela
+            number: Número da tabela
+        
+        Returns:
+            Descrição ou string padrão
+        """
+        for table_info in self.KNOWN_TABLES.values():
+            if (table_info["table_id"] == table_id and
+                table_info["table_type"] == table_type and
+                table_info["number"] == number):
+                return table_info["description"]
+        
+        return f"Tabela {table_id}_{table_type}_{number}"
+    
+    def _parse_date_column(self, date_str: Any) -> Optional[str]:
+        """
+        Faz parsing de coluna de data em múltiplos formatos.
+        
+        Formatos suportados:
+        - "jan/24" -> "2024-01-01"
+        - "01/2024" -> "2024-01-01"
+        - "2024-01" -> "2024-01-01"
+        - "janeiro/2024" -> "2024-01-01"
+        
+        Args:
+            date_str: String com data
+        
+        Returns:
+            Data no formato YYYY-MM-DD ou None se inválida
+        """
+        if pd.isna(date_str):
+            return None
+        
+        date_str = str(date_str).strip().lower()
+        
+        # Mapeamento de nomes de meses
+        month_map = {
+            "jan": "01", "janeiro": "01",
+            "fev": "02", "fevereiro": "02",
+            "mar": "03", "março": "03", "marco": "03",
+            "abr": "04", "abril": "04",
+            "mai": "05", "maio": "05",
+            "jun": "06", "junho": "06",
+            "jul": "07", "julho": "07",
+            "ago": "08", "agosto": "08",
+            "set": "09", "setembro": "09",
+            "out": "10", "outubro": "10",
+            "nov": "11", "novembro": "11",
+            "dez": "12", "dezembro": "12"
+        }
+        
+        # Padrão: "jan/24" ou "janeiro/2024"
+        match = re.match(r"([a-z]+)[/\-](\d{2,4})", date_str)
+        if match:
+            month_name, year = match.groups()
+            month = month_map.get(month_name)
+            if month:
+                # Converter ano de 2 dígitos
+                if len(year) == 2:
+                    year = "20" + year if int(year) < 50 else "19" + year
+                return f"{year}-{month}-01"
+        
+        # Padrão: "01/2024" ou "1/2024"
+        match = re.match(r"(\d{1,2})[/\-](\d{4})", date_str)
+        if match:
+            month, year = match.groups()
+            return f"{year}-{month.zfill(2)}-01"
+        
+        # Padrão: "2024-01"
+        match = re.match(r"(\d{4})[/\-](\d{1,2})", date_str)
+        if match:
+            year, month = match.groups()
+            return f"{year}-{month.zfill(2)}-01"
+        
+        logger.warning("unparseable_date", date_str=date_str)
+        return None
+    
+    def _clean_numeric_value(self, value: Any) -> Optional[float]:
+        """
+        Limpa valor numérico (remove pontos de milhar, converte vírgula).
+        
+        Args:
+            value: Valor a limpar
+        
+        Returns:
+            Float ou None se inválido
+        
+        Example:
+            >>> client._clean_numeric_value("1.234,56")
+            1234.56
+            >>> client._clean_numeric_value("R$ 2.500,00")
+            2500.0
+        """
+        if pd.isna(value):
+            return None
+        
+        # Se já é número, retornar
+        if isinstance(value, (int, float)):
+            return float(value)
+        
+        # Converter para string e limpar
+        value_str = str(value).strip()
+        
+        # Remover símbolos comuns
+        value_str = re.sub(r"[R$%\s]", "", value_str)
+        
+        # Remover pontos de milhar e converter vírgula decimal
+        value_str = value_str.replace(".", "")
+        value_str = value_str.replace(",", ".")
+        
+        try:
+            return float(value_str)
+        except ValueError:
+            logger.warning("invalid_numeric_value", value=value)
+            return None
+    
+    def parse_cub_by_state(
+        self,
+        filepath: Path,
+        uf: str = "SC",
+        tipo_cub: str = "R1-N"
+    ) -> pd.DataFrame:
+        """
+        Faz parsing de arquivo CUB por UF.
+        
+        Lê sheet específica da UF e extrai série histórica completa.
+        Arquivos CBIC têm uma aba por estado com série temporal completa.
+        
+        Estrutura do arquivo:
+        - Coluna 0 (MÊS): ANO (2007, NaN, NaN, ..., 2008, NaN, ...)
+        - Coluna 1 (Unnamed: 1): MÊS (FEV, MAR, ABR, ...)
+        - Coluna 2 (Unnamed: 2): Valores em R$/m² (611.28, 615.43, ...)
+        - Demais colunas: Variações percentuais
+        
+        Args:
+            filepath: Caminho do arquivo Excel
+            uf: Sigla do estado (ex: "SC", "SP")
+            tipo_cub: Tipo de CUB (DEPRECATED - arquivo não especifica tipo)
+        
+        Returns:
+            DataFrame com colunas:
+            - data_referencia: YYYY-MM-DD
+            - uf: Sigla do estado
+            - tipo_cub: "CUB-MEDIO" (arquivo não especifica tipo)
+            - custo_m2: Custo em R$/m²
+            - fonte_url: URL original
+            - checksum_dados: SHA256 dos dados
+            - metodo_versao: Versão do método de parsing
+            - created_at: Timestamp da criação
+        
+        Raises:
+            FileNotFoundError: Arquivo não encontrado
+            ValueError: Erro ao parsear dados
+        
+        Example:
+            >>> client = CBICClient()
+            >>> filepath = client.download_table("06.A.06", "BI", 53)
+            >>> df = client.parse_cub_by_state(filepath, uf="SC")
+            >>> print(f"{len(df)} meses de histórico")
+        """
+        if not filepath.exists():
+            raise FileNotFoundError(f"Arquivo não encontrado: {filepath}")
+        
+        logger.info("parsing_cub_by_state", filepath=str(filepath), uf=uf)
+        
+        try:
+            # Carregar metadata
+            metadata = self._load_metadata(filepath)
+            
+            # Ler Excel - skiprows=7 é o padrão identificado
+            df = pd.read_excel(
+                filepath,
+                sheet_name=uf,
+                skiprows=7
+            )
+            
+            if df.empty:
+                logger.error("empty_dataframe", uf=uf)
+                return pd.DataFrame()
+            
+            logger.info(
+                "excel_loaded",
+                shape=df.shape,
+                columns=list(df.columns)
+            )
+            
+            # Estrutura esperada:
+            # Col 0: MÊS (ano aparece periodicamente)
+            # Col 1: Unnamed: 1 (nome do mês)
+            # Col 2: Unnamed: 2 (valor em R$/m²)
+            
+            # Renomear colunas
+            col_names = {
+                df.columns[0]: 'ano_raw',
+                df.columns[1]: 'mes_raw',
+                df.columns[2]: 'valor_raw'
+            }
+            df_clean = df.rename(columns=col_names)[['ano_raw', 'mes_raw', 'valor_raw']].copy()
+            
+            # Preencher anos (forward fill)
+            df_clean['ano'] = pd.to_numeric(df_clean['ano_raw'], errors='coerce')
+            df_clean['ano'] = df_clean['ano'].ffill()
+            
+            # Converter mês para número
+            month_map = {
+                'JAN': 1, 'FEV': 2, 'MAR': 3, 'ABR': 4,
+                'MAI': 5, 'JUN': 6, 'JUL': 7, 'AGO': 8,
+                'SET': 9, 'OUT': 10, 'NOV': 11, 'DEZ': 12
+            }
+            
+            df_clean['mes'] = df_clean['mes_raw'].str.upper().str.strip().map(month_map)
+            
+            # Construir data_referencia
+            df_clean['data_referencia'] = pd.to_datetime(
+                df_clean['ano'].astype('Int64').astype(str) + '-' +
+                df_clean['mes'].astype('Int64').astype(str).str.zfill(2) + '-01',
+                errors='coerce'
+            )
+            
+            # Limpar valores numéricos
+            df_clean['custo_m2'] = pd.to_numeric(df_clean['valor_raw'], errors='coerce')
+            
+            # Filtrar linhas válidas
+            df_result = df_clean[
+                (df_clean['data_referencia'].notna()) &
+                (df_clean['custo_m2'].notna()) &
+                (df_clean['custo_m2'] > 0)
+            ].copy()
+            
+            if df_result.empty:
+                logger.warning("no_valid_rows_after_cleaning", uf=uf)
+                return pd.DataFrame()
+            
+            # Adicionar metadados
+            df_result['uf'] = uf
+            df_result['tipo_cub'] = 'CUB-MEDIO'  # Arquivo não especifica tipo
+            df_result['fonte_url'] = metadata['url'] if metadata else str(filepath)
+            df_result['checksum_dados'] = metadata['checksum_sha256'][:16] if metadata else ''
+            df_result['metodo_versao'] = '1.0.0'
+            df_result['created_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            # Selecionar colunas finais
+            result = df_result[[
+                'data_referencia',
+                'uf',
+                'tipo_cub',
+                'custo_m2',
+                'fonte_url',
+                'checksum_dados',
+                'metodo_versao',
+                'created_at'
+            ]].sort_values('data_referencia').reset_index(drop=True)
+            
+            # Converter data_referencia para string
+            result['data_referencia'] = result['data_referencia'].dt.strftime('%Y-%m-%d')
+            
+            logger.info(
+                "cub_parsed",
+                uf=uf,
+                rows=len(result),
+                date_range=f"{result['data_referencia'].min()} até {result['data_referencia'].max()}",
+                value_range=f"R$ {result['custo_m2'].min():.2f} - R$ {result['custo_m2'].max():.2f}"
+            )
+            
+            return result
+        
+        except Exception as e:
+            logger.error(
+                "parse_cub_failed",
+                filepath=str(filepath),
+                uf=uf,
+                error=str(e),
+                error_type=type(e).__name__
+            )
+            raise
+    
+    def fetch_cub_historical(
+        self,
+        uf: str = "SC",
+        tipo_cub: str = "R1-N",
+        force_download: bool = False
+    ) -> pd.DataFrame:
+        """
+        Baixa e parseia série histórica completa de CUB para um estado.
+        
+        Método de conveniência que combina download + parsing.
+        
+        Args:
+            uf: Sigla do estado (padrão: "SC")
+            tipo_cub: Tipo de CUB (padrão: "R1-N")
+            force_download: Força redownload mesmo se existe cache
+        
+        Returns:
+            DataFrame com série histórica de CUB
+        
+        Example:
+            >>> client = CBICClient()
+            >>> df = client.fetch_cub_historical("SC")
+            >>> print(f"CUB/SC: {len(df)} meses de histórico")
+            >>> print(f"Último valor: R$ {df.iloc[-1]['custo_m2']:.2f}/m²")
+        """
+        logger.info("fetching_cub_historical", uf=uf, tipo_cub=tipo_cub)
+        
+        # Baixar tabela CUB global
+        filepath = self.download_table(
+            table_id="06.A.06",
+            table_type="BI",
+            number=53,
+            force_download=force_download
+        )
+        
+        # Parsear dados
+        df = self.parse_cub_by_state(filepath, uf=uf, tipo_cub=tipo_cub)
+        
+        return df

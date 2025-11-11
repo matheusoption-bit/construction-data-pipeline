@@ -10,6 +10,7 @@ Pipeline automatizado de ingestão e análise de séries temporais econômicas d
 
 ## 📊 Séries Coletadas
 
+### Banco Central do Brasil (BCB SGS)
 - **Selic** (432) - Taxa básica de juros
 - **TR** (226) - Taxa Referencial
 - **USD/BRL** (1) - Taxa de câmbio
@@ -20,6 +21,12 @@ Pipeline automatizado de ingestão e análise de séries temporais econômicas d
 - **Crédito PF** (4390) - Volume de crédito pessoa física
 - **Produção Construção** (1207) - Índice de produção da construção
 - **Estoque Crédito Habitacional** (24364) - Volume de crédito imobiliário
+
+### CBIC (Câmara Brasileira da Indústria da Construção)
+- **CUB** - Custo Unitário Básico por m² (histórico desde dez/2015)
+  - Disponível para todos os 21 estados brasileiros
+  - Atualização mensal
+  - Projeto padrão representativo (CUB-MEDIO)
 
 ## 🚀 Execução Local
 
@@ -54,8 +61,9 @@ cp .env.example .env
 # - GOOGLE_CREDENTIALS_PATH=credentials.json
 ```
 
-### 4. Executar Job de Ingestão
+### 4. Executar Jobs de Ingestão
 
+#### Job Diário BCB (Séries Econômicas)
 ```bash
 python -m src.jobs.daily_bcb
 ```
@@ -68,18 +76,43 @@ O job irá:
 - Registrar flags de qualidade em `_quality_flags`
 - Registrar log de execução em `_ingestion_log`
 
+#### Backfill CUB (Dados Históricos CBIC)
+```bash
+# Backfill Santa Catarina
+python -m src.jobs.backfill_cub --uf SC
+
+# Backfill outros estados
+python -m src.jobs.backfill_cub --uf SP  # São Paulo
+python -m src.jobs.backfill_cub --uf RJ  # Rio de Janeiro
+python -m src.jobs.backfill_cub --uf MG  # Minas Gerais
+
+# Forçar reprocessamento (limpar dados existentes)
+python -m src.jobs.backfill_cub --uf SC --force
+```
+
+O job irá:
+- Baixar série histórica completa de CUB para o estado
+- Validar qualidade dos dados (valores, gaps, variações)
+- Criar aba `fact_cub_historico` se não existir
+- Inserir 118 meses de dados (dez/2015 até set/2025)
+- Registrar log de execução
+
+Estados disponíveis: AL, AM, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PR, RJ, RO, RS, SC, SE, SP
+
 ## 📁 Estrutura do Projeto
 
 ```
 construction-data-pipeline/
 ├── src/
 │   ├── clients/          # Clientes de APIs externas
-│   │   └── bcb.py       # Cliente Banco Central
+│   │   ├── bcb.py       # Cliente Banco Central
+│   │   └── cbic.py      # Cliente CBIC (CUB)
 │   ├── etl/             # ETL e processamento
 │   │   ├── sheets.py    # Loader Google Sheets
 │   │   └── quality.py   # Validações de qualidade
 │   ├── jobs/            # Jobs de ingestão
-│   │   └── daily_bcb.py # Job diário BCB
+│   │   ├── daily_bcb.py     # Job diário BCB
+│   │   └── backfill_cub.py  # Backfill histórico CUB
 │   └── utils/           # Utilitários
 │       ├── config.py    # Configurações
 │       └── logger.py    # Logging estruturado
@@ -87,12 +120,23 @@ construction-data-pipeline/
 │   └── daily-ingestion.yml
 ├── configs/             # Configurações
 │   └── maps_sgs.csv    # Mapeamento de séries SGS
-├── tests/               # Testes automatizados
-│   └── test_clients.py
-├── requirements.txt     # Dependências Python
-├── .env.example        # Exemplo de variáveis de ambiente
-├── .gitignore          # Arquivos ignorados pelo Git
-└── pyproject.toml      # Configuração do projeto
+├── data/               # Dados em cache
+│   └── cache/cbic/     # Cache de arquivos CBIC
+├── docs/               # Documentação
+│   ├── UPSERT_IMPLEMENTATION.md
+│   ├── DIMENSIONAIS_DADOS_INICIAIS.md
+│   └── BACKFILL_CUB_RESULTADO.md
+├── scripts/            # Scripts auxiliares
+│   ├── setup_spreadsheet.py
+│   ├── test_cbic_client.py
+│   └── check_cub_data.py
+├── tests/              # Testes automatizados
+│   ├── test_clients.py
+│   └── test_sheets_upsert.py
+├── requirements.txt    # Dependências Python
+├── .env.example       # Exemplo de variáveis de ambiente
+├── .gitignore         # Arquivos ignorados pelo Git
+└── pyproject.toml     # Configuração do projeto
 ```
 
 ## 🧪 Executar Testes
@@ -135,7 +179,7 @@ base64 -w 0 credentials.json
 
 ## 📊 Estrutura das Abas no Google Sheets
 
-### `fact_series`
+### `fact_series` (Séries Econômicas BCB)
 Tabela de fatos com séries temporais:
 - `id_fato` - Chave primária (series_id + data)
 - `series_id` - Identificador da série
@@ -144,6 +188,18 @@ Tabela de fatos com séries temporais:
 - `variacao_mom` - Variação mês sobre mês (%)
 - `variacao_yoy` - Variação ano sobre ano (%)
 - `fonte_original` - Fonte (bcb_sgs)
+- `created_at` - Timestamp de criação
+
+### `fact_cub_historico` (Custo Unitário Básico CBIC)
+Tabela de fatos com série histórica de CUB:
+- `id_fato` - Chave primária (CUB_UF_TIPO_ANO-MES)
+- `uf` - Sigla do estado
+- `tipo_cub` - Tipo de CUB (CUB-MEDIO)
+- `data_referencia` - Data no formato YYYY-MM-DD
+- `custo_m2` - Custo por m² em R$
+- `fonte_url` - URL da fonte CBIC
+- `checksum_dados` - SHA256 dos dados (16 chars)
+- `metodo_versao` - Versão do método de parsing
 - `created_at` - Timestamp de criação
 
 ### `_quality_flags`
@@ -174,6 +230,8 @@ Log de execuções:
 - **structlog** - Logging estruturado em JSON
 - **scipy** - Cálculos estatísticos (z-score)
 - **pytest** - Testes automatizados
+- **tenacity** - Retry com exponential backoff
+- **openpyxl** - Leitura de arquivos Excel (.xlsx)
 
 ## 📝 Logs
 

@@ -1,0 +1,175 @@
+# Pre-commit Configuration
+# Install: pip install pre-commit
+# Setup: pre-commit install
+# Run: pre-commit run --all-files
+
+repos:
+  # ============================================
+  # 🔒 SECURITY CHECKS - Prevenir vazamento de credenciais
+  # ============================================
+  
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        name: 🔐 Detect secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: |
+          (?x)^(
+            package-lock.json|
+            poetry.lock|
+            .*\.svg
+          )$
+  
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Prevenir commit de arquivos grandes
+      - id: check-added-large-files
+        name: 🚫 Check for large files
+        args: ['--maxkb=1000']
+      
+      # Prevenir commit de credenciais
+      - id: detect-private-key
+        name: 🔑 Detect private keys
+      
+      # Verificar merge conflicts não resolvidos
+      - id: check-merge-conflict
+        name: ⚔️ Check merge conflicts
+      
+      # Verificar JSON válido
+      - id: check-json
+        name: 📄 Check JSON syntax
+      
+      # Verificar YAML válido
+      - id: check-yaml
+        name: 📄 Check YAML syntax
+        args: ['--allow-multiple-documents']
+      
+      # Verificar TOML válido
+      - id: check-toml
+        name: 📄 Check TOML syntax
+      
+      # Remover trailing whitespace
+      - id: trailing-whitespace
+        name: 🧹 Trim trailing whitespace
+        args: ['--markdown-linebreak-ext=md']
+      
+      # Garantir final de linha consistente
+      - id: end-of-file-fixer
+        name: 🧹 Fix end of files
+      
+      # Verificar encoding UTF-8
+      - id: mixed-line-ending
+        name: 📝 Check line endings
+        args: ['--fix=lf']
+  
+  # ============================================
+  # 🐍 PYTHON QUALITY - Formatação e linting
+  # ============================================
+  
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        name: 🎨 Black - Code formatter
+        language_version: python3
+        args: ['--line-length=100']
+  
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: 📦 isort - Sort imports
+        args: ['--profile', 'black', '--line-length', '100']
+  
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        name: 🔍 Flake8 - Style guide
+        args: ['--max-line-length=100', '--extend-ignore=E203,W503']
+  
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        name: 🛡️ Bandit - Security linter
+        args: ['-c', 'pyproject.toml', '-r', 'src/']
+        additional_dependencies: ['bandit[toml]']
+  
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        name: 🔬 MyPy - Type checking
+        args: ['--ignore-missing-imports', '--show-error-codes']
+        additional_dependencies: ['types-requests', 'types-python-dateutil']
+  
+  # ============================================
+  # 📋 CUSTOM HOOKS - Verificações específicas do projeto
+  # ============================================
+  
+  - repo: local
+    hooks:
+      # Prevenir commit de credentials.json
+      - id: prevent-credentials-commit
+        name: 🚨 Prevent credentials.json commit
+        entry: bash -c 'if git diff --cached --name-only | grep -q "credentials.json"; then echo "ERROR: credentials.json cannot be committed!"; exit 1; fi'
+        language: system
+        stages: [commit]
+      
+      # Prevenir commit de .env files
+      - id: prevent-env-commit
+        name: 🚨 Prevent .env files commit
+        entry: bash -c 'if git diff --cached --name-only | grep -q "\.env$"; then echo "ERROR: .env files cannot be committed!"; exit 1; fi'
+        language: system
+        stages: [commit]
+      
+      # Verificar que testes passam
+      - id: run-tests
+        name: 🧪 Run tests
+        entry: pytest tests/ -v --tb=short
+        language: system
+        pass_filenames: false
+        stages: [push]
+        always_run: false  # Set to true to run on every push
+      
+      # Verificar requirements.txt está atualizado
+      - id: check-requirements
+        name: 📦 Check requirements.txt
+        entry: bash -c 'pip freeze | grep -Ff requirements.txt > /dev/null || (echo "WARNING: requirements.txt may be outdated"; exit 0)'
+        language: system
+        stages: [commit]
+        always_run: false
+
+# ============================================
+# ⚙️ CONFIGURATION
+# ============================================
+
+default_language_version:
+  python: python3
+
+# Arquivos/diretórios a ignorar
+exclude: |
+  (?x)^(
+    \.venv/|
+    venv/|
+    \.git/|
+    \.mypy_cache/|
+    \.pytest_cache/|
+    __pycache__/|
+    \.tox/|
+    dist/|
+    build/|
+    .*\.egg-info/|
+    snapshots/|
+    credentials\.json|
+    .*-key\.json
+  )$
+
+# Fail fast - parar no primeiro erro
+fail_fast: false
+
+# Minimum pre-commit version
+minimum_pre_commit_version: '2.20.0'

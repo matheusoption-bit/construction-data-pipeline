@@ -1,0 +1,11 @@
+series_id,nome,categoria,fonte,freq,unidade,metodo_versao,status,created_at
+BCB_SGS_432,Taxa Selic,Juros,BCB_SGS,mensal,% a.a.,v1.0,ativa,2024-11-10
+BCB_SGS_226,Taxa Referencial (TR),Juros,BCB_SGS,mensal,% a.m.,v1.0,ativa,2024-11-10
+BCB_SGS_1,Taxa de Câmbio USD/BRL,Câmbio,BCB_SGS,mensal,R$/USD,v1.0,ativa,2024-11-10
+BCB_SGS_433,IPCA,Inflação,BCB_SGS,mensal,índice,v1.0,ativa,2024-11-10
+BCB_SGS_189,IGP-M,Inflação,BCB_SGS,mensal,índice,v1.0,ativa,2024-11-10
+BCB_SGS_7478,Poupança,Juros,BCB_SGS,mensal,% a.a.,v1.0,ativa,2024-11-10
+BCB_SGS_4189,INPC,Inflação,BCB_SGS,mensal,índice,v1.0,ativa,2024-11-10
+BCB_SGS_4390,Crédito Pessoa Física,Crédito,BCB_SGS,mensal,R$ milhões,v1.0,ativa,2024-11-10
+BCB_SGS_1207,Produção Construção Civil,Produção,BCB_SGS,mensal,índice,v1.0,ativa,2024-11-10
+BCB_SGS_24364,Estoque Crédito Habitacional,Crédito,BCB_SGS,mensal,R$ milhões,v1.0,ativa,2024-11-10
