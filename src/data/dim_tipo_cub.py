@@ -1,263 +1,346 @@
 """
-Dimensão de Tipos de CUB segundo NBR 12721:2006.
+Dimensão de tipos de CUB (Custo Unitário Básico).
 
-Define todos os tipos de projetos-padrão para cálculo do CUB.
+Este módulo contém os tipos de dados CUB disponíveis no sistema,
+incluindo valores absolutos e variações percentuais.
+
+Uso:
+    from src.data.dim_tipo_cub import get_tipo_by_codigo, to_dataframe
+    
+    # Buscar tipo específico
+    cub_medio = get_tipo_by_codigo("CUB-medio")
+    
+    # Buscar por categoria
+    variacoes = get_tipos_by_categoria("Variação")
+    
+    # Converter para DataFrame
+    df = to_dataframe()
 """
 
+from typing import List, Optional
+import pandas as pd
+
+
+# Dimensão de tipos de CUB
 TIPOS_CUB = [
-    # RESIDENCIAIS UNIFAMILIARES
     {
-        "sk_tipo": 1,
-        "codigo_tipo": "R1-N",
-        "nome_tipo": "Residência Unifamiliar - Padrão Normal",
-        "categoria": "Residencial",
-        "subcategoria": "Unifamiliar",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 136.56,
-        "descricao": "Casa térrea ou sobrado padrão normal",
-        "fonte": "NBR 12721:2006",
+        "sk_tipo_cub": 1,
+        "codigo": "CUB-medio",
+        "nome": "Custo Unitário Básico Médio",
+        "descricao": "Valor médio do CUB em R$/m² de construção. Representa o custo médio de construção por metro quadrado.",
+        "unidade_medida": "R$/m²",
+        "categoria": "Valor",
+        "fonte_calculo": "ABNT NBR 12721",
+        "periodicidade": "Mensal",
         "is_ativo": True
     },
     {
-        "sk_tipo": 2,
-        "codigo_tipo": "R1-B",
-        "nome_tipo": "Residência Unifamiliar - Padrão Baixo",
-        "categoria": "Residencial",
-        "subcategoria": "Unifamiliar",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 136.56,
-        "descricao": "Casa térrea ou sobrado padrão baixo",
-        "fonte": "NBR 12721:2006",
+        "sk_tipo_cub": 2,
+        "codigo": "Variacao_mensal_%",
+        "nome": "Variação Mensal",
+        "descricao": "Variação percentual do CUB em relação ao mês anterior. Indica a inflação mensal do setor.",
+        "unidade_medida": "%",
+        "categoria": "Variação",
+        "fonte_calculo": "Comparação mês a mês",
+        "periodicidade": "Mensal",
         "is_ativo": True
     },
     {
-        "sk_tipo": 3,
-        "codigo_tipo": "R1-A",
-        "nome_tipo": "Residência Unifamiliar - Padrão Alto",
-        "categoria": "Residencial",
-        "subcategoria": "Unifamiliar",
-        "padrao_acabamento": "Alto",
-        "area_referencia_m2": 136.56,
-        "descricao": "Casa térrea ou sobrado padrão alto",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # RESIDENCIAIS MULTIFAMILIARES - 8 PAVIMENTOS
-    {
-        "sk_tipo": 4,
-        "codigo_tipo": "R8-N",
-        "nome_tipo": "Residencial Multifamiliar 8 Pavimentos - Normal",
-        "categoria": "Residencial",
-        "subcategoria": "Multifamiliar",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 1291.56,
-        "descricao": "Edifício residencial de 8 pavimentos padrão normal",
-        "fonte": "NBR 12721:2006",
+        "sk_tipo_cub": 3,
+        "codigo": "Variacao_12meses_%",
+        "nome": "Variação 12 Meses",
+        "descricao": "Variação percentual acumulada nos últimos 12 meses. Mostra a inflação anual do setor.",
+        "unidade_medida": "%",
+        "categoria": "Variação",
+        "fonte_calculo": "Acumulado 12 meses",
+        "periodicidade": "Mensal",
         "is_ativo": True
     },
     {
-        "sk_tipo": 5,
-        "codigo_tipo": "R8-B",
-        "nome_tipo": "Residencial Multifamiliar 8 Pavimentos - Baixo",
-        "categoria": "Residencial",
-        "subcategoria": "Multifamiliar",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 1291.56,
-        "descricao": "Edifício residencial de 8 pavimentos padrão baixo",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 6,
-        "codigo_tipo": "R8-A",
-        "nome_tipo": "Residencial Multifamiliar 8 Pavimentos - Alto",
-        "categoria": "Residencial",
-        "subcategoria": "Multifamiliar",
-        "padrao_acabamento": "Alto",
-        "area_referencia_m2": 1291.56,
-        "descricao": "Edifício residencial de 8 pavimentos padrão alto",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # RESIDENCIAIS MULTIFAMILIARES - 16 PAVIMENTOS
-    {
-        "sk_tipo": 7,
-        "codigo_tipo": "R16-N",
-        "nome_tipo": "Residencial Multifamiliar 16 Pavimentos - Normal",
-        "categoria": "Residencial",
-        "subcategoria": "Multifamiliar",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 2464.80,
-        "descricao": "Edifício residencial de 16 pavimentos padrão normal",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 8,
-        "codigo_tipo": "R16-B",
-        "nome_tipo": "Residencial Multifamiliar 16 Pavimentos - Baixo",
-        "categoria": "Residencial",
-        "subcategoria": "Multifamiliar",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 2464.80,
-        "descricao": "Edifício residencial de 16 pavimentos padrão baixo",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 9,
-        "codigo_tipo": "R16-A",
-        "nome_tipo": "Residencial Multifamiliar 16 Pavimentos - Alto",
-        "categoria": "Residencial",
-        "subcategoria": "Multifamiliar",
-        "padrao_acabamento": "Alto",
-        "area_referencia_m2": 2464.80,
-        "descricao": "Edifício residencial de 16 pavimentos padrão alto",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # PROJETOS POPULARES
-    {
-        "sk_tipo": 10,
-        "codigo_tipo": "PP4-N",
-        "nome_tipo": "Projeto Popular 4 Pavimentos - Normal",
-        "categoria": "Residencial",
-        "subcategoria": "Popular",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 436.00,
-        "descricao": "Edifício residencial popular de 4 pavimentos",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 11,
-        "codigo_tipo": "PIS",
-        "nome_tipo": "Projeto de Interesse Social",
-        "categoria": "Residencial",
-        "subcategoria": "Social",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 41.00,
-        "descricao": "Habitação de interesse social",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 12,
-        "codigo_tipo": "RP1Q",
-        "nome_tipo": "Residência Popular 1 Quarto",
-        "categoria": "Residencial",
-        "subcategoria": "Popular",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 50.00,
-        "descricao": "Residência popular de 1 quarto",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # COMERCIAIS SALAS/LOJAS
-    {
-        "sk_tipo": 13,
-        "codigo_tipo": "CSL8-N",
-        "nome_tipo": "Comercial Salas/Lojas 8 Pavimentos - Normal",
-        "categoria": "Comercial",
-        "subcategoria": "Salas e Lojas",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 1200.00,
-        "descricao": "Edifício comercial de salas/lojas 8 pavimentos",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 14,
-        "codigo_tipo": "CSL16-N",
-        "nome_tipo": "Comercial Salas/Lojas 16 Pavimentos - Normal",
-        "categoria": "Comercial",
-        "subcategoria": "Salas e Lojas",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 2400.00,
-        "descricao": "Edifício comercial de salas/lojas 16 pavimentos",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # COMERCIAIS ANDAR LIVRE
-    {
-        "sk_tipo": 15,
-        "codigo_tipo": "CAL8-N",
-        "nome_tipo": "Comercial Andar Livre 8 Pavimentos - Normal",
-        "categoria": "Comercial",
-        "subcategoria": "Andar Livre",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 1400.00,
-        "descricao": "Edifício comercial de andar livre 8 pavimentos",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # GALPÕES INDUSTRIAIS
-    {
-        "sk_tipo": 16,
-        "codigo_tipo": "GI",
-        "nome_tipo": "Galpão Industrial",
-        "categoria": "Industrial",
-        "subcategoria": "Galpão",
-        "padrao_acabamento": "Normal",
-        "area_referencia_m2": 1000.00,
-        "descricao": "Galpão industrial padrão",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    
-    # COMERCIAIS ADICIONAIS (expandindo além dos 10 principais)
-    {
-        "sk_tipo": 17,
-        "codigo_tipo": "CSL8-B",
-        "nome_tipo": "Comercial Salas/Lojas 8 Pavimentos - Baixo",
-        "categoria": "Comercial",
-        "subcategoria": "Salas e Lojas",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 1200.00,
-        "descricao": "Edifício comercial de salas/lojas 8 pavimentos padrão baixo",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 18,
-        "codigo_tipo": "CSL8-A",
-        "nome_tipo": "Comercial Salas/Lojas 8 Pavimentos - Alto",
-        "categoria": "Comercial",
-        "subcategoria": "Salas e Lojas",
-        "padrao_acabamento": "Alto",
-        "area_referencia_m2": 1200.00,
-        "descricao": "Edifício comercial de salas/lojas 8 pavimentos padrão alto",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 19,
-        "codigo_tipo": "CAL8-B",
-        "nome_tipo": "Comercial Andar Livre 8 Pavimentos - Baixo",
-        "categoria": "Comercial",
-        "subcategoria": "Andar Livre",
-        "padrao_acabamento": "Baixo",
-        "area_referencia_m2": 1400.00,
-        "descricao": "Edifício comercial de andar livre 8 pavimentos padrão baixo",
-        "fonte": "NBR 12721:2006",
-        "is_ativo": True
-    },
-    {
-        "sk_tipo": 20,
-        "codigo_tipo": "CAL8-A",
-        "nome_tipo": "Comercial Andar Livre 8 Pavimentos - Alto",
-        "categoria": "Comercial",
-        "subcategoria": "Andar Livre",
-        "padrao_acabamento": "Alto",
-        "area_referencia_m2": 1400.00,
-        "descricao": "Edifício comercial de andar livre 8 pavimentos padrão alto",
-        "fonte": "NBR 12721:2006",
+        "sk_tipo_cub": 4,
+        "codigo": "Variacao_ano_%",
+        "nome": "Variação no Ano",
+        "descricao": "Variação percentual acumulada desde janeiro do ano corrente. Indica a inflação acumulada no ano.",
+        "unidade_medida": "%",
+        "categoria": "Variação",
+        "fonte_calculo": "Acumulado desde janeiro",
+        "periodicidade": "Mensal",
         "is_ativo": True
     }
 ]
+
+
+def get_tipo_by_codigo(codigo: str) -> Optional[dict]:
+    """
+    Busca tipo de CUB por código.
+    
+    Args:
+        codigo: Código do tipo (ex: "CUB-medio", "Variacao_mensal_%")
+        
+    Returns:
+        Dicionário com dados do tipo ou None se não encontrado
+        
+    Examples:
+        >>> cub = get_tipo_by_codigo("CUB-medio")
+        >>> cub["nome"]
+        'Custo Unitário Básico Médio'
+        >>> cub["unidade_medida"]
+        'R$/m²'
+        >>> cub["categoria"]
+        'Valor'
+        
+        >>> var = get_tipo_by_codigo("Variacao_mensal_%")
+        >>> var["nome"]
+        'Variação Mensal'
+        >>> var["categoria"]
+        'Variação'
+        
+        >>> invalido = get_tipo_by_codigo("INEXISTENTE")
+        >>> invalido is None
+        True
+    """
+    codigo_stripped = codigo.strip()
+    
+    for tipo in TIPOS_CUB:
+        if tipo["codigo"] == codigo_stripped:
+            return tipo.copy()
+    
+    return None
+
+
+def get_tipos_by_categoria(categoria: str) -> List[dict]:
+    """
+    Busca todos os tipos de uma categoria.
+    
+    Args:
+        categoria: Nome da categoria ("Valor" ou "Variação")
+        
+    Returns:
+        Lista de dicionários com dados dos tipos
+        
+    Examples:
+        >>> valores = get_tipos_by_categoria("Valor")
+        >>> len(valores)
+        1
+        >>> valores[0]["codigo"]
+        'CUB-medio'
+        
+        >>> variacoes = get_tipos_by_categoria("Variação")
+        >>> len(variacoes)
+        3
+        >>> sorted([t["codigo"] for t in variacoes])
+        ['Variacao_12meses_%', 'Variacao_ano_%', 'Variacao_mensal_%']
+        
+        >>> invalida = get_tipos_by_categoria("Desconhecida")
+        >>> invalida
+        []
+    """
+    categoria_capitalized = categoria.strip().title()
+    
+    resultado = [
+        tipo.copy()
+        for tipo in TIPOS_CUB
+        if tipo["categoria"] == categoria_capitalized
+    ]
+    
+    return resultado
+
+
+def get_all_codigos() -> List[str]:
+    """
+    Retorna lista com todos os códigos de tipos CUB.
+    
+    Returns:
+        Lista com os 4 códigos de tipos CUB
+        
+    Examples:
+        >>> codigos = get_all_codigos()
+        >>> len(codigos)
+        4
+        >>> "CUB-medio" in codigos
+        True
+        >>> "Variacao_mensal_%" in codigos
+        True
+    """
+    return [tipo["codigo"] for tipo in TIPOS_CUB]
+
+
+def get_all_categorias() -> List[str]:
+    """
+    Retorna lista com todas as categorias de tipos CUB.
+    
+    Returns:
+        Lista com as categorias únicas
+        
+    Examples:
+        >>> categorias = get_all_categorias()
+        >>> len(categorias)
+        2
+        >>> "Valor" in categorias
+        True
+        >>> "Variação" in categorias
+        True
+    """
+    categorias = list(set(tipo["categoria"] for tipo in TIPOS_CUB))
+    return sorted(categorias)
+
+
+def to_dataframe() -> pd.DataFrame:
+    """
+    Converte TIPOS_CUB para DataFrame pandas.
+    
+    Returns:
+        DataFrame com todos os tipos de CUB
+        
+    Examples:
+        >>> df = to_dataframe()
+        >>> df.shape
+        (4, 9)
+        >>> df.columns.tolist()
+        ['sk_tipo_cub', 'codigo', 'nome', 'descricao', 'unidade_medida',
+         'categoria', 'fonte_calculo', 'periodicidade', 'is_ativo']
+        >>> df[df["codigo"] == "CUB-medio"]["categoria"].values[0]
+        'Valor'
+        >>> df["categoria"].value_counts()["Variação"]
+        3
+    """
+    df = pd.DataFrame(TIPOS_CUB)
+    
+    # Garantir ordem das colunas
+    colunas_ordenadas = [
+        "sk_tipo_cub",
+        "codigo",
+        "nome",
+        "descricao",
+        "unidade_medida",
+        "categoria",
+        "fonte_calculo",
+        "periodicidade",
+        "is_ativo"
+    ]
+    
+    return df[colunas_ordenadas]
+
+
+def get_tipo_info(codigo: str) -> str:
+    """
+    Retorna informações formatadas sobre um tipo de CUB.
+    
+    Args:
+        codigo: Código do tipo
+        
+    Returns:
+        String formatada com informações do tipo ou mensagem de erro
+        
+    Examples:
+        >>> info = get_tipo_info("CUB-medio")
+        >>> "Custo Unitário Básico Médio" in info
+        True
+        >>> "R$/m²" in info
+        True
+    """
+    tipo = get_tipo_by_codigo(codigo)
+    
+    if not tipo:
+        return f"❌ Tipo '{codigo}' não encontrado."
+    
+    return f"""
+📊 {tipo['nome']}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Código: {tipo['codigo']}
+• Categoria: {tipo['categoria']}
+• Unidade: {tipo['unidade_medida']}
+• Periodicidade: {tipo['periodicidade']}
+• Fonte: {tipo['fonte_calculo']}
+• Descrição: {tipo['descricao']}
+• Status: {'✅ Ativo' if tipo['is_ativo'] else '❌ Inativo'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    """.strip()
+
+
+def get_statistics() -> dict:
+    """
+    Retorna estatísticas sobre os tipos de CUB.
+    
+    Returns:
+        Dicionário com estatísticas gerais
+        
+    Examples:
+        >>> stats = get_statistics()
+        >>> stats["total_tipos"]
+        4
+        >>> stats["tipos_por_categoria"]["Valor"]
+        1
+        >>> stats["tipos_por_categoria"]["Variação"]
+        3
+        >>> stats["tipos_ativos"]
+        4
+    """
+    df = to_dataframe()
+    
+    return {
+        "total_tipos": len(df),
+        "tipos_ativos": int(df["is_ativo"].sum()),
+        "tipos_inativos": int((~df["is_ativo"]).sum()),
+        "tipos_por_categoria": df["categoria"].value_counts().to_dict(),
+        "unidades_medida": df["unidade_medida"].unique().tolist(),
+        "periodicidades": df["periodicidade"].unique().tolist(),
+        "fontes_calculo": df["fonte_calculo"].unique().tolist()
+    }
+
+
+if __name__ == "__main__":
+    # Demonstração de uso
+    print("="*80)
+    print("  📊 DIMENSÃO DE TIPOS CUB")
+    print("="*80 + "\n")
+    
+    # Buscar tipo específico
+    print("🔍 Exemplo 1: Buscar tipo por código")
+    cub_medio = get_tipo_by_codigo("CUB-medio")
+    if cub_medio:
+        print(f"   Código: {cub_medio['codigo']}")
+        print(f"   Nome: {cub_medio['nome']}")
+        print(f"   Categoria: {cub_medio['categoria']}")
+        print(f"   Unidade: {cub_medio['unidade_medida']}")
+    print()
+    
+    # Buscar por categoria
+    print("🔍 Exemplo 2: Buscar tipos por categoria")
+    variacoes = get_tipos_by_categoria("Variação")
+    print(f"   Categoria 'Variação': {len(variacoes)} tipos")
+    for tipo in variacoes:
+        print(f"   - {tipo['codigo']}: {tipo['nome']}")
+    print()
+    
+    # Converter para DataFrame
+    print("📊 Exemplo 3: Converter para DataFrame")
+    df = to_dataframe()
+    print(f"   Shape: {df.shape}")
+    print(f"   Colunas: {len(df.columns)}")
+    print()
+    
+    # Informações detalhadas
+    print("📋 Exemplo 4: Informações detalhadas")
+    print(get_tipo_info("CUB-medio"))
+    print()
+    
+    # Estatísticas
+    print("📈 Estatísticas Gerais:")
+    stats = get_statistics()
+    print(f"   Total de tipos: {stats['total_tipos']}")
+    print(f"   Tipos ativos: {stats['tipos_ativos']}")
+    print(f"   Tipos por categoria:")
+    for cat, count in sorted(stats['tipos_por_categoria'].items()):
+        print(f"      - {cat}: {count}")
+    print(f"   Unidades de medida: {', '.join(stats['unidades_medida'])}")
+    print()
+    
+    # Listar todos
+    print("📋 Todos os tipos CUB:")
+    for tipo in TIPOS_CUB:
+        status = "✅" if tipo["is_ativo"] else "❌"
+        print(f"   {status} {tipo['codigo']:25s} | {tipo['categoria']:10s} | {tipo['unidade_medida']}")
+    print()
+    
+    print("✅ Módulo pronto para uso!")
