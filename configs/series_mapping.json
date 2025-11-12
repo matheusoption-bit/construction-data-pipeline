@@ -1,0 +1,76 @@
+{
+  "series": {
+    "taxa_cambio": {
+      "bcb_code": "1",
+      "nome_completo": "Taxa de Câmbio - USD/BRL",
+      "unidade": "R$/US$",
+      "frequencia": "diaria",
+      "horario_coleta": "18:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries"
+    },
+    "igp_m_infla": {
+      "bcb_code": "189",
+      "nome_completo": "IGP-M - Inflação",
+      "unidade": "% m/m",
+      "frequencia": "mensal",
+      "horario_coleta": "08:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "taxa_ref": {
+      "bcb_code": "226",
+      "nome_completo": "Taxa Referencial - TR",
+      "unidade": "% a.m.",
+      "frequencia": "diaria",
+      "horario_coleta": "18:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "credito_habit": {
+      "bcb_code": "24364",
+      "nome_completo": "Estoque de Crédito Habitacional",
+      "unidade": "R$ bilhões",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "inpc_infla": {
+      "bcb_code": "4189",
+      "nome_completo": "INPC - Inflação",
+      "unidade": "% m/m",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "taxa_selic": {
+      "bcb_code": "432",
+      "nome_completo": "Taxa Selic",
+      "unidade": "% a.a.",
+      "frequencia": "mensal",
+      "horario_coleta": "19:30",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "ipca_infla": {
+      "bcb_code": "433",
+      "nome_completo": "IPCA - Inflação",
+      "unidade": "% m/m",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "credito_pf": {
+      "bcb_code": "4390",
+      "nome_completo": "Crédito Pessoa Física",
+      "unidade": "R$ milhões",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "rend_poupanca": {
+      "bcb_code": "7478",
+      "nome_completo": "Rendimento da Poupança",
+      "unidade": "% a.m.",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    }
+  }
+}
