@@ -1,0 +1,11 @@
+id_topografia,desc_topografia,fator_custo,fator_prazo,requer_contencao
+TOPO_01,Plano,1,1,FALSE
+TOPO_02,Aclive Leve (até 10%),"1,08","1,05",TRUE
+TOPO_03,Aclive Moderado (10-20%),"1,15","1,1",TRUE
+TOPO_04,Aclive Acentuado (>20%),"1,25","1,15",TRUE
+TOPO_05,Declive Leve (até 10%),"1,1","1,08",TRUE
+TOPO_06,Declive Moderado (10-20%),"1,18","1,12",TRUE
+TOPO_07,Declive Acentuado (>20%),"1,28","1,18",TRUE
+TOPO_08,Irregular/Ondulado,"1,2","1,15",TRUE
+TOPO_09,Aterro/Várzea,"1,35","1,25",TRUE
+TOPO_10,Rochoso,"1,4","1,2",TRUE

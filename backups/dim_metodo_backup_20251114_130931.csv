@@ -1,0 +1,9 @@
+id_metodo,nome_metodo,fator_custo,fator_prazo,limitacao_pavimentos
+MET_01,Alvenaria Convencional,1,1,até 4 pavimentos
+MET_02,Alvenaria Estrutural,"0,92","0,85",até 15 pavimentos
+MET_03,Concreto Armado,"1,15","0,9",sem limite
+MET_04,Concreto Protendido,"1,45","0,85",sem limite
+MET_05,Steel Frame,"1,35","0,7",até 6 pavimentos
+MET_06,Wood Frame,"1,2","0,75",até 3 pavimentos
+MET_07,Pré-Moldado,"1,25","0,8",até 12 pavimentos
+MET_08,Alvenaria + Estrutura Metálica,"1,3","0,88",até 10 pavimentos
