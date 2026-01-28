@@ -13,7 +13,8 @@ Séries coletadas:
 - Poupança (7478)
 - INPC (4189)
 - Crédito PF (4390)
-- Produção Construção (1207)
+- PAIC - Produção Construção Civil Receita Real (21864)
+- Crédito Construção Civil (28561)
 - Estoque Crédito Habitacional (24364)
 
 Uso:
@@ -45,7 +46,8 @@ SERIES_MAP = {
     'BCB_SGS_7478': 7478,    # Poupança
     'BCB_SGS_4189': 4189,    # INPC
     'BCB_SGS_4390': 4390,    # Crédito PF
-    'BCB_SGS_1207': 1207,    # Produção Construção
+    'BCB_SGS_21864': 21864,  # PAIC - Produção Construção Civil (Receita real)
+    'BCB_SGS_28561': 28561,  # Crédito - Construção Civil (Saldo)
     'BCB_SGS_24364': 24364   # Estoque Crédito Habitacional
 }
 
@@ -448,9 +450,26 @@ if __name__ == "__main__":
         print_summary(summary)
         
         # Determinar exit code
+        # PARTIAL é considerado sucesso se pelo menos 80% das séries foram processadas
         if summary["status"] == "success":
             logger.info("job_completed_successfully")
             sys.exit(0)
+        elif summary["status"] == "partial":
+            success_rate = summary["successful_series"] / summary["total_series"]
+            if success_rate >= 0.8:
+                logger.info(
+                    "job_completed_partially_success",
+                    status=summary["status"],
+                    success_rate=f"{success_rate:.1%}"
+                )
+                sys.exit(0)
+            else:
+                logger.warning(
+                    "job_completed_with_too_many_failures",
+                    status=summary["status"],
+                    success_rate=f"{success_rate:.1%}"
+                )
+                sys.exit(1)
         else:
             logger.warning(
                 "job_completed_with_issues",

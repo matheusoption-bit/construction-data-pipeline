@@ -7,5 +7,7 @@ BCB_SGS_189,189,IGP-M (% m/m),M,%,https://api.bcb.gov.br/dados/serie/bcdata.sgs.
 BCB_SGS_7478,7478,Poupança (% a.m.),M,%,https://api.bcb.gov.br/dados/serie/bcdata.sgs.7478/dados,TRUE
 BCB_SGS_4189,4189,INPC (% m/m),M,%,https://api.bcb.gov.br/dados/serie/bcdata.sgs.4189/dados,TRUE
 BCB_SGS_4390,4390,Crédito PF Total,M,R$ mi,https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados,TRUE
-BCB_SGS_1207,1207,Produção Indústria Construção,M,índice,https://api.bcb.gov.br/dados/serie/bcdata.sgs.1207/dados,TRUE
+BCB_SGS_1207,1207,Produção Indústria Construção,M,índice,https://api.bcb.gov.br/dados/serie/bcdata.sgs.1207/dados,FALSE
+BCB_SGS_21864,21864,PAIC - Receita Real Construção,M,índice,https://api.bcb.gov.br/dados/serie/bcdata.sgs.21864/dados,TRUE
+BCB_SGS_28561,28561,Crédito - Construção Civil,M,R$ mi,https://api.bcb.gov.br/dados/serie/bcdata.sgs.28561/dados,TRUE
 BCB_SGS_24364,24364,Estoque Crédito Habitacional,M,R$ mi,https://api.bcb.gov.br/dados/serie/bcdata.sgs.24364/dados,TRUE
