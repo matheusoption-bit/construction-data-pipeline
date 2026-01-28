@@ -1,0 +1,271 @@
+id_metodo_uf,id_metodo,nome_metodo,id_localidade,uf,nome_uf,regiao,fator_regional_custo,fator_custo_base,fator_custo_regional_calc,fator_regional_prazo,fator_prazo_base,fator_prazo_regional_calc,percentual_material,percentual_mao_obra,percentual_admin_equip,fonte_primaria,status_validacao,nota_importante,data_atualizacao_cub
+MET_01_AC_001,MET_01,Alvenaria Convencional,BR_AC,AC,Acre,Norte,0.829,1200.0,994.8,0.829,1.0,0.829,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_AL_002,MET_01,Alvenaria Convencional,BR_AL,AL,Alagoas,Nordeste,0.905,1200.0,1086.0,0.905,1.0,0.905,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_AP_003,MET_01,Alvenaria Convencional,BR_AP,AP,Amapá,Norte,0.859,1200.0,1030.8,0.859,1.0,0.859,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_AM_004,MET_01,Alvenaria Convencional,BR_AM,AM,Amazonas,Norte,0.842,1200.0,1010.4,0.842,1.0,0.842,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_BA_005,MET_01,Alvenaria Convencional,BR_BA,BA,Bahia,Nordeste,0.896,1200.0,1075.2,0.896,1.0,0.896,0.6,0.35,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_CE_006,MET_01,Alvenaria Convencional,BR_CE,CE,Ceará,Nordeste,0.9,1200.0,1080.0,0.9,1.0,0.9,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_DF_007,MET_01,Alvenaria Convencional,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1200.0,1180.8,0.984,1.0,0.984,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_ES_008,MET_01,Alvenaria Convencional,BR_ES,ES,Espírito Santo,Sudeste,0.949,1200.0,1138.8,0.949,1.0,0.949,0.6,0.35,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_GO_009,MET_01,Alvenaria Convencional,BR_GO,GO,Goiás,Centro-Oeste,0.958,1200.0,1149.6,0.958,1.0,0.958,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_MA_010,MET_01,Alvenaria Convencional,BR_MA,MA,Maranhão,Nordeste,0.898,1200.0,1077.6,0.898,1.0,0.898,0.6,0.35,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_MT_011,MET_01,Alvenaria Convencional,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1200.0,1155.6,0.963,1.0,0.963,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_MS_012,MET_01,Alvenaria Convencional,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1200.0,1156.8,0.964,1.0,0.964,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_MG_013,MET_01,Alvenaria Convencional,BR_MG,MG,Minas Gerais,Sudeste,0.982,1200.0,1178.4,0.982,1.0,0.982,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_PA_014,MET_01,Alvenaria Convencional,BR_PA,PA,Pará,Norte,0.841,1200.0,1009.2,0.841,1.0,0.841,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_PB_015,MET_01,Alvenaria Convencional,BR_PB,PB,Paraíba,Nordeste,0.877,1200.0,1052.4,0.877,1.0,0.877,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_PR_016,MET_01,Alvenaria Convencional,BR_PR,PR,Paraná,Sul,1.02,1200.0,1224.0,1.02,1.0,1.02,0.6,0.35,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_PE_017,MET_01,Alvenaria Convencional,BR_PE,PE,Pernambuco,Nordeste,0.888,1200.0,1065.6,0.888,1.0,0.888,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_PI_018,MET_01,Alvenaria Convencional,BR_PI,PI,Piauí,Nordeste,0.872,1200.0,1046.4,0.872,1.0,0.872,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_RJ_019,MET_01,Alvenaria Convencional,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1200.0,1158.0,0.965,1.0,0.965,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_RN_020,MET_01,Alvenaria Convencional,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1200.0,1065.6,0.888,1.0,0.888,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_RS_021,MET_01,Alvenaria Convencional,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1200.0,1260.0,1.05,1.0,1.05,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_RO_022,MET_01,Alvenaria Convencional,BR_RO,RO,Rondônia,Norte,0.865,1200.0,1038.0,0.865,1.0,0.865,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_RR_023,MET_01,Alvenaria Convencional,BR_RR,RR,Roraima,Norte,0.82,1200.0,984.0,0.82,1.0,0.82,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_01_SC_024,MET_01,Alvenaria Convencional,BR_SC,SC,Santa Catarina,Sul,1.045,1200.0,1254.0,1.045,1.0,1.045,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_SP_025,MET_01,Alvenaria Convencional,BR_SP,SP,São Paulo,Sudeste,1.0,1200.0,1200.0,1.0,1.0,1.0,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_SE_026,MET_01,Alvenaria Convencional,BR_SE,SE,Sergipe,Nordeste,0.88,1200.0,1056.0,0.88,1.0,0.88,0.6,0.35,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_01_TO_027,MET_01,Alvenaria Convencional,BR_TO,TO,Tocantins,Norte,0.86,1200.0,1032.0,0.86,1.0,0.86,0.6,0.35,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_02_AC_028,MET_02,Alvenaria Estrutural,BR_AC,AC,Acre,Norte,0.829,1150.0,953.35,0.829,0.95,0.788,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_AL_029,MET_02,Alvenaria Estrutural,BR_AL,AL,Alagoas,Nordeste,0.905,1150.0,1040.75,0.905,0.95,0.86,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_AP_030,MET_02,Alvenaria Estrutural,BR_AP,AP,Amapá,Norte,0.859,1150.0,987.85,0.859,0.95,0.816,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_AM_031,MET_02,Alvenaria Estrutural,BR_AM,AM,Amazonas,Norte,0.842,1150.0,968.3,0.842,0.95,0.8,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_BA_032,MET_02,Alvenaria Estrutural,BR_BA,BA,Bahia,Nordeste,0.896,1150.0,1030.4,0.896,0.95,0.851,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_CE_033,MET_02,Alvenaria Estrutural,BR_CE,CE,Ceará,Nordeste,0.9,1150.0,1035.0,0.9,0.95,0.855,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_DF_034,MET_02,Alvenaria Estrutural,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1150.0,1131.6,0.984,0.95,0.935,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_ES_035,MET_02,Alvenaria Estrutural,BR_ES,ES,Espírito Santo,Sudeste,0.949,1150.0,1091.35,0.949,0.95,0.902,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_GO_036,MET_02,Alvenaria Estrutural,BR_GO,GO,Goiás,Centro-Oeste,0.958,1150.0,1101.7,0.958,0.95,0.91,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_MA_037,MET_02,Alvenaria Estrutural,BR_MA,MA,Maranhão,Nordeste,0.898,1150.0,1032.7,0.898,0.95,0.853,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_MT_038,MET_02,Alvenaria Estrutural,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1150.0,1107.45,0.963,0.95,0.915,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_MS_039,MET_02,Alvenaria Estrutural,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1150.0,1108.6,0.964,0.95,0.916,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_MG_040,MET_02,Alvenaria Estrutural,BR_MG,MG,Minas Gerais,Sudeste,0.982,1150.0,1129.3,0.982,0.95,0.933,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_PA_041,MET_02,Alvenaria Estrutural,BR_PA,PA,Pará,Norte,0.841,1150.0,967.15,0.841,0.95,0.799,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_PB_042,MET_02,Alvenaria Estrutural,BR_PB,PB,Paraíba,Nordeste,0.877,1150.0,1008.55,0.877,0.95,0.833,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_PR_043,MET_02,Alvenaria Estrutural,BR_PR,PR,Paraná,Sul,1.02,1150.0,1173.0,1.02,0.95,0.969,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_PE_044,MET_02,Alvenaria Estrutural,BR_PE,PE,Pernambuco,Nordeste,0.888,1150.0,1021.2,0.888,0.95,0.844,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_PI_045,MET_02,Alvenaria Estrutural,BR_PI,PI,Piauí,Nordeste,0.872,1150.0,1002.8,0.872,0.95,0.828,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_RJ_046,MET_02,Alvenaria Estrutural,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1150.0,1109.75,0.965,0.95,0.917,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_RN_047,MET_02,Alvenaria Estrutural,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1150.0,1021.2,0.888,0.95,0.844,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_RS_048,MET_02,Alvenaria Estrutural,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1150.0,1207.5,1.05,0.95,0.997,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_RO_049,MET_02,Alvenaria Estrutural,BR_RO,RO,Rondônia,Norte,0.865,1150.0,994.75,0.865,0.95,0.822,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_RR_050,MET_02,Alvenaria Estrutural,BR_RR,RR,Roraima,Norte,0.82,1150.0,943.0,0.82,0.95,0.779,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_SC_051,MET_02,Alvenaria Estrutural,BR_SC,SC,Santa Catarina,Sul,1.045,1150.0,1201.75,1.045,0.95,0.993,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_SP_052,MET_02,Alvenaria Estrutural,BR_SP,SP,São Paulo,Sudeste,1.0,1150.0,1150.0,1.0,0.95,0.95,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_SE_053,MET_02,Alvenaria Estrutural,BR_SE,SE,Sergipe,Nordeste,0.88,1150.0,1012.0,0.88,0.95,0.836,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_02_TO_054,MET_02,Alvenaria Estrutural,BR_TO,TO,Tocantins,Norte,0.86,1150.0,989.0,0.86,0.95,0.817,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_AC_055,MET_03,Concreto Armado,BR_AC,AC,Acre,Norte,0.829,1400.0,1160.6,0.829,1.1,0.912,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_AL_056,MET_03,Concreto Armado,BR_AL,AL,Alagoas,Nordeste,0.905,1400.0,1267.0,0.905,1.1,0.996,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_AP_057,MET_03,Concreto Armado,BR_AP,AP,Amapá,Norte,0.859,1400.0,1202.6,0.859,1.1,0.945,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_AM_058,MET_03,Concreto Armado,BR_AM,AM,Amazonas,Norte,0.842,1400.0,1178.8,0.842,1.1,0.926,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_BA_059,MET_03,Concreto Armado,BR_BA,BA,Bahia,Nordeste,0.896,1400.0,1254.4,0.896,1.1,0.986,0.5,0.35,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_CE_060,MET_03,Concreto Armado,BR_CE,CE,Ceará,Nordeste,0.9,1400.0,1260.0,0.9,1.1,0.99,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_DF_061,MET_03,Concreto Armado,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1400.0,1377.6,0.984,1.1,1.082,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_ES_062,MET_03,Concreto Armado,BR_ES,ES,Espírito Santo,Sudeste,0.949,1400.0,1328.6,0.949,1.1,1.044,0.5,0.35,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_GO_063,MET_03,Concreto Armado,BR_GO,GO,Goiás,Centro-Oeste,0.958,1400.0,1341.2,0.958,1.1,1.054,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_MA_064,MET_03,Concreto Armado,BR_MA,MA,Maranhão,Nordeste,0.898,1400.0,1257.2,0.898,1.1,0.988,0.5,0.35,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_MT_065,MET_03,Concreto Armado,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1400.0,1348.2,0.963,1.1,1.059,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_MS_066,MET_03,Concreto Armado,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1400.0,1349.6,0.964,1.1,1.06,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_MG_067,MET_03,Concreto Armado,BR_MG,MG,Minas Gerais,Sudeste,0.982,1400.0,1374.8,0.982,1.1,1.08,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_PA_068,MET_03,Concreto Armado,BR_PA,PA,Pará,Norte,0.841,1400.0,1177.4,0.841,1.1,0.925,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_PB_069,MET_03,Concreto Armado,BR_PB,PB,Paraíba,Nordeste,0.877,1400.0,1227.8,0.877,1.1,0.965,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_PR_070,MET_03,Concreto Armado,BR_PR,PR,Paraná,Sul,1.02,1400.0,1428.0,1.02,1.1,1.122,0.5,0.35,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_PE_071,MET_03,Concreto Armado,BR_PE,PE,Pernambuco,Nordeste,0.888,1400.0,1243.2,0.888,1.1,0.977,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_PI_072,MET_03,Concreto Armado,BR_PI,PI,Piauí,Nordeste,0.872,1400.0,1220.8,0.872,1.1,0.959,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_RJ_073,MET_03,Concreto Armado,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1400.0,1351.0,0.965,1.1,1.062,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_RN_074,MET_03,Concreto Armado,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1400.0,1243.2,0.888,1.1,0.977,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_RS_075,MET_03,Concreto Armado,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1400.0,1470.0,1.05,1.1,1.155,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_RO_076,MET_03,Concreto Armado,BR_RO,RO,Rondônia,Norte,0.865,1400.0,1211.0,0.865,1.1,0.952,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_RR_077,MET_03,Concreto Armado,BR_RR,RR,Roraima,Norte,0.82,1400.0,1148.0,0.82,1.1,0.902,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_03_SC_078,MET_03,Concreto Armado,BR_SC,SC,Santa Catarina,Sul,1.045,1400.0,1463.0,1.045,1.1,1.149,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_SP_079,MET_03,Concreto Armado,BR_SP,SP,São Paulo,Sudeste,1.0,1400.0,1400.0,1.0,1.1,1.1,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_SE_080,MET_03,Concreto Armado,BR_SE,SE,Sergipe,Nordeste,0.88,1400.0,1232.0,0.88,1.1,0.968,0.5,0.35,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_03_TO_081,MET_03,Concreto Armado,BR_TO,TO,Tocantins,Norte,0.86,1400.0,1204.0,0.86,1.1,0.946,0.5,0.35,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_04_AC_082,MET_04,Concreto Protendido,BR_AC,AC,Acre,Norte,0.829,1600.0,1326.4,0.829,1.2,0.995,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_AL_083,MET_04,Concreto Protendido,BR_AL,AL,Alagoas,Nordeste,0.905,1600.0,1448.0,0.905,1.2,1.086,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_AP_084,MET_04,Concreto Protendido,BR_AP,AP,Amapá,Norte,0.859,1600.0,1374.4,0.859,1.2,1.031,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_AM_085,MET_04,Concreto Protendido,BR_AM,AM,Amazonas,Norte,0.842,1600.0,1347.2,0.842,1.2,1.01,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_BA_086,MET_04,Concreto Protendido,BR_BA,BA,Bahia,Nordeste,0.896,1600.0,1433.6,0.896,1.2,1.075,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_CE_087,MET_04,Concreto Protendido,BR_CE,CE,Ceará,Nordeste,0.9,1600.0,1440.0,0.9,1.2,1.08,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_DF_088,MET_04,Concreto Protendido,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1600.0,1574.4,0.984,1.2,1.181,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_ES_089,MET_04,Concreto Protendido,BR_ES,ES,Espírito Santo,Sudeste,0.949,1600.0,1518.4,0.949,1.2,1.139,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_GO_090,MET_04,Concreto Protendido,BR_GO,GO,Goiás,Centro-Oeste,0.958,1600.0,1532.8,0.958,1.2,1.15,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_MA_091,MET_04,Concreto Protendido,BR_MA,MA,Maranhão,Nordeste,0.898,1600.0,1436.8,0.898,1.2,1.078,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_MT_092,MET_04,Concreto Protendido,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1600.0,1540.8,0.963,1.2,1.156,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_MS_093,MET_04,Concreto Protendido,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1600.0,1542.4,0.964,1.2,1.157,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_MG_094,MET_04,Concreto Protendido,BR_MG,MG,Minas Gerais,Sudeste,0.982,1600.0,1571.2,0.982,1.2,1.178,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_PA_095,MET_04,Concreto Protendido,BR_PA,PA,Pará,Norte,0.841,1600.0,1345.6,0.841,1.2,1.009,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_PB_096,MET_04,Concreto Protendido,BR_PB,PB,Paraíba,Nordeste,0.877,1600.0,1403.2,0.877,1.2,1.052,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_PR_097,MET_04,Concreto Protendido,BR_PR,PR,Paraná,Sul,1.02,1600.0,1632.0,1.02,1.2,1.224,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_PE_098,MET_04,Concreto Protendido,BR_PE,PE,Pernambuco,Nordeste,0.888,1600.0,1420.8,0.888,1.2,1.066,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_PI_099,MET_04,Concreto Protendido,BR_PI,PI,Piauí,Nordeste,0.872,1600.0,1395.2,0.872,1.2,1.046,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_RJ_100,MET_04,Concreto Protendido,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1600.0,1544.0,0.965,1.2,1.158,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_RN_101,MET_04,Concreto Protendido,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1600.0,1420.8,0.888,1.2,1.066,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_RS_102,MET_04,Concreto Protendido,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1600.0,1680.0,1.05,1.2,1.26,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_RO_103,MET_04,Concreto Protendido,BR_RO,RO,Rondônia,Norte,0.865,1600.0,1384.0,0.865,1.2,1.038,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_RR_104,MET_04,Concreto Protendido,BR_RR,RR,Roraima,Norte,0.82,1600.0,1312.0,0.82,1.2,0.984,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_SC_105,MET_04,Concreto Protendido,BR_SC,SC,Santa Catarina,Sul,1.045,1600.0,1672.0,1.045,1.2,1.254,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_SP_106,MET_04,Concreto Protendido,BR_SP,SP,São Paulo,Sudeste,1.0,1600.0,1600.0,1.0,1.2,1.2,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_SE_107,MET_04,Concreto Protendido,BR_SE,SE,Sergipe,Nordeste,0.88,1600.0,1408.0,0.88,1.2,1.056,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_04_TO_108,MET_04,Concreto Protendido,BR_TO,TO,Tocantins,Norte,0.86,1600.0,1376.0,0.86,1.2,1.032,0.55,0.3,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_AC_109,MET_05,Steel Frame,BR_AC,AC,Acre,Norte,0.829,1350.0,1119.15,0.829,0.8,0.663,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_AL_110,MET_05,Steel Frame,BR_AL,AL,Alagoas,Nordeste,0.905,1350.0,1221.75,0.905,0.8,0.724,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_AP_111,MET_05,Steel Frame,BR_AP,AP,Amapá,Norte,0.859,1350.0,1159.65,0.859,0.8,0.687,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_AM_112,MET_05,Steel Frame,BR_AM,AM,Amazonas,Norte,0.842,1350.0,1136.7,0.842,0.8,0.674,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_BA_113,MET_05,Steel Frame,BR_BA,BA,Bahia,Nordeste,0.896,1350.0,1209.6,0.896,0.8,0.717,0.6,0.25,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_CE_114,MET_05,Steel Frame,BR_CE,CE,Ceará,Nordeste,0.9,1350.0,1215.0,0.9,0.8,0.72,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_DF_115,MET_05,Steel Frame,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1350.0,1328.4,0.984,0.8,0.787,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_ES_116,MET_05,Steel Frame,BR_ES,ES,Espírito Santo,Sudeste,0.949,1350.0,1281.15,0.949,0.8,0.759,0.6,0.25,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_GO_117,MET_05,Steel Frame,BR_GO,GO,Goiás,Centro-Oeste,0.958,1350.0,1293.3,0.958,0.8,0.766,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_MA_118,MET_05,Steel Frame,BR_MA,MA,Maranhão,Nordeste,0.898,1350.0,1212.3,0.898,0.8,0.718,0.6,0.25,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_MT_119,MET_05,Steel Frame,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1350.0,1300.05,0.963,0.8,0.77,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_MS_120,MET_05,Steel Frame,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1350.0,1301.4,0.964,0.8,0.771,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_MG_121,MET_05,Steel Frame,BR_MG,MG,Minas Gerais,Sudeste,0.982,1350.0,1325.7,0.982,0.8,0.786,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_PA_122,MET_05,Steel Frame,BR_PA,PA,Pará,Norte,0.841,1350.0,1135.35,0.841,0.8,0.673,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_PB_123,MET_05,Steel Frame,BR_PB,PB,Paraíba,Nordeste,0.877,1350.0,1183.95,0.877,0.8,0.702,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_PR_124,MET_05,Steel Frame,BR_PR,PR,Paraná,Sul,1.02,1350.0,1377.0,1.02,0.8,0.816,0.6,0.25,0.15,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_PE_125,MET_05,Steel Frame,BR_PE,PE,Pernambuco,Nordeste,0.888,1350.0,1198.8,0.888,0.8,0.71,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_PI_126,MET_05,Steel Frame,BR_PI,PI,Piauí,Nordeste,0.872,1350.0,1177.2,0.872,0.8,0.698,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_RJ_127,MET_05,Steel Frame,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1350.0,1302.75,0.965,0.8,0.772,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_RN_128,MET_05,Steel Frame,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1350.0,1198.8,0.888,0.8,0.71,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_RS_129,MET_05,Steel Frame,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1350.0,1417.5,1.05,0.8,0.84,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_RO_130,MET_05,Steel Frame,BR_RO,RO,Rondônia,Norte,0.865,1350.0,1167.75,0.865,0.8,0.692,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_RR_131,MET_05,Steel Frame,BR_RR,RR,Roraima,Norte,0.82,1350.0,1107.0,0.82,0.8,0.656,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_05_SC_132,MET_05,Steel Frame,BR_SC,SC,Santa Catarina,Sul,1.045,1350.0,1410.75,1.045,0.8,0.836,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_SP_133,MET_05,Steel Frame,BR_SP,SP,São Paulo,Sudeste,1.0,1350.0,1350.0,1.0,0.8,0.8,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_SE_134,MET_05,Steel Frame,BR_SE,SE,Sergipe,Nordeste,0.88,1350.0,1188.0,0.88,0.8,0.704,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_05_TO_135,MET_05,Steel Frame,BR_TO,TO,Tocantins,Norte,0.86,1350.0,1161.0,0.86,0.8,0.688,0.6,0.25,0.15,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_06_AC_136,MET_06,Wood Frame,BR_AC,AC,Acre,Norte,0.829,1300.0,1077.7,0.829,0.75,0.622,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_AL_137,MET_06,Wood Frame,BR_AL,AL,Alagoas,Nordeste,0.905,1300.0,1176.5,0.905,0.75,0.679,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_AP_138,MET_06,Wood Frame,BR_AP,AP,Amapá,Norte,0.859,1300.0,1116.7,0.859,0.75,0.644,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_AM_139,MET_06,Wood Frame,BR_AM,AM,Amazonas,Norte,0.842,1300.0,1094.6,0.842,0.75,0.631,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_BA_140,MET_06,Wood Frame,BR_BA,BA,Bahia,Nordeste,0.896,1300.0,1164.8,0.896,0.75,0.672,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_CE_141,MET_06,Wood Frame,BR_CE,CE,Ceará,Nordeste,0.9,1300.0,1170.0,0.9,0.75,0.675,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_DF_142,MET_06,Wood Frame,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1300.0,1279.2,0.984,0.75,0.738,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_ES_143,MET_06,Wood Frame,BR_ES,ES,Espírito Santo,Sudeste,0.949,1300.0,1233.7,0.949,0.75,0.712,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_GO_144,MET_06,Wood Frame,BR_GO,GO,Goiás,Centro-Oeste,0.958,1300.0,1245.4,0.958,0.75,0.718,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_MA_145,MET_06,Wood Frame,BR_MA,MA,Maranhão,Nordeste,0.898,1300.0,1167.4,0.898,0.75,0.673,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_MT_146,MET_06,Wood Frame,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1300.0,1251.9,0.963,0.75,0.722,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_MS_147,MET_06,Wood Frame,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1300.0,1253.2,0.964,0.75,0.723,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_MG_148,MET_06,Wood Frame,BR_MG,MG,Minas Gerais,Sudeste,0.982,1300.0,1276.6,0.982,0.75,0.736,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_PA_149,MET_06,Wood Frame,BR_PA,PA,Pará,Norte,0.841,1300.0,1093.3,0.841,0.75,0.631,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_PB_150,MET_06,Wood Frame,BR_PB,PB,Paraíba,Nordeste,0.877,1300.0,1140.1,0.877,0.75,0.658,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_PR_151,MET_06,Wood Frame,BR_PR,PR,Paraná,Sul,1.02,1300.0,1326.0,1.02,0.75,0.765,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_PE_152,MET_06,Wood Frame,BR_PE,PE,Pernambuco,Nordeste,0.888,1300.0,1154.4,0.888,0.75,0.666,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_PI_153,MET_06,Wood Frame,BR_PI,PI,Piauí,Nordeste,0.872,1300.0,1133.6,0.872,0.75,0.654,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_RJ_154,MET_06,Wood Frame,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1300.0,1254.5,0.965,0.75,0.724,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_RN_155,MET_06,Wood Frame,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1300.0,1154.4,0.888,0.75,0.666,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_RS_156,MET_06,Wood Frame,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1300.0,1365.0,1.05,0.75,0.788,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_RO_157,MET_06,Wood Frame,BR_RO,RO,Rondônia,Norte,0.865,1300.0,1124.5,0.865,0.75,0.649,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_RR_158,MET_06,Wood Frame,BR_RR,RR,Roraima,Norte,0.82,1300.0,1066.0,0.82,0.75,0.615,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_SC_159,MET_06,Wood Frame,BR_SC,SC,Santa Catarina,Sul,1.045,1300.0,1358.5,1.045,0.75,0.784,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_SP_160,MET_06,Wood Frame,BR_SP,SP,São Paulo,Sudeste,1.0,1300.0,1300.0,1.0,0.75,0.75,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_SE_161,MET_06,Wood Frame,BR_SE,SE,Sergipe,Nordeste,0.88,1300.0,1144.0,0.88,0.75,0.66,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_06_TO_162,MET_06,Wood Frame,BR_TO,TO,Tocantins,Norte,0.86,1300.0,1118.0,0.86,0.75,0.645,0.65,0.3,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_AC_163,MET_07,Containers,BR_AC,AC,Acre,Norte,0.829,1100.0,911.9,0.829,0.6,0.497,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_AL_164,MET_07,Containers,BR_AL,AL,Alagoas,Nordeste,0.905,1100.0,995.5,0.905,0.6,0.543,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_AP_165,MET_07,Containers,BR_AP,AP,Amapá,Norte,0.859,1100.0,944.9,0.859,0.6,0.515,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_AM_166,MET_07,Containers,BR_AM,AM,Amazonas,Norte,0.842,1100.0,926.2,0.842,0.6,0.505,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_BA_167,MET_07,Containers,BR_BA,BA,Bahia,Nordeste,0.896,1100.0,985.6,0.896,0.6,0.538,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_CE_168,MET_07,Containers,BR_CE,CE,Ceará,Nordeste,0.9,1100.0,990.0,0.9,0.6,0.54,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_DF_169,MET_07,Containers,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1100.0,1082.4,0.984,0.6,0.59,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_ES_170,MET_07,Containers,BR_ES,ES,Espírito Santo,Sudeste,0.949,1100.0,1043.9,0.949,0.6,0.569,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_GO_171,MET_07,Containers,BR_GO,GO,Goiás,Centro-Oeste,0.958,1100.0,1053.8,0.958,0.6,0.575,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_MA_172,MET_07,Containers,BR_MA,MA,Maranhão,Nordeste,0.898,1100.0,987.8,0.898,0.6,0.539,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_MT_173,MET_07,Containers,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1100.0,1059.3,0.963,0.6,0.578,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_MS_174,MET_07,Containers,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1100.0,1060.4,0.964,0.6,0.578,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_MG_175,MET_07,Containers,BR_MG,MG,Minas Gerais,Sudeste,0.982,1100.0,1080.2,0.982,0.6,0.589,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_PA_176,MET_07,Containers,BR_PA,PA,Pará,Norte,0.841,1100.0,925.1,0.841,0.6,0.505,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_PB_177,MET_07,Containers,BR_PB,PB,Paraíba,Nordeste,0.877,1100.0,964.7,0.877,0.6,0.526,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_PR_178,MET_07,Containers,BR_PR,PR,Paraná,Sul,1.02,1100.0,1122.0,1.02,0.6,0.612,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_PE_179,MET_07,Containers,BR_PE,PE,Pernambuco,Nordeste,0.888,1100.0,976.8,0.888,0.6,0.533,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_PI_180,MET_07,Containers,BR_PI,PI,Piauí,Nordeste,0.872,1100.0,959.2,0.872,0.6,0.523,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_RJ_181,MET_07,Containers,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1100.0,1061.5,0.965,0.6,0.579,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_RN_182,MET_07,Containers,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1100.0,976.8,0.888,0.6,0.533,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_RS_183,MET_07,Containers,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1100.0,1155.0,1.05,0.6,0.63,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_RO_184,MET_07,Containers,BR_RO,RO,Rondônia,Norte,0.865,1100.0,951.5,0.865,0.6,0.519,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_RR_185,MET_07,Containers,BR_RR,RR,Roraima,Norte,0.82,1100.0,902.0,0.82,0.6,0.492,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_SC_186,MET_07,Containers,BR_SC,SC,Santa Catarina,Sul,1.045,1100.0,1149.5,1.045,0.6,0.627,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_SP_187,MET_07,Containers,BR_SP,SP,São Paulo,Sudeste,1.0,1100.0,1100.0,1.0,0.6,0.6,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_SE_188,MET_07,Containers,BR_SE,SE,Sergipe,Nordeste,0.88,1100.0,968.0,0.88,0.6,0.528,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_07_TO_189,MET_07,Containers,BR_TO,TO,Tocantins,Norte,0.86,1100.0,946.0,0.86,0.6,0.516,0.7,0.2,0.1,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_AC_190,MET_08,Pré-Moldado,BR_AC,AC,Acre,Norte,0.829,1450.0,1202.05,0.829,0.85,0.705,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_AL_191,MET_08,Pré-Moldado,BR_AL,AL,Alagoas,Nordeste,0.905,1450.0,1312.25,0.905,0.85,0.769,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_AP_192,MET_08,Pré-Moldado,BR_AP,AP,Amapá,Norte,0.859,1450.0,1245.55,0.859,0.85,0.73,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_AM_193,MET_08,Pré-Moldado,BR_AM,AM,Amazonas,Norte,0.842,1450.0,1220.9,0.842,0.85,0.716,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_BA_194,MET_08,Pré-Moldado,BR_BA,BA,Bahia,Nordeste,0.896,1450.0,1299.2,0.896,0.85,0.762,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_CE_195,MET_08,Pré-Moldado,BR_CE,CE,Ceará,Nordeste,0.9,1450.0,1305.0,0.9,0.85,0.765,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_DF_196,MET_08,Pré-Moldado,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1450.0,1426.8,0.984,0.85,0.836,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_ES_197,MET_08,Pré-Moldado,BR_ES,ES,Espírito Santo,Sudeste,0.949,1450.0,1376.05,0.949,0.85,0.807,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_GO_198,MET_08,Pré-Moldado,BR_GO,GO,Goiás,Centro-Oeste,0.958,1450.0,1389.1,0.958,0.85,0.814,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_MA_199,MET_08,Pré-Moldado,BR_MA,MA,Maranhão,Nordeste,0.898,1450.0,1302.1,0.898,0.85,0.763,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_MT_200,MET_08,Pré-Moldado,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1450.0,1396.35,0.963,0.85,0.819,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_MS_201,MET_08,Pré-Moldado,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1450.0,1397.8,0.964,0.85,0.819,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_MG_202,MET_08,Pré-Moldado,BR_MG,MG,Minas Gerais,Sudeste,0.982,1450.0,1423.9,0.982,0.85,0.835,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_PA_203,MET_08,Pré-Moldado,BR_PA,PA,Pará,Norte,0.841,1450.0,1219.45,0.841,0.85,0.715,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_PB_204,MET_08,Pré-Moldado,BR_PB,PB,Paraíba,Nordeste,0.877,1450.0,1271.65,0.877,0.85,0.745,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_PR_205,MET_08,Pré-Moldado,BR_PR,PR,Paraná,Sul,1.02,1450.0,1479.0,1.02,0.85,0.867,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_PE_206,MET_08,Pré-Moldado,BR_PE,PE,Pernambuco,Nordeste,0.888,1450.0,1287.6,0.888,0.85,0.755,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_PI_207,MET_08,Pré-Moldado,BR_PI,PI,Piauí,Nordeste,0.872,1450.0,1264.4,0.872,0.85,0.741,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_RJ_208,MET_08,Pré-Moldado,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1450.0,1399.25,0.965,0.85,0.82,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_RN_209,MET_08,Pré-Moldado,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1450.0,1287.6,0.888,0.85,0.755,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_RS_210,MET_08,Pré-Moldado,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1450.0,1522.5,1.05,0.85,0.892,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_RO_211,MET_08,Pré-Moldado,BR_RO,RO,Rondônia,Norte,0.865,1450.0,1254.25,0.865,0.85,0.735,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_RR_212,MET_08,Pré-Moldado,BR_RR,RR,Roraima,Norte,0.82,1450.0,1189.0,0.82,0.85,0.697,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_SC_213,MET_08,Pré-Moldado,BR_SC,SC,Santa Catarina,Sul,1.045,1450.0,1515.25,1.045,0.85,0.888,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_SP_214,MET_08,Pré-Moldado,BR_SP,SP,São Paulo,Sudeste,1.0,1450.0,1450.0,1.0,0.85,0.85,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_SE_215,MET_08,Pré-Moldado,BR_SE,SE,Sergipe,Nordeste,0.88,1450.0,1276.0,0.88,0.85,0.748,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_08_TO_216,MET_08,Pré-Moldado,BR_TO,TO,Tocantins,Norte,0.86,1450.0,1247.0,0.86,0.85,0.731,0.6,0.25,0.15,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_AC_217,MET_09,EPS/ICF (Isopor Estrutural),BR_AC,AC,Acre,Norte,0.829,1250.0,1036.25,0.829,0.7,0.58,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_AL_218,MET_09,EPS/ICF (Isopor Estrutural),BR_AL,AL,Alagoas,Nordeste,0.905,1250.0,1131.25,0.905,0.7,0.633,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_AP_219,MET_09,EPS/ICF (Isopor Estrutural),BR_AP,AP,Amapá,Norte,0.859,1250.0,1073.75,0.859,0.7,0.601,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_AM_220,MET_09,EPS/ICF (Isopor Estrutural),BR_AM,AM,Amazonas,Norte,0.842,1250.0,1052.5,0.842,0.7,0.589,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_BA_221,MET_09,EPS/ICF (Isopor Estrutural),BR_BA,BA,Bahia,Nordeste,0.896,1250.0,1120.0,0.896,0.7,0.627,0.7,0.25,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_CE_222,MET_09,EPS/ICF (Isopor Estrutural),BR_CE,CE,Ceará,Nordeste,0.9,1250.0,1125.0,0.9,0.7,0.63,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_DF_223,MET_09,EPS/ICF (Isopor Estrutural),BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1250.0,1230.0,0.984,0.7,0.689,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_ES_224,MET_09,EPS/ICF (Isopor Estrutural),BR_ES,ES,Espírito Santo,Sudeste,0.949,1250.0,1186.25,0.949,0.7,0.664,0.7,0.25,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_GO_225,MET_09,EPS/ICF (Isopor Estrutural),BR_GO,GO,Goiás,Centro-Oeste,0.958,1250.0,1197.5,0.958,0.7,0.671,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_MA_226,MET_09,EPS/ICF (Isopor Estrutural),BR_MA,MA,Maranhão,Nordeste,0.898,1250.0,1122.5,0.898,0.7,0.629,0.7,0.25,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_MT_227,MET_09,EPS/ICF (Isopor Estrutural),BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1250.0,1203.75,0.963,0.7,0.674,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_MS_228,MET_09,EPS/ICF (Isopor Estrutural),BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1250.0,1205.0,0.964,0.7,0.675,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_MG_229,MET_09,EPS/ICF (Isopor Estrutural),BR_MG,MG,Minas Gerais,Sudeste,0.982,1250.0,1227.5,0.982,0.7,0.687,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_PA_230,MET_09,EPS/ICF (Isopor Estrutural),BR_PA,PA,Pará,Norte,0.841,1250.0,1051.25,0.841,0.7,0.589,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_PB_231,MET_09,EPS/ICF (Isopor Estrutural),BR_PB,PB,Paraíba,Nordeste,0.877,1250.0,1096.25,0.877,0.7,0.614,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_PR_232,MET_09,EPS/ICF (Isopor Estrutural),BR_PR,PR,Paraná,Sul,1.02,1250.0,1275.0,1.02,0.7,0.714,0.7,0.25,0.05,CBIC/SINAPI,PARCIALMENTE_VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_PE_233,MET_09,EPS/ICF (Isopor Estrutural),BR_PE,PE,Pernambuco,Nordeste,0.888,1250.0,1110.0,0.888,0.7,0.622,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_PI_234,MET_09,EPS/ICF (Isopor Estrutural),BR_PI,PI,Piauí,Nordeste,0.872,1250.0,1090.0,0.872,0.7,0.61,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_RJ_235,MET_09,EPS/ICF (Isopor Estrutural),BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1250.0,1206.25,0.965,0.7,0.675,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_RN_236,MET_09,EPS/ICF (Isopor Estrutural),BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1250.0,1110.0,0.888,0.7,0.622,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_RS_237,MET_09,EPS/ICF (Isopor Estrutural),BR_RS,RS,Rio Grande do Sul,Sul,1.05,1250.0,1312.5,1.05,0.7,0.735,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_RO_238,MET_09,EPS/ICF (Isopor Estrutural),BR_RO,RO,Rondônia,Norte,0.865,1250.0,1081.25,0.865,0.7,0.605,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_RR_239,MET_09,EPS/ICF (Isopor Estrutural),BR_RR,RR,Roraima,Norte,0.82,1250.0,1025.0,0.82,0.7,0.574,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_09_SC_240,MET_09,EPS/ICF (Isopor Estrutural),BR_SC,SC,Santa Catarina,Sul,1.045,1250.0,1306.25,1.045,0.7,0.731,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_SP_241,MET_09,EPS/ICF (Isopor Estrutural),BR_SP,SP,São Paulo,Sudeste,1.0,1250.0,1250.0,1.0,0.7,0.7,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_SE_242,MET_09,EPS/ICF (Isopor Estrutural),BR_SE,SE,Sergipe,Nordeste,0.88,1250.0,1100.0,0.88,0.7,0.616,0.7,0.25,0.05,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_09_TO_243,MET_09,EPS/ICF (Isopor Estrutural),BR_TO,TO,Tocantins,Norte,0.86,1250.0,1075.0,0.86,0.7,0.602,0.7,0.25,0.05,CBIC/SINAPI,VALIDADO,Expansão regional implementada,2025-11-14
+MET_10_AC_244,MET_10,3D Printing,BR_AC,AC,Acre,Norte,0.829,1800.0,1492.2,0.829,0.5,0.414,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_AL_245,MET_10,3D Printing,BR_AL,AL,Alagoas,Nordeste,0.905,1800.0,1629.0,0.905,0.5,0.453,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_AP_246,MET_10,3D Printing,BR_AP,AP,Amapá,Norte,0.859,1800.0,1546.2,0.859,0.5,0.429,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_AM_247,MET_10,3D Printing,BR_AM,AM,Amazonas,Norte,0.842,1800.0,1515.6,0.842,0.5,0.421,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_BA_248,MET_10,3D Printing,BR_BA,BA,Bahia,Nordeste,0.896,1800.0,1612.8,0.896,0.5,0.448,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_CE_249,MET_10,3D Printing,BR_CE,CE,Ceará,Nordeste,0.9,1800.0,1620.0,0.9,0.5,0.45,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_DF_250,MET_10,3D Printing,BR_DF,DF,Distrito Federal,Centro-Oeste,0.984,1800.0,1771.2,0.984,0.5,0.492,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_ES_251,MET_10,3D Printing,BR_ES,ES,Espírito Santo,Sudeste,0.949,1800.0,1708.2,0.949,0.5,0.474,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_GO_252,MET_10,3D Printing,BR_GO,GO,Goiás,Centro-Oeste,0.958,1800.0,1724.4,0.958,0.5,0.479,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_MA_253,MET_10,3D Printing,BR_MA,MA,Maranhão,Nordeste,0.898,1800.0,1616.4,0.898,0.5,0.449,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_MT_254,MET_10,3D Printing,BR_MT,MT,Mato Grosso,Centro-Oeste,0.963,1800.0,1733.4,0.963,0.5,0.481,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_MS_255,MET_10,3D Printing,BR_MS,MS,Mato Grosso do Sul,Centro-Oeste,0.964,1800.0,1735.2,0.964,0.5,0.482,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_MG_256,MET_10,3D Printing,BR_MG,MG,Minas Gerais,Sudeste,0.982,1800.0,1767.6,0.982,0.5,0.491,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_PA_257,MET_10,3D Printing,BR_PA,PA,Pará,Norte,0.841,1800.0,1513.8,0.841,0.5,0.42,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_PB_258,MET_10,3D Printing,BR_PB,PB,Paraíba,Nordeste,0.877,1800.0,1578.6,0.877,0.5,0.439,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_PR_259,MET_10,3D Printing,BR_PR,PR,Paraná,Sul,1.02,1800.0,1836.0,1.02,0.5,0.51,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_PE_260,MET_10,3D Printing,BR_PE,PE,Pernambuco,Nordeste,0.888,1800.0,1598.4,0.888,0.5,0.444,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_PI_261,MET_10,3D Printing,BR_PI,PI,Piauí,Nordeste,0.872,1800.0,1569.6,0.872,0.5,0.436,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_RJ_262,MET_10,3D Printing,BR_RJ,RJ,Rio de Janeiro,Sudeste,0.965,1800.0,1737.0,0.965,0.5,0.482,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_RN_263,MET_10,3D Printing,BR_RN,RN,Rio Grande do Norte,Nordeste,0.888,1800.0,1598.4,0.888,0.5,0.444,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_RS_264,MET_10,3D Printing,BR_RS,RS,Rio Grande do Sul,Sul,1.05,1800.0,1890.0,1.05,0.5,0.525,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_RO_265,MET_10,3D Printing,BR_RO,RO,Rondônia,Norte,0.865,1800.0,1557.0,0.865,0.5,0.432,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_RR_266,MET_10,3D Printing,BR_RR,RR,Roraima,Norte,0.82,1800.0,1476.0,0.82,0.5,0.41,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_SC_267,MET_10,3D Printing,BR_SC,SC,Santa Catarina,Sul,1.045,1800.0,1881.0,1.045,0.5,0.522,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_SP_268,MET_10,3D Printing,BR_SP,SP,São Paulo,Sudeste,1.0,1800.0,1800.0,1.0,0.5,0.5,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_SE_269,MET_10,3D Printing,BR_SE,SE,Sergipe,Nordeste,0.88,1800.0,1584.0,0.88,0.5,0.44,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14
+MET_10_TO_270,MET_10,3D Printing,BR_TO,TO,Tocantins,Norte,0.86,1800.0,1548.0,0.86,0.5,0.43,0.4,0.15,0.45,CBIC/SINAPI,ESTIMADO,Expansão regional implementada,2025-11-14

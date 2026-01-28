@@ -1,0 +1,174 @@
+{
+  "data_analise": "2025-11-17 20:38:03",
+  "total_abas": 16,
+  "abas_analisadas": [
+    {
+      "nome": "cub_on_global",
+      "linhas": 241,
+      "colunas": 11,
+      "problemas": [
+        "Valores vazios em 6 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "cub_on_global_uf",
+      "linhas": 244,
+      "colunas": 11,
+      "problemas": [
+        "Valores vazios em 6 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "cub_des_global",
+      "linhas": 159,
+      "colunas": 11,
+      "problemas": [
+        "Valores vazios em 6 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "pib_brasil_serie",
+      "linhas": 31,
+      "colunas": 9,
+      "problemas": [
+        "Valores vazios em 4 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "pib_construcao_civil",
+      "linhas": 31,
+      "colunas": 9,
+      "problemas": [
+        "Valores vazios em 4 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "inv_construcao_civil",
+      "linhas": 31,
+      "colunas": 9,
+      "problemas": [
+        "Valores vazios em 4 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "inv_infraestrutura",
+      "linhas": 28,
+      "colunas": 9,
+      "problemas": [
+        "Valores vazios em 4 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "pib_part_construcao",
+      "linhas": 186,
+      "colunas": 12,
+      "problemas": [
+        "Valores vazios em 6 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: indicadores_do_pib_trimestral___pibpm_e_componentes_da_demanda*, data_extracao"
+      ]
+    },
+    {
+      "nome": "mat_cimento_consumo",
+      "linhas": 40,
+      "colunas": 19,
+      "problemas": [
+        "Valores vazios em 14 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "mat_cimento_producao",
+      "linhas": 40,
+      "colunas": 19,
+      "problemas": [
+        "Valores vazios em 14 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "ind_ipca_consumidor",
+      "linhas": 433,
+      "colunas": 11,
+      "problemas": [
+        "Valores vazios em 6 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "ind_taxa_selic",
+      "linhas": 178,
+      "colunas": 11,
+      "problemas": [
+        "Valores vazios em 6 colunas"
+      ],
+      "sugestoes": [
+        "Padronizar formato de datas: data_extracao"
+      ]
+    },
+    {
+      "nome": "dim_metodo_fase2",
+      "linhas": 270,
+      "colunas": 23,
+      "problemas": [],
+      "sugestoes": [
+        "Padronizar formato de datas: data_atualizacao_cub"
+      ]
+    },
+    {
+      "nome": "ind_taxa_desemprego",
+      "linhas": 41,
+      "colunas": 13,
+      "problemas": [
+        "Valores vazios em 12 colunas"
+      ],
+      "sugestoes": []
+    },
+    {
+      "nome": "comparacao_fatores",
+      "linhas": 27,
+      "colunas": 11,
+      "problemas": [
+        "Valores vazios em 5 colunas"
+      ],
+      "sugestoes": []
+    },
+    {
+      "nome": "fatores_empiricos",
+      "linhas": 21,
+      "colunas": 9,
+      "problemas": [],
+      "sugestoes": [
+        "Padronizar formato de datas: data_inicio, data_fim"
+      ]
+    }
+  ]
+}

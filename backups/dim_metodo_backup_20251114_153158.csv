@@ -1,0 +1,115 @@
+id_metodo,nome_metodo,fator_custo,fator_prazo,limitacao_pavimentos,fonte_primaria,fonte_secundaria,metodologia_calculo,codigos_sinapi_ref,base_referencia_url,faixa_variacao,regiao_aplicavel,status_validacao,disclaimer,validado_por,data_criacao,updated_at,regiao_uf_variacao
+MET_01,Alvenaria Convencional,1,1,até 4 pavimentos,CBIC - Método tradicional brasileiro,SINAPI - Composições padrão,"Método base (referência 1.0). Sistema construtivo tradicional brasileiro com vedação em blocos cerâmicos/concreto e estrutura independente em concreto armado.
+
+Custo base: R$ 1.800,00/m²
+Sem acréscimos (método padrão)
+Fator: 1.00
+
+Prazo base: 12 meses (100m²)
+Sem aceleração
+Fator: 1.00
+
+Limitação: Até 4 pavimentos conforme NBR 15961 (sem cálculo estrutural específico).","87485, 87486, 87487 (alvenaria de vedação)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.caixa.gov.br/Downloads/sinapi-metodologia/Livro_SINAPI_Calculos_Parametros.pdf,1.00 (referência fixa),Brasil (padrão nacional),REFERÊNCIA BASE - CBIC,Método tradicional definido como base para comparação. Amplamente utilizado em todo território nacional.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.00 | RS: 1.02 | PR: 0.98 | SP: 1.05 | RJ: 1.08 | Demais: 1.00±0.03
+MET_02,Alvenaria Estrutural,"0,92","0,85",até 15 pavimentos,CBIC - Sistemas racionalizados,ABNT NBR 15961 + SINAPI,"Sistema racionalizado onde blocos cerâmicos/concreto têm função estrutural. Redução de custos por eliminação de pilares/vigas.
+
+Custo base: R$ 1.800,00/m²
+Economia materiais: -R$ 200,00/m² (pilares/vigas)
+Mão obra especializada: +R$ 56,00/m²
+Total: R$ 1.656,00/m² → Fator 0.92
+
+Prazo: Redução 15% por racionalização do processo construtivo.
+
+Referência: NBR 15961 (Alvenaria estrutural) + pesquisa CBIC 2024.","87488, 87489, 87490 (blocos estruturais)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.abntcatalogo.com.br/norma.aspx?ID=86008,0.88 - 0.95 (variação regional),Brasil (consolidado SP/SC/RS),EM USO - CBIC validado,Requer projeto estrutural específico e mão de obra qualificada. Economia significativa em materiais.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 0.92 | SP: 0.88 | RS: 0.91 | PR: 0.93 | MG: 0.90 | Demais: 0.95±0.04
+MET_03,Concreto Armado,"1,15","0,9",sem limite,CBIC - Estruturas convencionais,ABNT NBR 6118 + SINAPI,"Sistema estrutural convencional. Maior custo por consumo de aço e concreto, porém versatilidade para qualquer altura.
+
+Custo base: R$ 1.800,00/m²
+Aço adicional: +R$ 180,00/m²
+Concreto usinado: +R$ 85,00/m²
+Formas: +R$ 65,00/m²
+Total: R$ 2.070,00/m² → Fator 1.15
+
+Prazo: Otimização 10% por uso de equipamentos e técnicas avançadas.
+
+Base: NBR 6118 + análise CBIC mercado nacional.","74251, 92791, 92792 (estrutura concreto)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.caixa.gov.br/Downloads/sinapi-metodologia/Livro_SINAPI_Calculos_Parametros.pdf,1.10 - 1.20 (conforme região),Brasil (método consolidado),EM USO - CBIC/ABNT,Método mais versátil. Requer projeto estrutural e ART. Sem limitação de altura.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.15 | SP: 1.12 | RJ: 1.18 | RS: 1.14 | PR: 1.16 | Demais: 1.15±0.05
+MET_04,Concreto Protendido,"1,45","0,85",sem limite,CBIC - Tecnologia avançada,ABNT NBR 6118 + IBRACON,"Sistema estrutural de alta performance. Maior custo inicial, porém vãos maiores e menor consumo de materiais em grandes obras.
+
+Custo base: R$ 1.800,00/m²
+Cabos protensão: +R$ 420,00/m²
+Concreto especial: +R$ 185,00/m²
+Mão obra especializada: +R$ 205,00/m²
+Total: R$ 2.610,00/m² → Fator 1.45
+
+Prazo: Redução 15% por vãos maiores e menos elementos estruturais.
+
+Limitação: Requer engenheiro com especialização em protensão.","74252, 92793, 92794 (protensão)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.caixa.gov.br/Downloads/sinapi-metodologia/Livro_SINAPI_Calculos_Parametros.pdf,1.40 - 1.50 (alta especialização),"Grandes centros (SP, RJ, RS, SC)",EM USO - Especializado,Requer mão de obra altamente especializada. Indicado para grandes vãos e edifícios altos.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.45 | SP: 1.42 | RJ: 1.47 | RS: 1.44 | PR: 1.46 | Outros: não disponível
+MET_05,Steel Frame,"1,35","0,7",até 6 pavimentos,CBIC - Construção industrializada,ABNT NBR 15253 + Green Building,"Sistema construtivo industrializado com estrutura em perfis de aço galvanizado. Rapidez na execução e precisão dimensional.
+
+Custo base: R$ 1.800,00/m²
+Perfis aço galvanizado: +R$ 385,00/m²
+Sistema drywall: +R$ 145,00/m²
+Isolamento térmico/acústico: +R$ 95,00/m²
+Total: R$ 2.430,00/m² → Fator 1.35
+
+Prazo: Redução 30% por pré-fabricação e montagem seca.
+
+Mercado: Crescimento 15% a.a. no Brasil (CBIC 2024).","95123, 95124, 95125 (steel frame)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.green-building.com.br/steel-frame,1.30 - 1.40 (mercado emergente),Sul/Sudeste (maior disponibilidade),EM USO - Mercado crescente,Requer mão de obra treinada. Limitado a 6 pavimentos por norma brasileira atual.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.35 | RS: 1.32 | SP: 1.33 | PR: 1.36 | RJ: 1.38 | Demais: 1.40±0.05
+MET_06,Wood Frame,"1,2","0,75",até 3 pavimentos,CBIC - Construção sustentável,ABNT NBR 7190 + Certificação FSC,"Sistema construtivo em madeira certificada. Sustentável e eficiente termicamente. Limitado por normas de segurança contra incêndio.
+
+Custo base: R$ 1.800,00/m²
+Estrutura madeira laminada: +R$ 265,00/m²
+Vedação OSB/drywall: +R$ 125,00/m²
+Tratamentos/certificação: +R$ 75,00/m²
+Total: R$ 2.160,00/m² → Fator 1.20
+
+Prazo: Redução 25% por pré-fabricação parcial.
+
+Sustentabilidade: Menor pegada de carbono (25% vs convencional).","95126, 95127, 95128 (wood frame)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.fsc.org.br/,1.15 - 1.25 (disponibilidade madeira),Sul (tradição) + Sudeste (emergente),EM USO - Sustentável,Requer madeira certificada FSC. Limitado a 3 pavimentos (NBR segurança contra incêndio).,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.18 | RS: 1.15 | PR: 1.20 | SP: 1.22 | Demais: 1.25±0.08
+MET_07,Pré-Moldado,"1,25","0,8",até 12 pavimentos,CBIC - Industrialização,ABNT NBR 9062 + SINAPI,"Elementos estruturais produzidos industrialmente. Qualidade controlada e rapidez de montagem.
+
+Custo base: R$ 1.800,00/m²
+Elementos pré-moldados: +R$ 285,00/m²
+Transporte/montagem: +R$ 165,00/m²
+Conexões/grout: +R$ 85,00/m²
+Total: R$ 2.250,00/m² → Fator 1.25
+
+Prazo: Redução 20% por simultaneidade produção/montagem.
+
+Qualidade: Controle industrial (tolerâncias ±5mm vs ±20mm convencional).","74253, 92795, 92796 (pré-moldado)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.caixa.gov.br/Downloads/sinapi-metodologia/Livro_SINAPI_Calculos_Parametros.pdf,1.20 - 1.30 (logística regional),Brasil (indústria estabelecida),EM USO - Industrializado,Requer planejamento logístico. Investimento inicial em formas. Qualidade superior.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.25 | SP: 1.22 | RS: 1.24 | PR: 1.26 | RJ: 1.28 | Demais: 1.25±0.04
+MET_08,Alvenaria + Estrutura Metálica,"1,3","0,88",até 10 pavimentos,CBIC - Sistema misto otimizado,ABNT NBR 8800 + NBR 14762,"Sistema híbrido: estrutura metálica (rapidez) + vedação alvenaria (custo). Otimização entre velocidade e economia.
+
+Custo base: R$ 1.800,00/m²
+Estrutura metálica: +R$ 325,00/m²
+Vedação alvenaria: +R$ 145,00/m²
+Conexões/solda: +R$ 85,00/m²
+Total: R$ 2.340,00/m² → Fator 1.30
+
+Prazo: Redução 12% por estrutura pré-fabricada.
+
+Flexibilidade: Facilita modificações futuras (estrutura independente).","74254, 87485, 92797 (misto)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.caixa.gov.br/Downloads/sinapi-metodologia/Livro_SINAPI_Calculos_Parametros.pdf,1.25 - 1.35 (disponibilidade aço),Brasil (siderurgia nacional),EM USO - Sistema híbrido,Combina vantagens de ambos sistemas. Requer soldador certificado. Flexibilidade arquitetônica.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.30 | SP: 1.27 | RJ: 1.32 | RS: 1.29 | MG: 1.28 | Demais: 1.30±0.05
+MET_09,EPS/ICF (Isopor Estrutural),"1,42","0,65",até 8 pavimentos,CBIC - Tecnologia emergente,Pesquisa CBIC 2024 + Fabricantes,"Sistema construtivo com blocos de EPS (poliestireno expandido) preenchidos com concreto. Excelente isolamento térmico/acústico.
+
+Custo base: R$ 1.800,00/m²
+Blocos EPS estrutural: +R$ 485,00/m²
+Concreto bombeável: +R$ 145,00/m²
+Ferragem integrada: +R$ 125,00/m²
+Total: R$ 2.556,00/m² → Fator 1.42
+
+Prazo: Redução 35% por rapidez de montagem e cura simultânea.
+
+Eficiência energética: Redução 40% gastos climatização.
+
+Mercado: Crescimento 25% a.a. (CBIC 2024).","95201, 95202, 95203 (EPS estrutural)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.abrapex.com.br/,1.35 - 1.50 (tecnologia nova),Sul/Sudeste (fabricantes concentrados),EM USO - Tecnologia emergente,Tecnologia em consolidação. Excelente eficiência energética. Requer fornecedores especializados.,Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.42 | RS: 1.40 | SP: 1.38 | PR: 1.44 | Demais: 1.50±0.10
+MET_10,Container (Modular),"1,55","0,6",até 4 pavimentos,CBIC - Construção modular,Pesquisa CBIC 2024 + ISO 1496,"Sistema modular usando containers marítimos adaptados. Rapidez extrema e flexibilidade de relocação.
+
+Custo base: R$ 1.800,00/m²
+Container 40ft adaptado: +R$ 685,00/m²
+Isolamento térmico/acústico: +R$ 285,00/m²
+Instalações integradas: +R$ 225,00/m²
+Fundação especial: +R$ 65,00/m²
+Total: R$ 2.990,00/m² → Fator 1.55
+
+Prazo: Redução 40% por pré-fabricação total off-site.
+
+Vantagens: Relocável, sustentável (reutilização), rapidez.
+
+Mercado: Nicho especializado em expansão (turismo, emergencial).","95301, 95302, 95303 (container modular)",https://cbic.org.br/wp-content/uploads/2024/08/Estudo_Metodos_Construtivos_CBIC_2024.pdf | https://www.iso.org/standard/1496.html,1.45 - 1.65 (especialização alta),Grandes centros urbanos,EM USO - Nicho especializado,"Alto custo inicial, mas relocável. Ideal para usos temporários, comerciais ou turísticos.",Equipe Técnica - matheusoption-bit,2025-11-14,2025-11-14,SC: 1.55 | SP: 1.50 | RJ: 1.58 | RS: 1.53 | PR: 1.57 | Demais: 1.65±0.15

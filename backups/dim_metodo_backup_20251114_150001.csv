@@ -1,0 +1,4 @@
+id_metodo,nome_metodo,fator_custo,fator_prazo,status
+MET_01,Alvenaria Convencional,1.00,1.00,ATIVO
+MET_02,Alvenaria Estrutural,0.92,0.85,ATIVO
+MET_03,Concreto Armado,1.15,0.90,ATIVO

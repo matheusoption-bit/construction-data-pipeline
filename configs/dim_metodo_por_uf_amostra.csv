@@ -1,0 +1,105 @@
+id_metodo_uf,id_metodo,nome_metodo,id_localidade,uf,nome_uf,regiao,fator_regional_custo,fator_custo_base,fator_custo_regional_calc,fator_regional_prazo,fator_prazo_base,fator_prazo_regional_calc,percentual_material,percentual_mao_obra,percentual_admin_equip,fonte_primaria,status_validacao,nota_importante,data_atualizacao_cub
+MET_01__SP,MET_01,Alvenaria Convencional,LOC_01,SP,São Paulo,Sudeste,1.00,1.00,1.00,1.00,1.00,1.00,0.40,0.45,0.15,fact_cub_por_uf (SP),VALIDADO,Baseline nacional - Maior economia,2025-11
+MET_01__RJ,MET_01,Alvenaria Convencional,LOC_02,RJ,Rio de Janeiro,Sudeste,0.97,1.00,0.97,1.00,1.00,1.00,0.40,0.45,0.15,fact_cub_por_uf (RJ),VALIDADO,Redução 3% vs SP,2025-11
+MET_01__MG,MET_01,Alvenaria Convencional,LOC_03,MG,Minas Gerais,Sudeste,0.95,1.00,0.95,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (MG),VALIDADO,Redução 5% vs SP,2025-11
+MET_01__ES,MET_01,Alvenaria Convencional,LOC_04,ES,Espírito Santo,Sudeste,0.94,1.00,0.94,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (ES),VALIDADO,Redução 6% vs SP,2025-11
+MET_01__BA,MET_01,Alvenaria Convencional,LOC_05,BA,Bahia,Nordeste,0.92,1.00,0.92,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (BA),VALIDADO,Redução 8% vs SP,2025-11
+MET_01__PE,MET_01,Alvenaria Convencional,LOC_06,PE,Pernambuco,Nordeste,0.90,1.00,0.90,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (PE),VALIDADO,Redução 10% vs SP,2025-11
+MET_01__CE,MET_01,Alvenaria Convencional,LOC_07,CE,Ceará,Nordeste,0.91,1.00,0.91,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (CE),VALIDADO,Redução 9% vs SP,2025-11
+MET_01__MA,MET_01,Alvenaria Convencional,LOC_08,MA,Maranhão,Nordeste,0.88,1.00,0.88,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (MA),VALIDADO,Redução 12% vs SP,2025-11
+MET_01__PI,MET_01,Alvenaria Convencional,LOC_09,PI,Piauí,Nordeste,0.87,1.00,0.87,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (PI),PARCIALMENTE_VALIDADO,Redução 13% vs SP,2025-11
+MET_01__RN,MET_01,Alvenaria Convencional,LOC_10,RN,Rio Grande do Norte,Nordeste,0.89,1.00,0.89,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (RN),VALIDADO,Redução 11% vs SP,2025-11
+MET_01__AL,MET_01,Alvenaria Convencional,LOC_11,AL,Alagoas,Nordeste,0.88,1.00,0.88,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (AL),VALIDADO,Redução 12% vs SP,2025-11
+MET_01__SE,MET_01,Alvenaria Convencional,LOC_12,SE,Sergipe,Nordeste,0.87,1.00,0.87,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (SE),PARCIALMENTE_VALIDADO,Redução 13% vs SP,2025-11
+MET_01__RS,MET_01,Alvenaria Convencional,LOC_13,RS,Rio Grande do Sul,Sul,1.05,1.00,1.05,0.99,1.00,0.99,0.40,0.45,0.15,fact_cub_por_uf (RS),VALIDADO,Aumento 5% vs SP - Logística,2025-11
+MET_01__SC,MET_01,Alvenaria Convencional,LOC_14,SC,Santa Catarina,Sul,1.03,1.00,1.03,0.99,1.00,0.99,0.40,0.45,0.15,fact_cub_por_uf (SC),VALIDADO,Aumento 3% vs SP,2025-11
+MET_01__PR,MET_01,Alvenaria Convencional,LOC_15,PR,Paraná,Sul,1.04,1.00,1.04,0.99,1.00,0.99,0.40,0.45,0.15,fact_cub_por_uf (PR),VALIDADO,Aumento 4% vs SP,2025-11
+MET_01__DF,MET_01,Alvenaria Convencional,LOC_16,DF,Distrito Federal,Centro-Oeste,1.02,1.00,1.02,1.00,1.00,1.00,0.40,0.45,0.15,fact_cub_por_uf (DF),VALIDADO,Aumento 2% vs SP,2025-11
+MET_01__GO,MET_01,Alvenaria Convencional,LOC_17,GO,Goiás,Centro-Oeste,0.98,1.00,0.98,1.00,1.00,1.00,0.40,0.45,0.15,fact_cub_por_uf (GO),VALIDADO,Redução 2% vs SP,2025-11
+MET_01__MT,MET_01,Alvenaria Convencional,LOC_18,MT,Mato Grosso,Centro-Oeste,0.96,1.00,0.96,1.00,1.00,1.00,0.40,0.45,0.15,fact_cub_por_uf (MT),VALIDADO,Redução 4% vs SP,2025-11
+MET_01__MS,MET_01,Alvenaria Convencional,LOC_19,MS,Mato Grosso do Sul,Centro-Oeste,0.95,1.00,0.95,1.00,1.00,1.00,0.40,0.45,0.15,fact_cub_por_uf (MS),VALIDADO,Redução 5% vs SP,2025-11
+MET_01__AM,MET_01,Alvenaria Convencional,LOC_20,AM,Amazonas,Norte,0.88,1.00,0.88,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (AM),PARCIALMENTE_VALIDADO,Redução 12% vs SP - Remota,2025-11
+MET_01__PA,MET_01,Alvenaria Convencional,LOC_21,PA,Pará,Norte,0.86,1.00,0.86,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (PA),PARCIALMENTE_VALIDADO,Redução 14% vs SP,2025-11
+MET_01__RO,MET_01,Alvenaria Convencional,LOC_22,RO,Rondônia,Norte,0.85,1.00,0.85,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (RO),ESTIMADO,Redução 15% vs SP,2025-11
+MET_01__AC,MET_01,Alvenaria Convencional,LOC_23,AC,Acre,Norte,0.83,1.00,0.83,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (AC),ESTIMADO,Redução 17% vs SP - Muito remota,2025-11
+MET_01__AP,MET_01,Alvenaria Convencional,LOC_24,AP,Amapá,Norte,0.84,1.00,0.84,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (AP),ESTIMADO,Redução 16% vs SP,2025-11
+MET_01__RR,MET_01,Alvenaria Convencional,LOC_25,RR,Roraima,Norte,0.82,1.00,0.82,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (RR),ESTIMADO,Redução 18% vs SP - Mais remota,2025-11
+MET_01__TO,MET_01,Alvenaria Convencional,LOC_26,TO,Tocantins,Norte,0.85,1.00,0.85,1.01,1.00,1.01,0.40,0.45,0.15,fact_cub_por_uf (TO),ESTIMADO,Redução 15% vs SP,2025-11
+MET_03__SP,MET_03,Concreto Armado,LOC_01,SP,São Paulo,Sudeste,1.00,1.15,1.150,1.00,0.90,0.900,0.50,0.35,0.15,fact_cub_por_uf (SP),VALIDADO,Baseline nacional - Premium em SP,2025-11
+MET_03__RJ,MET_03,Concreto Armado,LOC_02,RJ,Rio de Janeiro,Sudeste,0.98,1.15,1.127,1.00,0.90,0.901,0.50,0.35,0.15,fact_cub_por_uf (RJ),VALIDADO,Redução 2% vs SP,2025-11
+MET_03__MG,MET_03,Concreto Armado,LOC_03,MG,Minas Gerais,Sudeste,0.95,1.15,1.092,1.01,0.90,0.902,0.50,0.35,0.15,fact_cub_por_uf (MG),VALIDADO,Redução 5% vs SP,2025-11
+MET_03__ES,MET_03,Concreto Armado,LOC_04,ES,Espírito Santo,Sudeste,0.94,1.15,1.081,1.01,0.90,0.903,0.50,0.35,0.15,fact_cub_por_uf (ES),VALIDADO,Redução 6% vs SP,2025-11
+MET_03__BA,MET_03,Concreto Armado,LOC_05,BA,Bahia,Nordeste,0.92,1.15,1.058,1.01,0.90,0.904,0.50,0.35,0.15,fact_cub_por_uf (BA),VALIDADO,Redução 8% vs SP - Disponível regionalmente,2025-11
+MET_03__PE,MET_03,Concreto Armado,LOC_06,PE,Pernambuco,Nordeste,0.90,1.15,1.035,1.01,0.90,0.904,0.50,0.35,0.15,fact_cub_por_uf (PE),VALIDADO,Redução 10% vs SP,2025-11
+MET_03__CE,MET_03,Concreto Armado,LOC_07,CE,Ceará,Nordeste,0.91,1.15,1.046,1.01,0.90,0.904,0.50,0.35,0.15,fact_cub_por_uf (CE),VALIDADO,Redução 9% vs SP,2025-11
+MET_03__MA,MET_03,Concreto Armado,LOC_08,MA,Maranhão,Nordeste,0.88,1.15,1.012,1.01,0.90,0.905,0.50,0.35,0.15,fact_cub_por_uf (MA),VALIDADO,Redução 12% vs SP,2025-11
+MET_03__PI,MET_03,Concreto Armado,LOC_09,PI,Piauí,Nordeste,0.87,1.15,1.000,1.01,0.90,0.906,0.50,0.35,0.15,fact_cub_por_uf (PI),PARCIALMENTE_VALIDADO,Redução 13% vs SP,2025-11
+MET_03__RN,MET_03,Concreto Armado,LOC_10,RN,Rio Grande do Norte,Nordeste,0.89,1.15,1.023,1.01,0.90,0.905,0.50,0.35,0.15,fact_cub_por_uf (RN),VALIDADO,Redução 11% vs SP,2025-11
+MET_03__AL,MET_03,Concreto Armado,LOC_11,AL,Alagoas,Nordeste,0.88,1.15,1.012,1.01,0.90,0.905,0.50,0.35,0.15,fact_cub_por_uf (AL),VALIDADO,Redução 12% vs SP,2025-11
+MET_03__SE,MET_03,Concreto Armado,LOC_12,SE,Sergipe,Nordeste,0.87,1.15,1.000,1.01,0.90,0.906,0.50,0.35,0.15,fact_cub_por_uf (SE),PARCIALMENTE_VALIDADO,Redução 13% vs SP,2025-11
+MET_03__RS,MET_03,Concreto Armado,LOC_13,RS,Rio Grande do Sul,Sul,1.05,1.15,1.208,0.98,0.90,0.898,0.50,0.35,0.15,fact_cub_por_uf (RS),VALIDADO,Aumento 5% vs SP - Logística e clima,2025-11
+MET_03__SC,MET_03,Concreto Armado,LOC_14,SC,Santa Catarina,Sul,1.03,1.15,1.184,0.99,0.90,0.899,0.50,0.35,0.15,fact_cub_por_uf (SC),VALIDADO,Aumento 3% vs SP,2025-11
+MET_03__PR,MET_03,Concreto Armado,LOC_15,PR,Paraná,Sul,1.04,1.15,1.196,0.98,0.90,0.898,0.50,0.35,0.15,fact_cub_por_uf (PR),VALIDADO,Aumento 4% vs SP,2025-11
+MET_03__DF,MET_03,Concreto Armado,LOC_16,DF,Distrito Federal,Centro-Oeste,1.02,1.15,1.173,0.99,0.90,0.899,0.50,0.35,0.15,fact_cub_por_uf (DF),VALIDADO,Aumento 2% vs SP,2025-11
+MET_03__GO,MET_03,Concreto Armado,LOC_17,GO,Goiás,Centro-Oeste,0.98,1.15,1.127,1.00,0.90,0.901,0.50,0.35,0.15,fact_cub_por_uf (GO),VALIDADO,Redução 2% vs SP,2025-11
+MET_03__MT,MET_03,Concreto Armado,LOC_18,MT,Mato Grosso,Centro-Oeste,0.96,1.15,1.104,1.00,0.90,0.902,0.50,0.35,0.15,fact_cub_por_uf (MT),VALIDADO,Redução 4% vs SP,2025-11
+MET_03__MS,MET_03,Concreto Armado,LOC_19,MS,Mato Grosso do Sul,Centro-Oeste,0.95,1.15,1.092,1.01,0.90,0.902,0.50,0.35,0.15,fact_cub_por_uf (MS),VALIDADO,Redução 5% vs SP,2025-11
+MET_03__AM,MET_03,Concreto Armado,LOC_20,AM,Amazonas,Norte,0.88,1.15,1.012,1.01,0.90,0.905,0.50,0.35,0.15,fact_cub_por_uf (AM),PARCIALMENTE_VALIDADO,Redução 12% vs SP - Remota,2025-11
+MET_03__PA,MET_03,Concreto Armado,LOC_21,PA,Pará,Norte,0.86,1.15,0.989,1.01,0.90,0.906,0.50,0.35,0.15,fact_cub_por_uf (PA),PARCIALMENTE_VALIDADO,Redução 14% vs SP,2025-11
+MET_03__RO,MET_03,Concreto Armado,LOC_22,RO,Rondônia,Norte,0.85,1.15,0.977,1.01,0.90,0.907,0.50,0.35,0.15,fact_cub_por_uf (RO),ESTIMADO,Redução 15% vs SP,2025-11
+MET_03__AC,MET_03,Concreto Armado,LOC_23,AC,Acre,Norte,0.83,1.15,0.954,1.01,0.90,0.908,0.50,0.35,0.15,fact_cub_por_uf (AC),ESTIMADO,Redução 17% vs SP - Muito remota,2025-11
+MET_03__AP,MET_03,Concreto Armado,LOC_24,AP,Amapá,Norte,0.84,1.15,0.966,1.01,0.90,0.907,0.50,0.35,0.15,fact_cub_por_uf (AP),ESTIMADO,Redução 16% vs SP,2025-11
+MET_03__RR,MET_03,Concreto Armado,LOC_25,RR,Roraima,Norte,0.82,1.15,0.943,1.01,0.90,0.908,0.50,0.35,0.15,fact_cub_por_uf (RR),ESTIMADO,Redução 18% vs SP - Mais remota,2025-11
+MET_03__TO,MET_03,Concreto Armado,LOC_26,TO,Tocantins,Norte,0.85,1.15,0.977,1.01,0.90,0.907,0.50,0.35,0.15,fact_cub_por_uf (TO),ESTIMADO,Redução 15% vs SP,2025-11
+MET_05__SP,MET_05,Steel Frame,LOC_01,SP,São Paulo,Sudeste,1.00,1.35,1.350,1.00,0.70,0.700,0.60,0.25,0.15,Revista FT 2023,PARCIALMENTE_VALIDADO,⚠️ Fator subestimado - Mão obra certificada em SP,2025-11
+MET_05__RJ,MET_05,Steel Frame,LOC_02,RJ,Rio de Janeiro,Sudeste,0.98,1.35,1.323,1.00,0.70,0.701,0.60,0.25,0.15,Revista FT 2023,PARCIALMENTE_VALIDADO,Redução 2% vs SP,2025-11
+MET_05__MG,MET_05,Steel Frame,LOC_03,MG,Minas Gerais,Sudeste,0.95,1.35,1.282,1.01,0.70,0.702,0.60,0.25,0.15,Revista FT 2023,PARCIALMENTE_VALIDADO,Redução 5% vs SP,2025-11
+MET_05__ES,MET_05,Steel Frame,LOC_04,ES,Espírito Santo,Sudeste,0.94,1.35,1.269,1.01,0.70,0.703,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 6% vs SP - Dados limitados,2025-11
+MET_05__BA,MET_05,Steel Frame,LOC_05,BA,Bahia,Nordeste,0.92,1.35,1.242,1.01,0.70,0.704,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 8% vs SP - ⚠️ Mão obra MUITO escassa,2025-11
+MET_05__PE,MET_05,Steel Frame,LOC_06,PE,Pernambuco,Nordeste,0.90,1.35,1.215,1.01,0.70,0.704,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 10% vs SP - ⚠️ Praticamente inviável,2025-11
+MET_05__CE,MET_05,Steel Frame,LOC_07,CE,Ceará,Nordeste,0.91,1.35,1.228,1.01,0.70,0.704,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 9% vs SP - Dados limitados,2025-11
+MET_05__MA,MET_05,Steel Frame,LOC_08,MA,Maranhão,Nordeste,0.88,1.35,1.188,1.01,0.70,0.705,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 12% vs SP - ⚠️ Mão obra escassa,2025-11
+MET_05__PI,MET_05,Steel Frame,LOC_09,PI,Piauí,Nordeste,0.87,1.35,1.174,1.01,0.70,0.706,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 13% vs SP - ⚠️ Muito limitado,2025-11
+MET_05__RN,MET_05,Steel Frame,LOC_10,RN,Rio Grande do Norte,Nordeste,0.89,1.35,1.201,1.01,0.70,0.705,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 11% vs SP - Dados limitados,2025-11
+MET_05__AL,MET_05,Steel Frame,LOC_11,AL,Alagoas,Nordeste,0.88,1.35,1.188,1.01,0.70,0.705,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 12% vs SP - ⚠️ Mão obra escassa,2025-11
+MET_05__SE,MET_05,Steel Frame,LOC_12,SE,Sergipe,Nordeste,0.87,1.35,1.174,1.01,0.70,0.706,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 13% vs SP - ⚠️ Muito limitado,2025-11
+MET_05__RS,MET_05,Steel Frame,LOC_13,RS,Rio Grande do Sul,Sul,1.05,1.35,1.418,0.98,0.70,0.698,0.60,0.25,0.15,Revista FT 2023,VALIDADO,Aumento 5% vs SP - Crescimento acelerado no Sul,2025-11
+MET_05__SC,MET_05,Steel Frame,LOC_14,SC,Santa Catarina,Sul,1.03,1.35,1.390,0.99,0.70,0.699,0.60,0.25,0.15,Revista FT 2023,VALIDADO,Aumento 3% vs SP,2025-11
+MET_05__PR,MET_05,Steel Frame,LOC_15,PR,Paraná,Sul,1.04,1.35,1.404,0.98,0.70,0.698,0.60,0.25,0.15,Revista FT 2023,VALIDADO,Aumento 4% vs SP - Crescimento,2025-11
+MET_05__DF,MET_05,Steel Frame,LOC_16,DF,Distrito Federal,Centro-Oeste,1.02,1.35,1.377,0.99,0.70,0.699,0.60,0.25,0.15,Revista FT 2023,PARCIALMENTE_VALIDADO,Aumento 2% vs SP - Crescimento em Brasília,2025-11
+MET_05__GO,MET_05,Steel Frame,LOC_17,GO,Goiás,Centro-Oeste,0.98,1.35,1.323,1.00,0.70,0.701,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 2% vs SP - Mão obra em desenvolvimento,2025-11
+MET_05__MT,MET_05,Steel Frame,LOC_18,MT,Mato Grosso,Centro-Oeste,0.96,1.35,1.296,1.00,0.70,0.702,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 4% vs SP - Dados limitados,2025-11
+MET_05__MS,MET_05,Steel Frame,LOC_19,MS,Mato Grosso do Sul,Centro-Oeste,0.95,1.35,1.282,1.01,0.70,0.702,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 5% vs SP - Dados limitados,2025-11
+MET_05__AM,MET_05,Steel Frame,LOC_20,AM,Amazonas,Norte,0.88,1.35,1.188,1.01,0.70,0.705,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 12% vs SP - ⚠️ INVIÁVEL - Sem mão obra,2025-11
+MET_05__PA,MET_05,Steel Frame,LOC_21,PA,Pará,Norte,0.86,1.35,1.161,1.01,0.70,0.706,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 14% vs SP - ⚠️ INVIÁVEL,2025-11
+MET_05__RO,MET_05,Steel Frame,LOC_22,RO,Rondônia,Norte,0.85,1.35,1.147,1.01,0.70,0.707,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 15% vs SP - ⚠️ INVIÁVEL,2025-11
+MET_05__AC,MET_05,Steel Frame,LOC_23,AC,Acre,Norte,0.83,1.35,1.120,1.01,0.70,0.708,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 17% vs SP - ⚠️ MUITO INVIÁVEL,2025-11
+MET_05__AP,MET_05,Steel Frame,LOC_24,AP,Amapá,Norte,0.84,1.35,1.134,1.01,0.70,0.707,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 16% vs SP - ⚠️ INVIÁVEL,2025-11
+MET_05__RR,MET_05,Steel Frame,LOC_25,RR,Roraima,Norte,0.82,1.35,1.107,1.01,0.70,0.708,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 18% vs SP - ⚠️ MAIS INVIÁVEL,2025-11
+MET_05__TO,MET_05,Steel Frame,LOC_26,TO,Tocantins,Norte,0.85,1.35,1.147,1.01,0.70,0.707,0.60,0.25,0.15,Revista FT 2023,ESTIMADO,Redução 15% vs SP - ⚠️ INVIÁVEL,2025-11
+MET_09__SP,MET_09,EPS/ICF (Isopor Estrutural),LOC_01,SP,São Paulo,Sudeste,1.00,0.82,0.820,1.00,0.67,0.670,0.30,0.50,0.20,ADMPG 2021,VALIDADO,✓ -18-30% custo - Crescimento em SP,2025-11
+MET_09__RJ,MET_09,EPS/ICF (Isopor Estrutural),LOC_02,RJ,Rio de Janeiro,Sudeste,0.98,0.82,0.803,1.00,0.67,0.671,0.30,0.50,0.20,ADMPG 2021,VALIDADO,Redução 2% vs SP,2025-11
+MET_09__MG,MET_09,EPS/ICF (Isopor Estrutural),LOC_03,MG,Minas Gerais,Sudeste,0.95,0.82,0.779,1.01,0.67,0.672,0.30,0.50,0.20,ADMPG 2021,VALIDADO,Redução 5% vs SP,2025-11
+MET_09__ES,MET_09,EPS/ICF (Isopor Estrutural),LOC_04,ES,Espírito Santo,Sudeste,0.94,0.82,0.771,1.01,0.67,0.673,0.30,0.50,0.20,ADMPG 2021,VALIDADO,Redução 6% vs SP,2025-11
+MET_09__BA,MET_09,EPS/ICF (Isopor Estrutural),LOC_05,BA,Bahia,Nordeste,0.92,0.82,0.754,1.01,0.67,0.674,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 8% vs SP - ⚠️ Mão obra muito escassa,2025-11
+MET_09__PE,MET_09,EPS/ICF (Isopor Estrutural),LOC_06,PE,Pernambuco,Nordeste,0.90,0.82,0.738,1.01,0.67,0.674,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 10% vs SP - ⚠️ Projetos-piloto apenas,2025-11
+MET_09__CE,MET_09,EPS/ICF (Isopor Estrutural),LOC_07,CE,Ceará,Nordeste,0.91,0.82,0.746,1.01,0.67,0.674,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 9% vs SP - ⚠️ Dados limitados,2025-11
+MET_09__MA,MET_09,EPS/ICF (Isopor Estrutural),LOC_08,MA,Maranhão,Nordeste,0.88,0.82,0.722,1.01,0.67,0.675,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 12% vs SP - ⚠️ Mão obra escassa,2025-11
+MET_09__PI,MET_09,EPS/ICF (Isopor Estrutural),LOC_09,PI,Piauí,Nordeste,0.87,0.82,0.713,1.01,0.67,0.675,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 13% vs SP - ⚠️ Muito limitado,2025-11
+MET_09__RN,MET_09,EPS/ICF (Isopor Estrutural),LOC_10,RN,Rio Grande do Norte,Nordeste,0.89,0.82,0.730,1.01,0.67,0.675,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 11% vs SP - ⚠️ Dados limitados,2025-11
+MET_09__AL,MET_09,EPS/ICF (Isopor Estrutural),LOC_11,AL,Alagoas,Nordeste,0.88,0.82,0.722,1.01,0.67,0.675,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 12% vs SP - ⚠️ Mão obra escassa,2025-11
+MET_09__SE,MET_09,EPS/ICF (Isopor Estrutural),LOC_12,SE,Sergipe,Nordeste,0.87,0.82,0.713,1.01,0.67,0.675,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 13% vs SP - ⚠️ Muito limitado,2025-11
+MET_09__RS,MET_09,EPS/ICF (Isopor Estrutural),LOC_13,RS,Rio Grande do Sul,Sul,1.05,0.82,0.861,0.99,0.67,0.669,0.30,0.50,0.20,ADMPG 2021,PARCIALMENTE_VALIDADO,Aumento 5% vs SP - Crescimento no Sul,2025-11
+MET_09__SC,MET_09,EPS/ICF (Isopor Estrutural),LOC_14,SC,Santa Catarina,Sul,1.03,0.82,0.845,0.99,0.67,0.669,0.30,0.50,0.20,ADMPG 2021,PARCIALMENTE_VALIDADO,Aumento 3% vs SP,2025-11
+MET_09__PR,MET_09,EPS/ICF (Isopor Estrutural),LOC_15,PR,Paraná,Sul,1.04,0.82,0.853,0.99,0.67,0.669,0.30,0.50,0.20,ADMPG 2021,PARCIALMENTE_VALIDADO,Aumento 4% vs SP,2025-11
+MET_09__DF,MET_09,EPS/ICF (Isopor Estrutural),LOC_16,DF,Distrito Federal,Centro-Oeste,1.02,0.82,0.836,0.99,0.67,0.669,0.30,0.50,0.20,ADMPG 2021,VALIDADO,Aumento 2% vs SP - Maior adoção em DF,2025-11
+MET_09__GO,MET_09,EPS/ICF (Isopor Estrutural),LOC_17,GO,Goiás,Centro-Oeste,0.98,0.82,0.804,1.00,0.67,0.671,0.30,0.50,0.20,ADMPG 2021,VALIDADO,Redução 2% vs SP - Programas habitacionais,2025-11
+MET_09__MT,MET_09,EPS/ICF (Isopor Estrutural),LOC_18,MT,Mato Grosso,Centro-Oeste,0.96,0.82,0.787,1.00,0.67,0.671,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 4% vs SP - Dados limitados,2025-11
+MET_09__MS,MET_09,EPS/ICF (Isopor Estrutural),LOC_19,MS,Mato Grosso do Sul,Centro-Oeste,0.95,0.82,0.779,1.01,0.67,0.672,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 5% vs SP - Dados limitados,2025-11
+MET_09__AM,MET_09,EPS/ICF (Isopor Estrutural),LOC_20,AM,Amazonas,Norte,0.88,0.82,0.722,1.01,0.67,0.675,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 12% vs SP - ⚠️ Transporte painéis muito caro,2025-11
+MET_09__PA,MET_09,EPS/ICF (Isopor Estrutural),LOC_21,PA,Pará,Norte,0.86,0.82,0.705,1.01,0.67,0.676,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 14% vs SP - ⚠️ Viabilidade questionável,2025-11
+MET_09__RO,MET_09,EPS/ICF (Isopor Estrutural),LOC_22,RO,Rondônia,Norte,0.85,0.82,0.697,1.01,0.67,0.676,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 15% vs SP - ⚠️ Viabilidade questionável,2025-11
+MET_09__AC,MET_09,EPS/ICF (Isopor Estrutural),LOC_23,AC,Acre,Norte,0.83,0.82,0.681,1.01,0.67,0.677,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 17% vs SP - ⚠️ Inviável por transporte,2025-11
+MET_09__AP,MET_09,EPS/ICF (Isopor Estrutural),LOC_24,AP,Amapá,Norte,0.84,0.82,0.689,1.01,0.67,0.676,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 16% vs SP - ⚠️ Viabilidade questionável,2025-11
+MET_09__RR,MET_09,EPS/ICF (Isopor Estrutural),LOC_25,RR,Roraima,Norte,0.82,0.82,0.672,1.01,0.67,0.677,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 18% vs SP - ⚠️ Muito inviável,2025-11
+MET_09__TO,MET_09,EPS/ICF (Isopor Estrutural),LOC_26,TO,Tocantins,Norte,0.85,0.82,0.697,1.01,0.67,0.676,0.30,0.50,0.20,ADMPG 2021,ESTIMADO,Redução 15% vs SP - ⚠️ Viabilidade questionável,2025-11

@@ -62,7 +62,8 @@ class BCBClient:
         7478,   # Poupança
         4189,   # INPC
         4390,   # Crédito PF
-        1207,   # Produção Construção Civil
+        21864,  # PAIC - Produção Construção Civil (Receita real)
+        28561,  # Crédito - Construção Civil (Saldo)
         24364,  # Estoque Crédito Habitacional
     }
     
