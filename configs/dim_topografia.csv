@@ -1,0 +1,4 @@
+id,topografia_id,nome,fator_custo
+1,flat,Plano,1.00
+2,slope_light,Aclive/Declive Leve,1.08
+3,slope_high,Aclive/Declive Acentuado,1.25

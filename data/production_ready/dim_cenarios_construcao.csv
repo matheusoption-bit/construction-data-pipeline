@@ -1,0 +1,7 @@
+id,cenario_id,nome,descricao,multiplicador_custo,multiplicador_prazo,fator_fundacao,fator_estrutura,fator_terraplanagem,fator_contencao,fator_drenagem,nivel_risco,cor_risco,contingencia_percent,notas
+1,flat_no_subfloor,Plano sem Subsolo,Terreno plano fundação simples sem movimentação de terra significativa,1.0,1.0,1.0,1.0,1.0,0.0,0.5,baixo,green,5,Execução convencional. Menor complexidade técnica.
+2,flat_with_subfloor,Plano com Subsolo,Terreno plano com escavação para subsolo requer escoramento e drenagem,1.25,1.2,1.35,1.15,2.0,1.0,1.5,medio,yellow,10,Escavação profunda requer cuidado. Verificar lençol freático.
+3,slope_up_no_subfloor,Aclive sem Subsolo,Terreno em aclive requer corte de terreno e possível contenção,1.35,1.3,1.4,1.1,2.5,0.8,1.2,medio,yellow,12,Movimentação de terra significativa. Contenção pode ser necessária.
+4,slope_up_with_subfloor,Aclive com Subsolo,Terreno em aclive com subsolo alta complexidade de fundação e contenção,1.55,1.52,1.8,1.25,3.0,1.5,2.0,alto,orange,18,Complexidade estrutural elevada. Contenção robusta obrigatória. Drenagem crítica.
+5,slope_down_no_subfloor,Declive sem Subsolo,Terreno em declive fundação em desnível com pilares alongados,1.45,1.4,1.6,1.3,1.8,0.6,1.3,alto,orange,15,Pilares alongados aumentam custo estrutural. Acesso de obra complicado.
+6,slope_down_with_subfloor,Declive com Subsolo,Cenário de maior complexidade declive + subsolo = máxima contenção e estrutura,1.85,2.07,2.2,1.5,4.0,2.0,2.5,critico,red,25,Projeto estrutural especial obrigatório. Contenção de alto porte. Sondagem recomendada.

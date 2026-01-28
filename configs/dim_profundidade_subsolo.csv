@@ -1,0 +1,5 @@
+id,profundidade_id,nome,faixa_metros_min,faixa_metros_max,multiplicador
+1,shallow,Raso,0.00,1.50,1.00
+2,standard,Padrão,1.50,3.00,1.15
+3,deep,Profundo,3.00,5.00,1.35
+4,veryDeep,Muito Profundo,5.00,999.00,1.60

@@ -1,76 +1,285 @@
 {
+  "version": "2.0.0",
+  "updated_at": "2026-01-28",
+  "description": "Mapeamento de séries temporais para BI de Mercado Imobiliário e Viabilidade",
+  
   "series": {
     "taxa_cambio": {
       "bcb_code": "1",
       "nome_completo": "Taxa de Câmbio - USD/BRL",
+      "categoria": "cambio",
       "unidade": "R$/US$",
       "frequencia": "diaria",
       "horario_coleta": "18:00",
+      "relevancia_bi": "medio",
       "fonte_url": "https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries"
     },
     "igp_m_infla": {
       "bcb_code": "189",
-      "nome_completo": "IGP-M - Inflação",
-      "unidade": "% m/m",
+      "nome_completo": "IGP-M - Índice Geral de Preços do Mercado",
+      "categoria": "inflacao",
+      "unidade": "% a.m.",
       "frequencia": "mensal",
       "horario_coleta": "08:00",
+      "relevancia_bi": "alto",
+      "uso": "Reajuste de aluguéis e contratos de construção",
       "fonte_url": "https://www3.bcb.gov.br/sgspub"
     },
     "taxa_ref": {
       "bcb_code": "226",
       "nome_completo": "Taxa Referencial - TR",
+      "categoria": "taxas_referencia",
       "unidade": "% a.m.",
       "frequencia": "diaria",
       "horario_coleta": "18:00",
-      "fonte_url": "https://www3.bcb.gov.br/sgspub"
-    },
-    "credito_habit": {
-      "bcb_code": "24364",
-      "nome_completo": "Estoque de Crédito Habitacional",
-      "unidade": "R$ bilhões",
-      "frequencia": "mensal",
-      "horario_coleta": "09:00",
-      "fonte_url": "https://www3.bcb.gov.br/sgspub"
-    },
-    "inpc_infla": {
-      "bcb_code": "4189",
-      "nome_completo": "INPC - Inflação",
-      "unidade": "% m/m",
-      "frequencia": "mensal",
-      "horario_coleta": "09:00",
+      "relevancia_bi": "alto",
+      "uso": "Base para financiamentos habitacionais (FGTS, poupança)",
       "fonte_url": "https://www3.bcb.gov.br/sgspub"
     },
     "taxa_selic": {
       "bcb_code": "432",
-      "nome_completo": "Taxa Selic",
+      "nome_completo": "Taxa Selic - Meta",
+      "categoria": "taxas_referencia",
       "unidade": "% a.a.",
       "frequencia": "mensal",
       "horario_coleta": "19:30",
+      "relevancia_bi": "critico",
+      "uso": "Base para todas as taxas de juros do mercado",
       "fonte_url": "https://www3.bcb.gov.br/sgspub"
     },
     "ipca_infla": {
       "bcb_code": "433",
-      "nome_completo": "IPCA - Inflação",
-      "unidade": "% m/m",
+      "nome_completo": "IPCA - Índice de Preços ao Consumidor Amplo",
+      "categoria": "inflacao",
+      "unidade": "% a.m.",
       "frequencia": "mensal",
       "horario_coleta": "09:00",
+      "relevancia_bi": "critico",
+      "uso": "Inflação oficial, base para reajustes de financiamentos",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "inpc_infla": {
+      "bcb_code": "4189",
+      "nome_completo": "INPC - Índice Nacional de Preços ao Consumidor",
+      "categoria": "inflacao",
+      "unidade": "% a.m.",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "relevancia_bi": "medio",
+      "uso": "Reajustes de salários, impacta custo de mão de obra",
       "fonte_url": "https://www3.bcb.gov.br/sgspub"
     },
     "credito_pf": {
       "bcb_code": "4390",
-      "nome_completo": "Crédito Pessoa Física",
+      "nome_completo": "Crédito Pessoa Física - Total",
+      "categoria": "credito",
       "unidade": "R$ milhões",
       "frequencia": "mensal",
       "horario_coleta": "09:00",
+      "relevancia_bi": "medio",
       "fonte_url": "https://www3.bcb.gov.br/sgspub"
     },
     "rend_poupanca": {
       "bcb_code": "7478",
       "nome_completo": "Rendimento da Poupança",
+      "categoria": "taxas_referencia",
       "unidade": "% a.m.",
       "frequencia": "mensal",
       "horario_coleta": "09:00",
+      "relevancia_bi": "alto",
+      "uso": "Referência para retorno mínimo de investimentos",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "credito_habit_estoque": {
+      "bcb_code": "24364",
+      "nome_completo": "Estoque de Crédito Habitacional - Total",
+      "categoria": "mercado_imobiliario",
+      "unidade": "R$ bilhões",
+      "frequencia": "mensal",
+      "horario_coleta": "09:00",
+      "relevancia_bi": "alto",
+      "uso": "Volume total de crédito habitacional no mercado",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    
+    "ivg_r": {
+      "bcb_code": "21340",
+      "nome_completo": "IVG-R - Índice de Valores de Garantia de Imóveis Residenciais",
+      "categoria": "mercado_imobiliario",
+      "unidade": "índice (base dez/2001=100)",
+      "frequencia": "mensal",
+      "horario_coleta": "10:00",
+      "relevancia_bi": "critico",
+      "uso": "Principal indicador de valorização imobiliária residencial no Brasil",
+      "descricao": "Mede a evolução dos valores de avaliação de imóveis residenciais usados como garantia em financiamentos",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "inadimplencia_habitacional": {
+      "bcb_code": "21082",
+      "nome_completo": "Inadimplência - Carteira de Crédito Habitacional PF",
+      "categoria": "risco_credito",
+      "unidade": "% da carteira",
+      "frequencia": "mensal",
+      "horario_coleta": "10:00",
+      "relevancia_bi": "critico",
+      "uso": "Indicador de saúde do mercado habitacional e risco de crédito",
+      "descricao": "Percentual de operações de crédito habitacional para pessoa física com atraso superior a 90 dias",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "concessoes_sbpe": {
+      "bcb_code": "24363",
+      "nome_completo": "Concessões de Crédito Habitacional - SBPE",
+      "categoria": "mercado_imobiliario",
+      "unidade": "R$ milhões",
+      "frequencia": "mensal",
+      "horario_coleta": "10:00",
+      "relevancia_bi": "critico",
+      "uso": "Volume de novos financiamentos habitacionais (Sistema Brasileiro de Poupança e Empréstimo)",
+      "descricao": "Principal indicador de aquecimento/desaquecimento do mercado imobiliário",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "taxa_media_habitacional": {
+      "bcb_code": "25497",
+      "nome_completo": "Taxa Média de Juros - Financiamento Imobiliário PF",
+      "categoria": "mercado_imobiliario",
+      "unidade": "% a.a.",
+      "frequencia": "mensal",
+      "horario_coleta": "10:00",
+      "relevancia_bi": "critico",
+      "uso": "Taxa média praticada em financiamentos imobiliários",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "prazo_medio_habitacional": {
+      "bcb_code": "25503",
+      "nome_completo": "Prazo Médio - Financiamento Imobiliário PF",
+      "categoria": "mercado_imobiliario",
+      "unidade": "meses",
+      "frequencia": "mensal",
+      "horario_coleta": "10:00",
+      "relevancia_bi": "medio",
+      "uso": "Prazo médio dos financiamentos concedidos",
+      "fonte_url": "https://www3.bcb.gov.br/sgspub"
+    },
+    "incc_di": {
+      "bcb_code": "192",
+      "nome_completo": "INCC-DI - Índice Nacional de Custo da Construção",
+      "categoria": "construcao",
+      "unidade": "% a.m.",
+      "frequencia": "mensal",
+      "horario_coleta": "08:00",
+      "relevancia_bi": "critico",
+      "uso": "Reajuste de parcelas de imóveis na planta e custo de construção",
       "fonte_url": "https://www3.bcb.gov.br/sgspub"
     }
+  },
+  
+  "expectativas_focus": {
+    "description": "Expectativas de mercado coletadas pelo BCB via Sistema Focus (API OData)",
+    "api_base_url": "https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata",
+    "endpoints": {
+      "selic_12m": {
+        "nome": "Expectativa SELIC 12 meses",
+        "endpoint": "ExpectativasMercadoSelic",
+        "filtro": "$filter=baseCalculo eq '0' and Reuniao eq 'R8'",
+        "campos": "Data,Mediana,DataReferencia",
+        "frequencia": "diaria",
+        "relevancia_bi": "critico",
+        "uso": "Projeção de taxa de juros para cálculo de viabilidade futura"
+      },
+      "ipca_12m": {
+        "nome": "Expectativa IPCA 12 meses",
+        "endpoint": "ExpectativaMercadoMensais",
+        "filtro": "$filter=Indicador eq 'IPCA' and baseCalculo eq '0'",
+        "campos": "Data,Mediana,DataReferencia,Indicador",
+        "frequencia": "diaria",
+        "relevancia_bi": "critico",
+        "uso": "Projeção de inflação para atualização de custos"
+      },
+      "pib_anual": {
+        "nome": "Expectativa PIB Anual",
+        "endpoint": "ExpectativasMercadoAnuais",
+        "filtro": "$filter=Indicador eq 'PIB Total' and baseCalculo eq '0'",
+        "campos": "Data,Mediana,DataReferencia,Indicador",
+        "frequencia": "semanal",
+        "relevancia_bi": "medio",
+        "uso": "Cenário macroeconômico para análise de viabilidade"
+      },
+      "cambio_12m": {
+        "nome": "Expectativa Câmbio 12 meses",
+        "endpoint": "ExpectativasMercadoAnuais",
+        "filtro": "$filter=Indicador eq 'Câmbio' and baseCalculo eq '0'",
+        "campos": "Data,Mediana,DataReferencia",
+        "frequencia": "semanal",
+        "relevancia_bi": "medio",
+        "uso": "Projeção de câmbio para materiais importados"
+      }
+    }
+  },
+  
+  "categorias": {
+    "mercado_imobiliario": {
+      "nome": "Mercado Imobiliário",
+      "descricao": "Indicadores específicos do setor imobiliário",
+      "series": ["ivg_r", "inadimplencia_habitacional", "concessoes_sbpe", "credito_habit_estoque", "taxa_media_habitacional", "prazo_medio_habitacional"]
+    },
+    "inflacao": {
+      "nome": "Inflação",
+      "descricao": "Índices de preços e inflação",
+      "series": ["ipca_infla", "igp_m_infla", "inpc_infla"]
+    },
+    "construcao": {
+      "nome": "Construção Civil",
+      "descricao": "Indicadores de custo de construção",
+      "series": ["incc_di"]
+    },
+    "taxas_referencia": {
+      "nome": "Taxas de Referência",
+      "descricao": "Taxas base do sistema financeiro",
+      "series": ["taxa_selic", "taxa_ref", "rend_poupanca"]
+    },
+    "risco_credito": {
+      "nome": "Risco de Crédito",
+      "descricao": "Indicadores de inadimplência e risco",
+      "series": ["inadimplencia_habitacional"]
+    },
+    "credito": {
+      "nome": "Crédito",
+      "descricao": "Volume e concessões de crédito",
+      "series": ["credito_pf", "concessoes_sbpe", "credito_habit_estoque"]
+    },
+    "cambio": {
+      "nome": "Câmbio",
+      "descricao": "Taxas de câmbio",
+      "series": ["taxa_cambio"]
+    }
+  },
+  
+  "dashboard_bi": {
+    "kpis_principais": [
+      {
+        "nome": "Aquecimento do Mercado",
+        "series": ["concessoes_sbpe", "ivg_r"],
+        "calculo": "YoY % change",
+        "interpretacao": "positivo = aquecido"
+      },
+      {
+        "nome": "Risco do Setor",
+        "series": ["inadimplencia_habitacional", "taxa_selic"],
+        "calculo": "composite score",
+        "interpretacao": "menor = melhor"
+      },
+      {
+        "nome": "Custo de Financiamento",
+        "series": ["taxa_media_habitacional", "taxa_selic"],
+        "calculo": "spread = taxa_media - selic",
+        "interpretacao": "spread alto = mercado apertado"
+      },
+      {
+        "nome": "Pressão de Custos",
+        "series": ["incc_di", "ipca_infla"],
+        "calculo": "incc/ipca ratio",
+        "interpretacao": ">1 = construção pressionada"
+      }
+    ]
   }
 }

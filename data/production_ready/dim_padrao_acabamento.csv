@@ -1,0 +1,4 @@
+id,padrao_id,nome,codigo_cub,descricao
+1,low,Padrão Baixo,R1-B,Acabamento básico para imóveis econômicos
+2,normal,Padrão Normal,R1-N,Acabamento padrão para classe média
+3,high,Padrão Alto,R1-A,Acabamento de alto padrão para imóveis de luxo

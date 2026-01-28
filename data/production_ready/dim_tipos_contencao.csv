@@ -1,0 +1,6 @@
+id,tipo_contencao,nome,custo_m2,cenarios_aplicaveis,descricao
+1,none,Sem contenção,0.0,flat_no_subfloor,Não requer contenção
+2,gabion,Gabiões,280.0,"slope_up_no_subfloor,slope_down_no_subfloor",Contenção com gabiões metálicos e pedras
+3,concrete_wall,Muro de arrimo,450.0,"slope_up_no_subfloor,slope_up_with_subfloor,slope_down_no_subfloor",Muro de concreto armado
+4,anchored_wall,Cortina atirantada,850.0,"slope_up_with_subfloor,slope_down_with_subfloor",Parede de concreto com tirantes ancorados no solo
+5,secant_piles,Estacas secantes,1200.0,"flat_with_subfloor,slope_down_with_subfloor",Estacas de concreto sobrepostas para contenção de subsolo

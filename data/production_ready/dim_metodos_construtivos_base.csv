@@ -1,0 +1,6 @@
+id,metodo_id,nome,fator_custo,custo_base_ref,descricao
+1,masonry,Alvenaria Convencional,1.0,1200,Método tradicional com blocos cerâmicos ou de concreto
+2,steelFrame,Steel Frame,1.125,1350,Estrutura em perfis de aço galvanizado com fechamento em drywall
+3,woodFrame,Wood Frame,1.083,1300,Estrutura em perfis de madeira tratada com fechamento em OSB
+4,eps,EPS / ICF,1.041,1250,Blocos de EPS (isopor) preenchidos com concreto
+5,container,Contêineres,0.916,1100,Construção modular com contêineres marítimos adaptados

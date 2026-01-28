@@ -1,0 +1,4 @@
+id,pavimento_tipo,nome,fator_custo
+1,subfloor,Subsolo,1.25
+2,ground,Térreo,1.0
+3,upper,Pavimento Superior,0.98

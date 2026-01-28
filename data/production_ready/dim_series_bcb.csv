@@ -1,0 +1,20 @@
+id,serie_id,bcb_code,nome_completo,categoria,unidade,frequencia,relevancia_bi,uso,tipo_fonte,endpoint
+1,taxa_cambio,1,Taxa de Câmbio - USD/BRL,cambio,R$/US$,diaria,medio,,SGS,
+2,igp_m_infla,189,IGP-M - Índice Geral de Preços do Mercado,inflacao,% a.m.,mensal,alto,Reajuste de aluguéis e contratos de construção,SGS,
+3,taxa_ref,226,Taxa Referencial - TR,taxas_referencia,% a.m.,diaria,alto,"Base para financiamentos habitacionais (FGTS, poupança)",SGS,
+4,taxa_selic,432,Taxa Selic - Meta,taxas_referencia,% a.a.,mensal,critico,Base para todas as taxas de juros do mercado,SGS,
+5,ipca_infla,433,IPCA - Índice de Preços ao Consumidor Amplo,inflacao,% a.m.,mensal,critico,"Inflação oficial, base para reajustes de financiamentos",SGS,
+6,inpc_infla,4189,INPC - Índice Nacional de Preços ao Consumidor,inflacao,% a.m.,mensal,medio,"Reajustes de salários, impacta custo de mão de obra",SGS,
+7,credito_pf,4390,Crédito Pessoa Física - Total,credito,R$ milhões,mensal,medio,,SGS,
+8,rend_poupanca,7478,Rendimento da Poupança,taxas_referencia,% a.m.,mensal,alto,Referência para retorno mínimo de investimentos,SGS,
+9,credito_habit_estoque,24364,Estoque de Crédito Habitacional - Total,mercado_imobiliario,R$ bilhões,mensal,alto,Volume total de crédito habitacional no mercado,SGS,
+10,ivg_r,21340,IVG-R - Índice de Valores de Garantia de Imóveis Residenciais,mercado_imobiliario,índice (base dez/2001=100),mensal,critico,Principal indicador de valorização imobiliária residencial no Brasil,SGS,
+11,inadimplencia_habitacional,21082,Inadimplência - Carteira de Crédito Habitacional PF,risco_credito,% da carteira,mensal,critico,Indicador de saúde do mercado habitacional e risco de crédito,SGS,
+12,concessoes_sbpe,24363,Concessões de Crédito Habitacional - SBPE,mercado_imobiliario,R$ milhões,mensal,critico,Volume de novos financiamentos habitacionais (Sistema Brasileiro de Poupança e Empréstimo),SGS,
+13,taxa_media_habitacional,25497,Taxa Média de Juros - Financiamento Imobiliário PF,mercado_imobiliario,% a.a.,mensal,critico,Taxa média praticada em financiamentos imobiliários,SGS,
+14,prazo_medio_habitacional,25503,Prazo Médio - Financiamento Imobiliário PF,mercado_imobiliario,meses,mensal,medio,Prazo médio dos financiamentos concedidos,SGS,
+15,incc_di,192,INCC-DI - Índice Nacional de Custo da Construção,construcao,% a.m.,mensal,critico,Reajuste de parcelas de imóveis na planta e custo de construção,SGS,
+16,focus_selic_12m,,Expectativa SELIC 12 meses,expectativas,,diaria,critico,Projeção de taxa de juros para cálculo de viabilidade futura,FOCUS_ODATA,ExpectativasMercadoSelic
+17,focus_ipca_12m,,Expectativa IPCA 12 meses,expectativas,,diaria,critico,Projeção de inflação para atualização de custos,FOCUS_ODATA,ExpectativaMercadoMensais
+18,focus_pib_anual,,Expectativa PIB Anual,expectativas,,semanal,medio,Cenário macroeconômico para análise de viabilidade,FOCUS_ODATA,ExpectativasMercadoAnuais
+19,focus_cambio_12m,,Expectativa Câmbio 12 meses,expectativas,,semanal,medio,Projeção de câmbio para materiais importados,FOCUS_ODATA,ExpectativasMercadoAnuais
