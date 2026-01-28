@@ -21,6 +21,20 @@ jobs:
       # 1. Checkout do código
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Garante checkout completo
+      
+      # 1.1. Debug - Verificar versão do código
+      - name: Verify code version
+        run: |
+          echo "📋 Último commit:"
+          git log --oneline -1
+          echo ""
+          echo "📋 SERIES_MAP no daily_bcb.py (verificação):"
+          grep -A 15 "SERIES_MAP = {" src/jobs/daily_bcb.py || echo "SERIES_MAP não encontrado"
+          echo ""
+          echo "📋 Verificando se série 1207 existe:"
+          grep "1207" src/jobs/daily_bcb.py && echo "⚠️ ATENÇÃO: Série 1207 ainda está no código!" || echo "✅ Série 1207 removida corretamente"
       
       # 2. Setup Python 3.11
       - name: Set up Python ${{ env.PYTHON_VERSION }}
